@@ -1,0 +1,39 @@
+" General
+set number        " Show line numbers
+set ruler         " Show row and column
+set hlsearch      " Highlight all search results
+
+" Indent
+set autoindent      " Automatically indent new lines
+set smartindent     " Indent smartly c-like files
+set expandtab       " Override TAB command
+set softtabstop=2   " Number of spaces per tab
+set shiftwidth=2    " Number of autoindent spaces
+set numberwidth=2   
+
+" Backup files
+set directory=/home/niko/.vim/backup
+set backupdir=/home/niko/.vim/backup   " Directory for backup files
+set undodir=/home/niko/.vim/backup     " Directory for undo history
+
+" Syntax highlight
+"syntax on
+
+" Allow 256 colors in tmux
+set term=screen-256color
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set termguicolors
+
+" Quantum
+set background=dark
+let g:quantum_black=1
+colorscheme quantum
+
+" Molokai
+"let g:molokai_original = 1
+"colorscheme molokai
+
+" Desert
+"color desert

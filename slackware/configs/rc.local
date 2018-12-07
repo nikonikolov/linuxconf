@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.local:  Local system initialization script.
+#
+# Put any local startup commands in here.  Also, if you have
+# anything that needs to be run at shutdown time you can
+# make an /etc/rc.d/rc.local_shutdown script and put those
+# commands in there.
+
+# Create missing nvidia device nodes after reboot
+#/usr/bin/nvidia-modprobe -c 0 -u
+
+# Make bumblebeed start with the system
+[ -x /etc/rc.d/rc.bumblebeed ] && /etc/rc.d/rc.bumblebeed start
+
+# Stop the nvidia card
+/home/niko/bin/nvidia_control.sh stop
+
+# Start docker daemon
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start
