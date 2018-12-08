@@ -1,3 +1,12 @@
 get-pip.py
 /**/*.pyc
 MasterPDFEditor/
+opencv/
+redshift/
+sbotools*
+bumblebee/bumblebee/
+bumblebee/pkg64/
+cudatoolkit/
+virtualbox/
+*.tgz
+*.txz
