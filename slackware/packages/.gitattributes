@@ -1,0 +1,16 @@
+/**/*.svg filter=lfs diff=lfs merge=lfs -text
+/**/*.png filter=lfs diff=lfs merge=lfs -text
+/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+/**/*.tgz filter=lfs diff=lfs merge=lfs -text
+/**/*.txz filter=lfs diff=lfs merge=lfs -text
+/**/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+/**/*.tar.bz2 filter=lfs diff=lfs merge=lfs -text
+HexLite-KDETheme/** filter=lfs diff=lfs merge=lfs -text
+vlc/** filter=lfs diff=lfs merge=lfs -text
+ffmpeg/** filter=lfs diff=lfs merge=lfs -text
+qt5/** filter=lfs diff=lfs merge=lfs -text
+chromium/** filter=lfs diff=lfs merge=lfs -text
+dropbox/** filter=lfs diff=lfs merge=lfs -text
+BIOS/** filter=lfs diff=lfs merge=lfs -text
+jdk/** filter=lfs diff=lfs merge=lfs -text
+google-chrome/** filter=lfs diff=lfs merge=lfs -text
