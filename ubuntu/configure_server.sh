@@ -12,4 +12,5 @@ setupbashrc
 install_vim
 install_tmux
 configure_vim
-configure_tmux $UBUNTU_BACKUP_DIR
+# Set the tmux color to 220 (yellow), since this is a server
+configure_tmux $UBUNTU_BACKUP_DIR "colour220"
