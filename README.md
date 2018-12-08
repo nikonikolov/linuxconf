@@ -11,10 +11,12 @@
 ```
 - To install bumblebee:
   - First clone your repo
-```
-cd slackware/packages/bumblebee/
-git clone git@github.com:nikonikolov/Bumblebee-SlackBuilds.git
-```
+    
+    ```
+    cd slackware/packages/bumblebee/
+    git clone git@github.com:nikonikolov/Bumblebee-SlackBuilds.git
+    ```
+  
   - Follow your installation instructions
   - When ready, write all nvidia configurations with
 ```
