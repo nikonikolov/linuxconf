@@ -2,6 +2,7 @@
 
 # ======================== !! NOTE !! ========================
 # Rule of thumb is to always recompile SBo packages. This is the principle of Slackware.
+# If you use a binary, you might easily miss important dependencies.
 # Packages which you normally use from alien, such as chromium, vlc are OK to come in binary
 # ======================== !! NOTE !! ========================
 
@@ -93,7 +94,7 @@ installsbo "i8kutils"
 
 # ------------------------ jdk ------------------------
 installstart "jdk"
-jdk_dir=$SLACK_PKG_DIR/jdk
+jdk_dir=$SLACK_PKG_DIR/jdk-8u172
 if [ -d $jdk_dir ]; then
   cd $jdk_dir
   sudo ./jdk.SlackBuild

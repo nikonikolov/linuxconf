@@ -75,24 +75,24 @@ chmod +x ~/bin/nvidia_control.sh
 
 
 # ------------------------ slackpkg blacklist ------------------------
-message "Blacklisting Package Extensions in slackpkg"
+message "Blacklisting Packages in slackpkg"
 # Make sure that the following package extensions are properly 
 # recognized by the system and will not be automatically removed
-echo "" | sudo tee --append /etc/slackpkg/blacklist
-echo "# Blacklist trustable sources:" | sudo tee --append /etc/slackpkg/blacklist
-echo "[0-9]+_SBo" | sudo tee --append /etc/slackpkg/blacklist
-echo "[0-9]+alien" | sudo tee --append /etc/slackpkg/blacklist
-echo "[0-9]+compat32" | sudo tee --append /etc/slackpkg/blacklist
-echo "[0-9]+_bbsb" | sudo tee --append /etc/slackpkg/blacklist
+echo '' | sudo tee --append /etc/slackpkg/blacklist
+echo '# Blacklist trustable sources:' | sudo tee --append /etc/slackpkg/blacklist
+echo '[0-9]+_SBo' | sudo tee --append /etc/slackpkg/blacklist
+echo '[0-9]+alien' | sudo tee --append /etc/slackpkg/blacklist
+echo '[0-9]+compat32' | sudo tee --append /etc/slackpkg/blacklist
+echo '[0-9]+_bbsb' | sudo tee --append /etc/slackpkg/blacklist
 
-
-# ------------------------ nouveau blacklist ------------------------
-message "Blacklisting Nouveau Updates"
 # Make sure that nouveau driver is not automatically updated
 # because this will overwrite the nvidia libraries
-echo "" | sudo tee --append /etc/slackpkg/blacklist
-echo "# Make sure that nouveau driver is not automatically updated because this will overwrite the nvidia libraries" | sudo tee --append /etc/slackpkg/blacklist
-echo "xf86-video-nouveau" | sudo tee --append /etc/slackpkg/blacklist
+echo '' | sudo tee --append /etc/slackpkg/blacklist
+echo '# Make sure that nouveau driver is not automatically updated because this will overwrite the nvidia libraries' | sudo tee --append /etc/slackpkg/blacklist
+echo 'xf86-video-nouveau' | sudo tee --append /etc/slackpkg/blacklist
+
+echo '# Blacklist specific packages' | sudo tee --append /etc/slackpkg/blacklist
+echo 'google-chrome' | sudo tee --append /etc/slackpkg/blacklist
 
 
 # ------------------------ rc.local ------------------------
