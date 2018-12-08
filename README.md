@@ -19,9 +19,10 @@
   
   - Follow your installation instructions
   - When ready, write all nvidia configurations with
-```
-./slackware/configure_nvidia.sh
-```
+    
+    ```
+    ./slackware/configure_nvidia.sh
+    ```
 
 ### Installing additional packages
 
