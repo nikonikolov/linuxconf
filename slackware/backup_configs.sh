@@ -6,7 +6,7 @@ source $DIRPATH/../common/helpers.sh
 
 # sublime key shortcuts
 safecp "$HOME/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap" $SLACK_BACKUP_DIR
-safecp $HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $SLACK_BACKUP_DIR
 
 # redshift
 safecp $HOME/.config/redshift.conf $SLACK_BACKUP_DIR
@@ -45,6 +45,9 @@ safecp /etc/bumblebee/bumblebee.conf $SLACK_BACKUP_DIR
 
 # elilo
 safecp /boot/efi/EFI/Slackware/elilo.conf $SLACK_BACKUP_DIR
+
+# grub
+safecp /etc/default/grub $SLACK_BACKUP_DIR
 
 # ld.so.conf
 safecp /etc/ld.so.conf $SLACK_BACKUP_DIR

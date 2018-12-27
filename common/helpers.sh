@@ -58,9 +58,10 @@ configure_tmux(){
 configure_vim(){
   confstart "vim"
 
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  mkdir -p $HOME/.vim
+  git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
   git clone https://github.com/flazz/vim-colorschemes
-  mv vim-colorschemes/colors/ .vim
+  mv vim-colorschemes/colors $HOME/.vim/
   rm -rf vim-colorschemes
   # Get the .vimrc
   curl https://raw.githubusercontent.com/grigio/vim-sublime/master/vimrc > $HOME/.vimrc
@@ -111,6 +112,7 @@ configure_sublime(){
   echo '  [' >> $PACKFILE
   echo '    "CMake",' >> $PACKFILE
   echo '    "Package Control",' >> $PACKFILE
+  echo '    "Python Breakpoints",' >> $PACKFILE
   echo '    "SideBarEnhancements"' >> $PACKFILE
   echo '  ]' >> $PACKFILE
   echo '}' >> $PACKFILE
