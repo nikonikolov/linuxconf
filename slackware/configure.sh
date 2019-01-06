@@ -127,6 +127,12 @@ echo "" | sudo tee --append /etc/rc.d/rc.modules.local
 sudo chmod +x /etc/rc.d/rc.local_shutdown
 
 
+# ------------------------ DHCP ------------------------
+message "Setting DHCP client"
+sudo sed -i '/dhcp=dhcpcd/c\#dhcp=dhcpcd' /etc/NetworkManager/conf.d/00-dhcp-client.conf
+sudo sed -i '/dhcp=dhclient/c\dhcp=dhclient' /etc/NetworkManager/conf.d/00-dhcp-client.conf
+
+
 # ===============================================
 # ===================== OLD =====================
 # ===============================================
