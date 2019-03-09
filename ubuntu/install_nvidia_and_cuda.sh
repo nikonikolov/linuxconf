@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NVIDIA_VERSION=nvidia-375
+NVIDIA_VERSION=375
 
 sudo service lightdm stop
 sudo echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
@@ -9,7 +9,8 @@ sudo update-initramfs -u
 
 # Install nvidia
 sudo apt-get update
-sudo apt-get install -y $NVIDIA_VERSION
+sudo apt-get install -y nvidia-$NVIDIA_VERSION
+sudo apt-get install -y nvidia-driver-$NVIDIA_VERSION
 
 # Download CUDA
 wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
