@@ -79,6 +79,14 @@ cp $SLACK_BACKUP_DIR/redshift.conf ~/.config/
 redshift &
 
 
+# ------------------------ bash-completion ------------------------
+installstart "bash-completion"
+sudo slackpkg install bash-completion
+installend "bash-completion"
+wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+sudo mv git-completion.bash /usr/share/bash-completion/completions/git
+
+
 # ------------------------ pptp and NetworkManager-pptp for VPN ------------------------
 installsbo "pptp"
 installsbo "NetworkManager-pptp"

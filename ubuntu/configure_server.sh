@@ -8,7 +8,7 @@ source $DIRPATH/functions.sh
 # ------------- Configure git -------------
 git config --global user.name "nikonikolov"
 git config --global user.email "niko.b.nikolov@gmail.com"
-git config --global core.editor "vim -w"
+git config --global core.editor "vim"
 
 # ------------- Append ~/.bashrc with custom configs -------------
 setupbashrc
