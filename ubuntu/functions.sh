@@ -7,7 +7,7 @@ install_tmux(){
   INSTALLED=$(dpkg -l | grep tmux)
   
   if [ INSTALLED == "" ]; then
-    sudo apt-get install -y tmux
+    sudo apt install -y tmux
   fi
 }
 
@@ -15,7 +15,7 @@ install_vim(){
   INSTALLED=$(dpkg -l | grep vim)
   
   if [ INSTALLED == "" ]; then
-    sudo apt-get install -y vim
+    sudo apt install -y vim
   fi
 }
 
