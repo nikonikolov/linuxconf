@@ -81,8 +81,8 @@ message "Blacklisting Packages in slackpkg"
 echo '' | sudo tee --append /etc/slackpkg/blacklist
 echo '# Blacklist trustable sources:' | sudo tee --append /etc/slackpkg/blacklist
 echo '[0-9]+_SBo' | sudo tee --append /etc/slackpkg/blacklist
-echo '[0-9]+alien' | sudo tee --append /etc/slackpkg/blacklist
-echo '[0-9]+compat32' | sudo tee --append /etc/slackpkg/blacklist
+echo '# [0-9]+alien' | sudo tee --append /etc/slackpkg/blacklist
+echo '# [0-9]+compat32' | sudo tee --append /etc/slackpkg/blacklist
 echo '[0-9]+_bbsb' | sudo tee --append /etc/slackpkg/blacklist
 
 # Make sure that nouveau driver is not automatically updated

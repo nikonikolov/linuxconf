@@ -8,6 +8,12 @@ source $DIRPATH/functions.sh
 # Get the OS version number
 UBUNTU_VERSION=$(lsb_release -sr | cut -f 1 -d ".")
 
+# ------------- Install vim -------------
+sudo apt install -y vim
+
+# ------------- Install tmux -------------
+sudo apt install -y tmux
+
 # ------------- Append ~/.bashrc with custom configs -------------
 setupbashrc
 

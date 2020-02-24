@@ -49,6 +49,16 @@ installsbo(){
 
 # ===================== INSTALLING PACKAGES =====================
 
+# ------------------------ slackpkgplus ------------------------
+message "Installing slackpkg+"
+wget http://slakfinder.org/slackpkg+/pkg/slackpkg+-1.7.0-noarch-10mt.txz
+mv slackpkg+*.txz $SLACK_PKG_DIR
+sudo installpkg $SLACK_PKG_DIR/slackpkg+*.txz
+cp $SLACK_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
+sudo slackpkg update gpg
+sudo slackpkg update
+
+
 # ------------------------ sbotools ------------------------
 message "Installing sbotools"
 wget https://pink-mist.github.io/sbotools/downloads/sbotools-$SBOTOOLS_VERSION-noarch-1_SBo.tgz
