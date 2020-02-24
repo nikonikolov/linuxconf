@@ -14,7 +14,7 @@
 [ -x /etc/rc.d/rc.bumblebeed ] && /etc/rc.d/rc.bumblebeed start
 
 # Stop the nvidia card
-/home/niko/bin/nvidia_control.sh stop
+[ -x /home/niko/bin/nvidia_control.sh ] && /home/niko/bin/nvidia_control.sh stop
 
 # Start docker daemon
 [ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start
