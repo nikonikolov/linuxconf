@@ -109,6 +109,7 @@ PATH=$PATH:/sbin
 # ================================== ALIASES ==================================
 
 # Make aliases
+alias grep='grep --color=auto'
 alias download='wget -r --no-parent --reject="index.html*" -P /home/niko/Downloads/' 
 # alias package='ls /var/log/packages | grep -i'
 alias package='ls /var/lib/pkgtools/packages | grep -i'
@@ -118,9 +119,7 @@ alias library='ldconfig -p | grep -i'
 alias tmux='tmux -2'
 alias diskprops='df -h'
 alias loadhist='history -n'
-props(){
-  du -a -h --max-depth=1 $* | sort -hr
-}
+props(){ du -a -h --max-depth=1 $* | sort -hr; }
 
 # ================================== PATH ==================================
 
@@ -162,8 +161,8 @@ ANDROID_STUDIO_HOME=/usr/local/android-studio/bin
 
 # ================================== GCC ==================================
 
-C_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
-CPLUS_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
+# C_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
+# CPLUS_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
 
 
 # ================================== ROS ==================================
@@ -190,8 +189,8 @@ CPLUS_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
 
 
 # VARIABLES FOR rosserial 
-export ROS_LIB_DIR=~/catkin_ws/custom/ros_serial/ros_lib
-export GCC4MBED_DIR=/usr/local/bin/gcc4mbed
+# export ROS_LIB_DIR=~/catkin_ws/custom/ros_serial/ros_lib
+# export GCC4MBED_DIR=/usr/local/bin/gcc4mbed
 
 
 # ROS INSTALL DIRECTORIES
