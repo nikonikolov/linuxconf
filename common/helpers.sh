@@ -88,34 +88,34 @@ configure_sublime(){
   confstart "sublime"
   
   PACKDIR="$HOME/.config/sublime-text-3/Packages/User"
-  PACKFILE="$PACKDIR/Package\ Control.sublime-settings"
-  INTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed\ Packages"
+  PACKFILE="$PACKDIR/Package Control.sublime-settings"
+  INSTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed Packages"
 
   # Install the keyboard shortcuts and settings files
-  safecp "$1/Default\ (Linux).sublime-keymap" "$PACKDIR"
+  safecp "$1/Default (Linux).sublime-keymap" "$PACKDIR"
   safecp "$1/Preferences.sublime-settings" "$PACKDIR"
 
   # Install package control
   wget https://packagecontrol.io/Package%20Control.sublime-package
-  mkdir -p INTALLED_PACKDIR
-  mv Package\ Control.sublime-package INTALLED_PACKDIR/
+  mkdir -p "$INSTALLED_PACKDIR"
+  mv Package\ Control.sublime-package "$INSTALLED_PACKDIR/"
 
   # Set up packages which will automatically be installed on next sublime startup
-  mkdir -p $PACKDIR
-  touch $PACKFILE
-  echo '{' >> $PACKFILE
-  echo '  "bootstrapped": true,' >> $PACKFILE
-  echo '  "in_process_packages":' >> $PACKFILE
-  echo '  [' >> $PACKFILE
-  echo '  ],' >> $PACKFILE
-  echo '  "installed_packages":' >> $PACKFILE
-  echo '  [' >> $PACKFILE
-  echo '    "CMake",' >> $PACKFILE
-  echo '    "Package Control",' >> $PACKFILE
-  echo '    "Python Breakpoints",' >> $PACKFILE
-  echo '    "SideBarEnhancements"' >> $PACKFILE
-  echo '  ]' >> $PACKFILE
-  echo '}' >> $PACKFILE
+  mkdir -p "$PACKDIR"
+  touch "$PACKFILE"
+  echo '{' >> "$PACKFILE"
+  echo '  "bootstrapped": true,' >> "$PACKFILE"
+  echo '  "in_process_packages":' >> "$PACKFILE"
+  echo '  [' >> "$PACKFILE"
+  echo '  ],' >> "$PACKFILE"
+  echo '  "installed_packages":' >> "$PACKFILE"
+  echo '  [' >> "$PACKFILE"
+  echo '    "CMake",' >> "$PACKFILE"
+  echo '    "Package Control",' >> "$PACKFILE"
+  echo '    "Python Breakpoints",' >> "$PACKFILE"
+  echo '    "SideBarEnhancements"' >> "$PACKFILE"
+  echo '  ]' >> "$PACKFILE"
+  echo '}' >> "$PACKFILE"
 
   confend "sublime"
 }
