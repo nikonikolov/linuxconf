@@ -1,5 +1,7 @@
 #!/bin/bash
 
+COMMON_DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 message(){
   echo ""
   echo "-------------------------------------------------------------------------------"
@@ -25,21 +27,23 @@ installend(){
 }
 
 safecp(){
-  if [ -f "$1" ]; then
-    cp "$1" "$2"
+  local SOURCE_PATH="$1"         # $1: source path
+  local DESTIONATION_PATH="$2"   # $2: destination path
+
+  if [ -f "$SOURCE_PATH" ]; then
+    cp "$SOURCE_PATH" "$DESTIONATION_PATH"
   else
-    echo "[WARNING]: File $1 does not exist. IGNORING"
+    echo "[WARNING]: File $SOURCE_PATH does not exist. IGNORING"
   fi
 }
 
 configure_tmux(){
-  # Args:
-  #   $1: Backup directory where the configuration file is
-  #   $2: Color, e.g. "colour220". If present, treat as server and set fg and bg colors
+  local BACKUP_CONF_FILES_DIR="$1"  # $1: Backup directory where the configuration files are
+  local TMUX_COLOR="$2"             # $2: Color, e.g. "colour220". If present, treat as server and set fg and bg colors
 
   confstart "tmux"
 
-  cp $1/tmux.conf $HOME/.tmux.conf
+  cp $BACKUP_CONF_FILES_DIR/tmux.conf $HOME/.tmux.conf
   mkdir -p ~/.tmux_plugins
   cd ~/.tmux_plugins
   if [ ! -d tmux-better-mouse-mode ]; then
@@ -48,8 +52,8 @@ configure_tmux(){
   cd -
 
   if [ $# == 2 ]; then
-    sed -i "/# set -g pane-active-border-fg colour220/c\set -g pane-active-border-fg $2" $HOME/.tmux.conf
-    sed -i "/# set -g status-bg colour220/c\set -g status-bg $2" $HOME/.tmux.conf
+    sed -i "/# set -g pane-active-border-fg colour220/c\set -g pane-active-border-fg $TMUX_COLOR" $HOME/.tmux.conf
+    sed -i "/# set -g status-bg colour220/c\set -g status-bg $TMUX_COLOR" $HOME/.tmux.conf
   fi
   
   confend "tmux"
@@ -83,17 +87,17 @@ configure_vim(){
 }
 
 configure_sublime(){
-  # Args:
-  #   $1: Backup directory where the configuration files are
+  local BACKUP_CONF_FILES_DIR="$1"  # $1: Backup directory where the configuration files are
+
   confstart "sublime"
-  
-  PACKDIR="$HOME/.config/sublime-text-3/Packages/User"
-  PACKFILE="$PACKDIR/Package Control.sublime-settings"
-  INSTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed Packages"
+
+  local PACKDIR="$HOME/.config/sublime-text-3/Packages/User"
+  local PACKFILE="$PACKDIR/Package Control.sublime-settings"
+  local INSTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed Packages"
 
   # Install the keyboard shortcuts and settings files
-  safecp "$1/Default (Linux).sublime-keymap" "$PACKDIR"
-  safecp "$1/Preferences.sublime-settings" "$PACKDIR"
+  safecp "$BACKUP_CONF_FILES_DIR/Default (Linux).sublime-keymap" "$PACKDIR"
+  safecp "$BACKUP_CONF_FILES_DIR/Preferences.sublime-settings" "$PACKDIR"
 
   # Install package control
   wget https://packagecontrol.io/Package%20Control.sublime-package
@@ -102,26 +106,13 @@ configure_sublime(){
 
   # Set up packages which will automatically be installed on next sublime startup
   mkdir -p "$PACKDIR"
-  touch "$PACKFILE"
-  echo '{' >> "$PACKFILE"
-  echo '  "bootstrapped": true,' >> "$PACKFILE"
-  echo '  "in_process_packages":' >> "$PACKFILE"
-  echo '  [' >> "$PACKFILE"
-  echo '  ],' >> "$PACKFILE"
-  echo '  "installed_packages":' >> "$PACKFILE"
-  echo '  [' >> "$PACKFILE"
-  echo '    "CMake",' >> "$PACKFILE"
-  echo '    "Package Control",' >> "$PACKFILE"
-  echo '    "Python Breakpoints",' >> "$PACKFILE"
-  echo '    "SideBarEnhancements"' >> "$PACKFILE"
-  echo '  ]' >> "$PACKFILE"
-  echo '}' >> "$PACKFILE"
+  safecp "$COMMON_DIRPATH/sublime_packages.json" "$PACKFILE"
 
   confend "sublime"
 }
 
 configure_redshift(){
-  # Args:
-  #   $1: Backup directory where the configuration file is
-  safecp $1/redshift.conf $HOME/.config/
+  local BACKUP_CONF_FILES_DIR="$1"  # Backup directory where the configuration file is
+
+  safecp $BACKUP_CONF_FILES_DIR/redshift.conf $HOME/.config/
 }
