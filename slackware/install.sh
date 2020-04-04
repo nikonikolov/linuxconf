@@ -148,7 +148,8 @@ fi
 
 
 # ------------------------ chromium ------------------------
-installbinary "chromium" "chromium/chromium-*-x86_64-1alien.txz"
+# installbinary "chromium" "chromium/chromium-*-x86_64-1alien.txz"
+sudo slackpkg install chromium
 
 
 # ------------------------ dropbox ------------------------
