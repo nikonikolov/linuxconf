@@ -18,3 +18,12 @@
 
 # Start docker daemon
 [ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start
+
+# Start avahidaemon
+[ -x /etc/rc.d/rc.avahidaemon ] && /etc/rc.d/rc.avahidaemon start
+
+# Optional: Start avahidnsconfd
+# [ -x /etc/rc.d/rc.avahidnsconfd ] && /etc/rc.d/rc.avahidnsconfd start
+
+# Start plexmediaserver
+[ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver start
