@@ -7,7 +7,7 @@
 # ======================== !! NOTE !! ========================
 
 # ===================== CONFIRM READY =====================
-echo -n "DID YOU ENABLE SUDO AND CONNECT TO THE INTERNET [y/n]?"
+echo -n "DID YOU ENABLE SUDO, SELECT A SLACKPKG MIRROR AND CONNECT TO THE INTERNET [y/n]?"
 read ready
 if [ "$ready" != "y" ]; then
   echo "Exiting"
@@ -41,9 +41,15 @@ installbinary(){
 }
 
 installsbo(){
-  installstart $1
-  sudo sboinstall -j7 $1
-  installend $1
+  local PACKAGE="$1"
+  installstart $PACKAGE
+  if [ -z "$MESSAGE" ]; then
+    printf "\n$MESSAGE\n"
+    printf "Press any key to continue\n"
+    read -n 1 -s -r
+  fi
+  sudo sboinstall -j7 $PACKAGE
+  installend $PACKAGE
 }
 
 
@@ -83,6 +89,19 @@ sudo ln -s /usr/bin/sublime_text /usr/bin/sublime
 configure_sublime $SLACK_BACKUP_DIR
 
 
+# ------------------------ avahi ------------------------
+# Needed for geoclue2
+sudo groupadd -g 214 avahi
+sudo useradd -u 214 -g 214 -c "Avahi User" -d /dev/null -s /bin/false avahi
+installsbo "avahi"
+sudo /etc/rc.d/rc.avahidaemon start
+
+
+# ------------------------ geoclue2 ------------------------
+# Needed for redshift automatic location. Must be installed BEFORE redshift
+installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
+
+
 # ------------------------ redshift ------------------------
 installsbo "redshift"
 cp $SLACK_BACKUP_DIR/redshift.conf ~/.config/
@@ -108,6 +127,10 @@ installsbo "MasterPDFEditor"
 
 # ------------------------ i8kutils ------------------------
 installsbo "i8kutils"
+
+
+# ------------------------ plex ------------------------
+installsbo "plexmediaserver" "NOTE: Make sure to add the plex user and group when prompted by SBo"
 
 
 # ------------------------ jdk ------------------------

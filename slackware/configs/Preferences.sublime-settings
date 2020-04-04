@@ -1,10 +1,11 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/Theme - Monokai Pro/Monokai Pro (Filter Machine).sublime-color-scheme",
 	"font_size": 8,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
 	"tab_size": 2,
+	"theme": "Monokai Pro (Filter Machine).sublime-theme",
 	"translate_tabs_to_spaces": true
 }

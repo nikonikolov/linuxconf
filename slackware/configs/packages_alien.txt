@@ -17,6 +17,7 @@ akonadiconsole-19.12.2-x86_64-1alien
 akregator-19.12.2-x86_64-1alien
 alkimia-8.0.3-x86_64-2alien
 analitza-19.12.2-x86_64-1alien
+apache-ant-1.9.7-noarch-1alien
 ark-19.12.2-x86_64-1alien
 artikulate-19.12.2-x86_64-1alien
 attica-framework-5.67.0-x86_64-1alien
@@ -38,7 +39,7 @@ calligraplan-3.2.2-x86_64-1alien
 cantor-19.12.2-x86_64-1alien
 cervisia-19.12.2-x86_64-1alien
 cfitsio-3.420-x86_64-1alien
-chromium-79.0.3945.88-x86_64-1alien
+chromium-80.0.3987.132-x86_64-1alien
 cracklib-2.9.7-x86_64-1alien
 cryfs-0.10.2-x86_64-2alien
 cryptopp-8.2.0-x86_64-1alien
@@ -343,7 +344,7 @@ modemmanager-qt-5.67.0-x86_64-1alien
 networkmanager-qt-5.67.0-x86_64-1alien
 noto-cjk-font-ttf-2.001-noarch-1alien
 noto-font-ttf-2015_09_29-noarch-2alien
-npapi-vlc-20180907-x86_64-1alien
+npapi-vlc-20171129-x86_64-1alien
 okteta-0.26.2-x86_64-1alien
 okular-19.12.2-x86_64-1alien
 opencv-4.1.1-x86_64-1alien
@@ -414,7 +415,7 @@ threadweaver-5.67.0-x86_64-1alien
 umbrello-19.12.2-x86_64-1alien
 user-manager-5.18.0-x86_64-1alien
 vid.stab-97c6ae2_20150529git-x86_64-1alien
-vlc-3.0.4-x86_64-1alien
+vlc-3.0.8-x86_64-1alien
 wacomtablet-3.2.0-x86_64-1alien
 wayland-1.17.0-x86_64-1alien
 wayland-protocols-1.18-x86_64-1alien
