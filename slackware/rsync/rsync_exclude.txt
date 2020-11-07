@@ -10,6 +10,7 @@
 /lost+found
 /home/niko/Dropbox/*
 /home/niko/MOVIES/*
+/home/niko/.cache/*
 /home/niko/.cache/google-chrome/*
 /home/niko/.cache/chromium/*
 /home/niko/.cache/mozilla/*
