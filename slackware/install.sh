@@ -153,50 +153,53 @@ sudo slackpkg install chromium
 
 
 # ------------------------ dropbox ------------------------
-installbinary "dropbox" "dropbox/dropbox-client-1.6.1-x86_64-1alien.tgz"
+# installbinary "dropbox" "dropbox/dropbox-client-1.6.1-x86_64-1alien.tgz"
+sudo slackpkg install dropbox-client
 
 
 # ------------------------ vlc ------------------------
-installbinary "vlc" "vlc/vlc-*-x86_64-1alien.txz"
-installbinary "npapi-vlc" "vlc/npapi-vlc-*-x86_64-1alien.txz"
+# installbinary "vlc" "vlc/vlc-*-x86_64-1alien.txz"
+# installbinary "npapi-vlc" "vlc/npapi-vlc-*-x86_64-1alien.txz"
+sudo slackpkg install vlc
+sudo slackpkg install npapi-vlc
 
 
 # ------------------------ google-chrome ------------------------
-installbinary "google-chrome" "google-chrome/google-chrome-*-x86_64-1.txz"
+# installbinary "google-chrome" "google-chrome/google-chrome-*-x86_64-1.txz"
 
 
-if [ -x "$(command -v plasmashell)" ];
-  message "Found KDE5"
-else
-  message "Found KDE4"
-  configure_kde4
-fi
+# if [ -x "$(command -v plasmashell)" ];
+#   message "Found KDE5"
+# else
+#   message "Found KDE4"
+#   configure_kde4
+# fi
 
-configure_kde4(){
+# configure_kde4(){
   
-  message "Configuring KDE shortcuts"
-  # Configure KDE shortcuts
-  KDE_SHORTCUTS=$HOME/.kde/share/config/kglobalshortcutsrc
-  if [ -f $KDE_SHORTCUTS ]; then
-    mv $KDE_SHORTCUTS $KDE_SHORTCUTS.backup
-  fi 
-  cp $SLACK_BACKUP_DIR/kglobalshortcutsrc ~/.kde/share/config/kglobalshortcutsrc
+#   message "Configuring KDE shortcuts"
+#   # Configure KDE shortcuts
+#   KDE_SHORTCUTS=$HOME/.kde/share/config/kglobalshortcutsrc
+#   if [ -f $KDE_SHORTCUTS ]; then
+#     mv $KDE_SHORTCUTS $KDE_SHORTCUTS.backup
+#   fi
+#   cp $SLACK_BACKUP_DIR/kglobalshortcutsrc ~/.kde/share/config/kglobalshortcutsrc
 
-  # ===================== INSTALL KDE THEMES =====================
-  message "Installing HexLite-KDETheme"
-  cd $SLACK_PKG_DIR/HexLite-KDETheme
-  cp -r Aurorae/* ~/.kde/share/apps/aurorae/themes/
-  cp -r Plasma/* ~/.kde/share/apps/desktoptheme/
-  cp -r Color\ Schemes/* ~/.kde/share/apps/color-schemes/
-  cd -
+#   # ===================== INSTALL KDE THEMES =====================
+#   message "Installing HexLite-KDETheme"
+#   cd $SLACK_PKG_DIR/HexLite-KDETheme
+#   cp -r Aurorae/* ~/.kde/share/apps/aurorae/themes/
+#   cp -r Plasma/* ~/.kde/share/apps/desktoptheme/
+#   cp -r Color\ Schemes/* ~/.kde/share/apps/color-schemes/
+#   cd -
 
-  message "Installing EvolvereSuit KDE4 icons"
-  mkdir -p ~/.evolveresuit && git clone https://github.com/franksouza183/EvolvereSuit ~/.evolveresuit/
-  cp -r ~/.evolveresuit/icons/evolvere-black-folders-vivid ~/.kde/share/icons/
-  rm -rf ~/.evolveresuit
+#   message "Installing EvolvereSuit KDE4 icons"
+#   mkdir -p ~/.evolveresuit && git clone https://github.com/franksouza183/EvolvereSuit ~/.evolveresuit/
+#   cp -r ~/.evolveresuit/icons/evolvere-black-folders-vivid ~/.kde/share/icons/
+#   rm -rf ~/.evolveresuit
 
-  installsbo "QtCurve-KDE4"
-}
+#   installsbo "QtCurve-KDE4"
+# }
 
 
 # -------------------------------------
