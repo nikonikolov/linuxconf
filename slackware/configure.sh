@@ -69,8 +69,8 @@ chmod +x ~/bin/nvidia_control.sh
 
 
 # ======================== !! NOTE !! ========================
-# It is a bad idea to copy your backups of slackpkg blacklist, rc.local, rc.local_shutdown, etc.
-# since you might overwrite new contents in the system files
+# It is a bad idea to copy your backups of slackpkg blacklist since you might overwrite system files.
+# Copying rc.local, rc.local_shutdown, etc. is OK since these are user-specific files
 # ======================== !! NOTE !! ========================
 
 

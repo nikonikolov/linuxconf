@@ -1,0 +1,7 @@
+*.info !text !filter !merge !diff
+*README !text !filter !merge !diff
+*.SlackBuild !text !filter !merge !diff
+*slack-desc !text !filter !merge !diff
+*.sh !text !filter !merge !diff
+*.desktop !text !filter !merge !diff
+*.csh !text !filter !merge !diff

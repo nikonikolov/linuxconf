@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b00b027af87abc8f9e407b87466ccf37796377874f2d2381b939e1610d5438e7
-size 304
+
+
+Fixes & Enhancements
+1.Fixed Pre-OS has no display on external monitor with Lid Close issue
+
+Version 1.2.19, 1.2.19
+
+Release date
+23 Jan 2017
+
+
+MD5: b2ade50ae6f02e236a270c8295211aee
+SHA1: 75f8182b680db782e5e19fd9bcc3d5c9cc82cf87
+SHA-256: 37aac2a6a2f195795d5a27682a04ada764ea41eb3b38874544242ce39047cd79

@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:16f96592f9b13bde3215fe089c670201a40f29bb2a5d968247f7afc4b2d28ad2
-size 405
+PRGNAM="sublime_text"
+VERSION="3.1.26"
+HOMEPAGE="http://www.sublimetext.com"
+DOWNLOAD="https://download.sublimetext.com/sublime_text_3_build_3126_x32.tar.bz2"
+MD5SUM="622247d2314d1f9f4babf8592150ed09"
+DOWNLOAD_x86_64="https://download.sublimetext.com/sublime_text_3_build_3126_x64.tar.bz2"
+MD5SUM_x86_64="acc34252b0ea7dff1f581c5db1564dcb"
+REQUIRES=""
+MAINTAINER="Bruno Queiros"
+EMAIL="bqueiros@gmail.com"

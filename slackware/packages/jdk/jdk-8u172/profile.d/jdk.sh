@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7fdb1d9564e085fa5a44de631c0546384fea1aea05428caf85241d846210daed
-size 146
+#!/bin/sh
+export JAVA_HOME=/usr/lib/java
+export MANPATH="${MANPATH}:${JAVA_HOME}/man"
+export PATH="${PATH}:${JAVA_HOME}/bin:${JAVA_HOME}/jre/bin"
