@@ -1,0 +1,97 @@
+# ================================== GCC ==================================
+
+# C_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
+# CPLUS_INCLUDE_PATH=/home/niko/ros_catkin_ws/install_isolated/include
+
+
+# ================================== GCC-ARM-NONE-EABI ==================================
+
+GCC_ARM_NONE_EABI_VERSION=gcc-arm-none-eabi-5_4-2016q3
+#PATH=$PATH:/usr/local/bin/gcc-arm-none-eabi-5_4-2016q2/bin
+PATH=$PATH:/home/niko/bin/$GCC_ARM_NONE_EABI_VERSION/bin
+
+# gcc4mbed
+# PATH=$PATH:/usr/local/bin/gcc4mbed/gcc-arm-none-eabi/bin
+#export GCC4MBED_DEPLOY='cp PROJECT.bin /media/MBED/ ; sync'
+
+
+# ================================== ROS ==================================
+
+# ROS MAIN WORKSPACES
+
+# ------------------
+
+# source ~/ros_catkin_ws/install_isolated/setup.bash
+# source ~/catkin_ws/devel/setup.bash
+
+# # ROS PROJECTS WORKSPACES
+# source ~/ros_pack_ws/install/setup.bash
+# source ~/Workspace/asda-project/devel/setup.bash
+
+# PYTHONPATH=$PYTHONPATH:~/ros_catkin_ws/install_isolated/lib64/python2.7/site-packages
+
+# ------------------
+
+# source ~/Workspace/Labs/ardrone_ws/devel/setup.bash
+# source ~/baxter_ros_ws/devel/setup.bash
+# source ~/ros_pack_ws/devel/setup.bash
+
+
+
+# VARIABLES FOR rosserial 
+# export ROS_LIB_DIR=~/catkin_ws/custom/ros_serial/ros_lib
+# export GCC4MBED_DIR=/usr/local/bin/gcc4mbed
+
+
+# ROS INSTALL DIRECTORIES
+# export PYTHONPATH
+
+#PYTHONPATH=$PYTHONPATH:~/ros_catkin_ws/src/catkin/python/catkin
+#PYTHONPATH=$PYTHONPATH:~/ros_catkin_ws/install_isolated/lib/python2.7/site-packages
+
+# this might be needed - not confirmed
+#PYTHONPATH=$PYTHONPATH:~/ros_catkin_ws/src/catkin/python
+
+# ROS WORKSPACE DIRECTORIES
+#PYTHONPATH=$PYTHONPATH:~/catkin_ws/devel/lib/python2.7/site-packages
+#PYTHONPATH=$PYTHONPATH:~/catkin_ws/install/lib/python2.7/site-packages
+
+
+# ================================== OLD PROBLEMS ==================================
+
+#alias hibernate='sudo dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Hibernate'
+#alias android='setsid $ANDROID_STUDIO_HOME/studio.sh'
+#alias touchfinger='sudo modprobe -r psmouse && sudo modprobe psmouse proto=imps'
+#alias touchscroll='sudo modprobe -r psmouse && sudo modprobe psmouse'
+
+
+# ================================== ANDROID STUDIO ==================================
+
+# Android Studio
+#PATH=$PATH:/home/niko/bin/android-studio/bin
+PATH=$PATH:/usr/local/android-studio/bin
+
+# Set Android Studio HOME
+#ANDROID_STUDIO_HOME=/home/niko/bin/android-studio/bin
+ANDROID_STUDIO_HOME=/usr/local/android-studio/bin
+
+# ================================== LOCALE ==================================
+
+# Fix locale setting - no longer needed on Slackware 15.0
+# export LANG=en_US.utf8
+# Alternatively, can also set LC_ALL variable
+# export LC_ALL=en_US.utf8
+
+# ================================== COLORS ==================================
+
+# Stick to screen-256color for vim in tmux. Default is xterm
+# export TERM=screen-256color
+# export TERM=screen
+# export TERM=xterm-256color
+
+# if [[ $TERM == screen ]]; then
+#   export TERM=screen-256color
+# fi
+# if [[ $TERM == xterm ]]; then
+#   export TERM=xterm-256color
+# fi
