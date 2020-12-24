@@ -74,14 +74,6 @@ sudo sboconfig --slackware-version $SLACK_VERSION
 sudo sbocheck
 
 
-# ------------------------ pip3 ------------------------
-installstart "pip3"
-wget https://bootstrap.pypa.io/get-pip.py
-mv get-pip.py $SLACK_PKG_DIR/
-sudo python3 $SLACK_PKG_DIR/get-pip.py
-installend "pip3"
-
-
 # ------------------------ sublime ------------------------
 installsbo "sublime_text"
 sudo ln -s /usr/bin/sublime_text /usr/bin/sublime
@@ -99,7 +91,7 @@ sudo /etc/rc.d/rc.avahidaemon start
 
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
-installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
+installsbo "geoclue2" "!!!!!!!!! NOTE: Make sure to pass AVAHI=yes !!!!!!!!!"
 
 
 # ------------------------ redshift ------------------------
@@ -116,9 +108,15 @@ wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-com
 sudo mv git-completion.bash /usr/share/bash-completion/completions/git
 
 
-# ------------------------ pptp and NetworkManager-pptp for VPN ------------------------
+# ------------------------ VPN packages ------------------------
 installsbo "pptp"
 installsbo "NetworkManager-pptp"
+#
+installsbo "NetworkManager-l2tp"
+installsbo "xl2tpd"
+installsbo "strongswan"
+#
+installsbo "NetworkManager-openvpn"
 
 
 # ------------------------ MasterPDFEditor ------------------------
@@ -129,8 +127,17 @@ installsbo "MasterPDFEditor"
 installsbo "i8kutils"
 
 
+# ------------------------ telegram ------------------------
+installsbo "telegram"
+
+
+# ------------------------ spotify ------------------------
+installsbo "spotify"
+sudo slackpkg install ffmpeg3-compat
+
+
 # ------------------------ plex ------------------------
-installsbo "plexmediaserver" "NOTE: Make sure to add the plex user and group when prompted by SBo"
+installsbo "plexmediaserver" "!!!!!!!!! NOTE: Make sure to add the plex user and group when prompted by SBo !!!!!!!!!"
 
 
 # ------------------------ jdk ------------------------
@@ -148,58 +155,33 @@ fi
 
 
 # ------------------------ chromium ------------------------
-# installbinary "chromium" "chromium/chromium-*-x86_64-1alien.txz"
 sudo slackpkg install chromium
 
 
 # ------------------------ dropbox ------------------------
-# installbinary "dropbox" "dropbox/dropbox-client-1.6.1-x86_64-1alien.tgz"
 sudo slackpkg install dropbox-client
 
 
 # ------------------------ vlc ------------------------
-# installbinary "vlc" "vlc/vlc-*-x86_64-1alien.txz"
-# installbinary "npapi-vlc" "vlc/npapi-vlc-*-x86_64-1alien.txz"
 sudo slackpkg install vlc
 sudo slackpkg install npapi-vlc
 
 
+# ------------------------ common packages ------------------------
+installsbo "FontAwesome"
+installsbo "git-lfs"
+installsbo "hplip-plugin"
+installsbo "mendeley-desktop"
+installsbo "nvme-cli"
+installsbo "teamviewer"
+installsbo "texlive-extra"
+installsbo "texlive-fonts"
+installsbo "unrar"
+installsbo "zoom"
+
+
 # ------------------------ google-chrome ------------------------
 # installbinary "google-chrome" "google-chrome/google-chrome-*-x86_64-1.txz"
-
-
-# if [ -x "$(command -v plasmashell)" ];
-#   message "Found KDE5"
-# else
-#   message "Found KDE4"
-#   configure_kde4
-# fi
-
-# configure_kde4(){
-  
-#   message "Configuring KDE shortcuts"
-#   # Configure KDE shortcuts
-#   KDE_SHORTCUTS=$HOME/.kde/share/config/kglobalshortcutsrc
-#   if [ -f $KDE_SHORTCUTS ]; then
-#     mv $KDE_SHORTCUTS $KDE_SHORTCUTS.backup
-#   fi
-#   cp $SLACK_BACKUP_DIR/kglobalshortcutsrc ~/.kde/share/config/kglobalshortcutsrc
-
-#   # ===================== INSTALL KDE THEMES =====================
-#   message "Installing HexLite-KDETheme"
-#   cd $SLACK_PKG_DIR/HexLite-KDETheme
-#   cp -r Aurorae/* ~/.kde/share/apps/aurorae/themes/
-#   cp -r Plasma/* ~/.kde/share/apps/desktoptheme/
-#   cp -r Color\ Schemes/* ~/.kde/share/apps/color-schemes/
-#   cd -
-
-#   message "Installing EvolvereSuit KDE4 icons"
-#   mkdir -p ~/.evolveresuit && git clone https://github.com/franksouza183/EvolvereSuit ~/.evolveresuit/
-#   cp -r ~/.evolveresuit/icons/evolvere-black-folders-vivid ~/.kde/share/icons/
-#   rm -rf ~/.evolveresuit
-
-#   installsbo "QtCurve-KDE4"
-# }
 
 
 # -------------------------------------
@@ -214,21 +196,10 @@ sudo slackpkg install npapi-vlc
 # installsbo "texlive-fonts"
 
 
-# ---------------------------------------------
-# OLD PACKAGES (now part of official Slackware)
-# ---------------------------------------------
+# ------------------------ pip3 ------------------------
+# installstart "pip3"
+# wget https://bootstrap.pypa.io/get-pip.py
+# mv get-pip.py $SLACK_PKG_DIR/
+# sudo python3 $SLACK_PKG_DIR/get-pip.py
+# installend "pip3"
 
-# installstart "ffmpeg"
-# ffmpeg_pkg=$SLACK_PKG_DIR/ffmpeg-alien/ffmpeg-*-x86_64-1alien.txz
-# if [ -f $ffmpeg_pkg ]; then
-#   sudo installpkg $ffmpeg_pkg
-#   installend "ffmpeg"
-# else 
-#   message "ERROR: ffmpeg not available. Continuing without installing ffmpeg"
-# fi
-
-# installsbo "libinput"
-# sudo cp $SLACK_BACKUP_DIR/*libinput.conf /etc/X11/xorg.conf.d/
-# sudo cp $SLACK_BACKUP_DIR/*touchpad.conf /etc/X11/xorg.conf.d/
-
-# installsbo "xf86-input-libinput"
