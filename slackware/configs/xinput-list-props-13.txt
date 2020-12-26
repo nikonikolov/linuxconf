@@ -1,0 +1,37 @@
+Device 'DLL06E4:01 06CB:7A13 Touchpad':
+	Device Enabled (167):	1
+	Coordinate Transformation Matrix (169):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+	libinput Tapping Enabled (321):	1
+	libinput Tapping Enabled Default (322):	0
+	libinput Tapping Drag Enabled (323):	1
+	libinput Tapping Drag Enabled Default (324):	1
+	libinput Tapping Drag Lock Enabled (325):	0
+	libinput Tapping Drag Lock Enabled Default (326):	0
+	libinput Tapping Button Mapping Enabled (327):	1, 0
+	libinput Tapping Button Mapping Default (328):	1, 0
+	libinput Natural Scrolling Enabled (303):	0
+	libinput Natural Scrolling Enabled Default (304):	0
+	libinput Disable While Typing Enabled (329):	1
+	libinput Disable While Typing Enabled Default (330):	1
+	libinput Scroll Methods Available (305):	1, 1, 0
+	libinput Scroll Method Enabled (306):	1, 0, 0
+	libinput Scroll Method Enabled Default (307):	1, 0, 0
+	libinput Click Methods Available (331):	1, 1
+	libinput Click Method Enabled (332):	1, 0
+	libinput Click Method Enabled Default (333):	1, 0
+	libinput Middle Emulation Enabled (334):	0
+	libinput Middle Emulation Enabled Default (335):	0
+	libinput Accel Speed (312):	1.000000
+	libinput Accel Speed Default (313):	0.000000
+	libinput Accel Profiles Available (314):	1, 1
+	libinput Accel Profile Enabled (315):	1, 0
+	libinput Accel Profile Enabled Default (316):	1, 0
+	libinput Left Handed Enabled (317):	0
+	libinput Left Handed Enabled Default (318):	0
+	libinput Send Events Modes Available (288):	1, 1
+	libinput Send Events Mode Enabled (289):	0, 0
+	libinput Send Events Mode Enabled Default (290):	0, 0
+	Device Node (291):	"/dev/input/event17"
+	Device Product ID (292):	1739, 31251
+	libinput Drag Lock Buttons (319):	<no items>
+	libinput Horizontal Scroll Enabled (320):	1
