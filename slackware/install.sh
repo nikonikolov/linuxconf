@@ -33,6 +33,20 @@ SLACKWARE_VERSION=14.2
 
 # ===================== HELPER FUNCTIONS =====================
 
+installfromsource(){
+  local PACKAGE_NAME="$1"
+  local PACKAGE_BINARY_PATH="$2"
+  installstart "$PACKAGE_NAME"
+  PACKAGE_SLACKBUILD_DIR=$SLACK_PKG_DIR/$PACKAGE_NAME
+  if [ -d $PACKAGE_SLACKBUILD_DIR ]; then
+    cd $PACKAGE_SLACKBUILD_DIR
+    ./$PACKAGE_NAME.SlackBuild
+    installpkg /tmp/$PACKAGE_NAME-*-x86_64-1*.tgz
+  else 
+    message "[ERROR]: $PACKAGE_NAME not available. Continuing without installing $PACKAGE_NAME"
+  fi
+}
+
 installbinary(){
   local PACKAGE_NAME="$1"
   local PACKAGE_BINARY_PATH="$2"
@@ -106,6 +120,10 @@ sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf ~/.config/
 sudo -u $SUDO_USER redshift &
 
 
+# ------------------------ chromium ------------------------
+slackpkg install chromium
+
+
 # ------------------------ bash-completion ------------------------
 installstart "bash-completion"
 slackpkg install bash-completion
@@ -138,7 +156,8 @@ installsbo "telegram"
 
 
 # ------------------------ spotify ------------------------
-installsbo "spotify"
+installfromsource "spotify"
+# installsbo "spotify"
 slackpkg install ffmpeg3-compat
 
 
@@ -147,21 +166,12 @@ installsbo "plexmediaserver" "!!!!!!!!! NOTE: Make sure to add the plex user and
 
 
 # ------------------------ jdk ------------------------
-installstart "jdk"
-jdk_dir=$SLACK_PKG_DIR/jdk-8u172
-if [ -d $jdk_dir ]; then
-  cd $jdk_dir
-  ./jdk.SlackBuild
-  installpkg /tmp/jdk-*-x86_64-1_SBo.tgz
-  cd -
-  installend "jdk"
-else 
-  message "ERROR: jdk not available. Continuing without installing jdk"
-fi
+installfromsource "jdk"
 
 
-# ------------------------ chromium ------------------------
-slackpkg install chromium
+# ------------------------ mendeleydesktop ------------------------
+installfromsource "mendeleydesktop"
+# installsbo "mendeleydesktop"
 
 
 # ------------------------ dropbox ------------------------
@@ -177,7 +187,6 @@ slackpkg install npapi-vlc
 installsbo "FontAwesome"
 installsbo "git-lfs"
 installsbo "hplip-plugin"
-installsbo "mendeley-desktop"
 installsbo "nvme-cli"
 installsbo "teamviewer"
 installsbo "texlive-extra"
