@@ -95,6 +95,11 @@ echo '# Blacklist specific packages' | sudo tee --append /etc/slackpkg/blacklist
 echo 'google-chrome' | sudo tee --append /etc/slackpkg/blacklist
 
 
+# ------------------------ slackpkg mirror ------------------------
+LINE_NUM=(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
+sed "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+
+
 # ------------------------ rc.local ------------------------
 message "Configuring /etc/rc.d/rc.local"
 sudo cp $SLACK_BACKUP_DIR/rc.local /etc/rc.d/rc.local
