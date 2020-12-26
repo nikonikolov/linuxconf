@@ -27,7 +27,7 @@ safecp $HOME/.vimrc $SLACK_BACKUP_DIR/vimrc.txt
 safecp $HOME/.tmux.conf $SLACK_BACKUP_DIR/tmux.conf
 
 # Mutt
-safecp $HOME/.mutt/muttrc $SLACK_BACKUP_DIR/mutt.txt
+# safecp $HOME/.mutt/muttrc $SLACK_BACKUP_DIR/mutt.txt
 
 # nvidia controller
 safecp $HOME/bin/nvidia_control.sh $SLACK_BACKUP_DIR
@@ -47,7 +47,7 @@ done
 safecp /etc/bumblebee/bumblebee.conf $SLACK_BACKUP_DIR
 
 # elilo
-safecp /boot/efi/EFI/Slackware/elilo.conf $SLACK_BACKUP_DIR
+# safecp /boot/efi/EFI/Slackware/elilo.conf $SLACK_BACKUP_DIR
 
 # grub
 safecp /etc/default/grub $SLACK_BACKUP_DIR
@@ -75,3 +75,8 @@ safecp /etc/hosts $SLACK_BACKUP_DIR
 ls /var/log/packages > $SLACK_BACKUP_DIR/packages.txt
 ls /var/log/packages | grep SBo > $SLACK_BACKUP_DIR/packages_SBo.txt
 ls /var/log/packages | grep alien > $SLACK_BACKUP_DIR/packages_alien.txt
+
+# libinput configuration
+xinput list > $SLACK_BACKUP_DIR/xinput-list.txt
+xinput list-props 12 > $SLACK_BACKUP_DIR/xinput-list-props-12.txt
+xinput list-props 13 > $SLACK_BACKUP_DIR/xinput-list-props-13.txt
