@@ -157,9 +157,9 @@ installsbo "telegram"
 
 # ------------------------ spotify ------------------------
 installfromsource "spotify"
+# installsbo "spotify"
 # The deb package is linked to libcurl-gnutls.so.4, which is incorrect naming in Ubuntu
 ln -s /usr/lib64/libcurl.so /usr/lib64/libcurl-gnutls.so.4
-# installsbo "spotify"
 slackpkg install ffmpeg3-compat
 
 
