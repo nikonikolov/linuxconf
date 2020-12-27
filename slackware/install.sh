@@ -28,7 +28,7 @@ SLACK_BACKUP_DIR="$DIRPATH/configs"
 SLACK_PKG_DIR="$DIRPATH/packages"
 source $DIRPATH/../common/helpers.sh
 
-SBOTOOLS_VERSION=2.5
+SBOTOOLS_VERSION=2.7
 SLACKWARE_VERSION=14.2
 
 # ===================== HELPER FUNCTIONS =====================
@@ -41,7 +41,7 @@ installfromsource(){
   if [ -d $PACKAGE_SLACKBUILD_DIR ]; then
     cd $PACKAGE_SLACKBUILD_DIR
     ./$PACKAGE_NAME.SlackBuild
-    installpkg /tmp/$PACKAGE_NAME-*-x86_64-1*.tgz
+    installpkg /tmp/$PACKAGE_NAME-*-x86_64-*.tgz
   else 
     message "[ERROR]: $PACKAGE_NAME not available. Continuing without installing $PACKAGE_NAME"
   fi
@@ -157,6 +157,8 @@ installsbo "telegram"
 
 # ------------------------ spotify ------------------------
 installfromsource "spotify"
+# The deb package is linked to libcurl-gnutls.so.4, which is incorrect naming in Ubuntu
+ln -s /usr/lib64/libcurl.so /usr/lib64/libcurl-gnutls.so.4
 # installsbo "spotify"
 slackpkg install ffmpeg3-compat
 
