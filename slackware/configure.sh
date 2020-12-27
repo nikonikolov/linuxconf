@@ -3,7 +3,7 @@
 # MAKE SURE TO FIRST ALLOW SUDO AND CONNECT TO THE INTERNET !!!
 
 # ===================== CONFIRM READY =====================
-echo -n "DID YOU ENABLE SUDO, NETWORKMANAGER AND CONNECT TO THE INTERNET [y/n]?"
+echo -n "DID YOU ENABLE SUDO AND CONNECT TO THE INTERNET [y/n]?"
 read ready
 if [ "$ready" != "y" ]; then
   echo "Exiting"
@@ -96,8 +96,13 @@ echo 'google-chrome' | sudo tee --append /etc/slackpkg/blacklist
 
 
 # ------------------------ slackpkg mirror ------------------------
-LINE_NUM=(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
-sed "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+LINE_NUM=$(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
+sudo sed -i "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+
+
+# ------------------------ libinput ------------------------
+sudo cp $SLACK_BACKUP_DIR/*-touchpad.conf /etc/X11/xorg.conf.d/
+sudo cp $SLACK_BACKUP_DIR/*-libinput.conf /etc/X11/xorg.conf.d/
 
 
 # ------------------------ rc.local ------------------------
@@ -105,43 +110,17 @@ message "Configuring /etc/rc.d/rc.local"
 sudo cp $SLACK_BACKUP_DIR/rc.local /etc/rc.d/rc.local
 sudo chmod +x /etc/rc.d/rc.local
 
-# echo "# Make bumblebeed start with the system" | sudo tee --append /etc/rc.d/rc.local
-# echo "[ -x /etc/rc.d/rc.bumblebeed ] && /etc/rc.d/rc.bumblebeed start" | sudo tee --append /etc/rc.d/rc.local
-# echo "" | sudo tee --append /etc/rc.d/rc.local
-
-# echo "# Stop the nvidia card" | sudo tee --append /etc/rc.d/rc.local
-# echo "[ -x /home/niko/bin/nvidia_control.sh ] && /home/niko/bin/nvidia_control.sh stop" | sudo tee --append /etc/rc.d/rc.local
-# echo "" | sudo tee --append /etc/rc.d/rc.local
-
-# echo "# Start docker daemon" | sudo tee --append /etc/rc.d/rc.local
-# echo "[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start" | sudo tee --append /etc/rc.d/rc.local
-# echo "" | sudo tee --append /etc/rc.d/rc.local
-
 
 # ------------------------ rc.local_shutdown ------------------------
 message "Configuring /etc/rc.d/rc.local_shutdown"
 sudo cp $SLACK_BACKUP_DIR/rc.local_shutdown /etc/rc.d/rc.local_shutdown
 sudo chmod +x /etc/rc.d/rc.local_shutdown
 
-# message "Making the contents of /tmp get deleted on shutdown"
-# # Make the contents of /tmp get deleted on shut down
-# sudo touch /etc/rc.d/rc.local_shutdown
-# echo "# Delete the contents of /tmp on shutdown" | sudo tee --append /etc/rc.d/rc.local_shutdown
-# echo "/usr/bin/find /tmp -mindepth 1 -maxdepth 1 -exec /bin/rm -rf {} +;" | sudo tee --append /etc/rc.d/rc.local_shutdown
-# echo "" | sudo tee --append /etc/rc.d/rc.local_shutdown
-# sudo chmod +x /etc/rc.d/rc.local_shutdown
-
 
 # ------------------------ rc.modules.local ------------------------
 message "Configuring /etc/rc.d/rc.modules.local"
 sudo cp $SLACK_BACKUP_DIR/rc.modules.local /etc/rc.d/rc.modules.local
 sudo chmod +x /etc/rc.d/rc.modules.local
-
-# message "Making i8k module be automatically loaded"
-# # Load the i8k kernel module for monitoring fan
-# echo "/sbin/modprobe i8k force=1     # Dell hardware module" | sudo tee --append /etc/rc.d/rc.modules.local
-# echo "" | sudo tee --append /etc/rc.d/rc.modules.local
-# sudo chmod +x /etc/rc.d/rc.modules.local
 
 
 # ------------------------ DHCP ------------------------

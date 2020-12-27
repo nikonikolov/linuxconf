@@ -38,13 +38,16 @@ safecp $HOME/bin/nvidia_control.sh $SLACK_BACKUP_DIR
 # KDE shortcuts
 safecp $HOME/.kde/share/config/kglobalshortcutsrc $SLACK_BACKUP_DIR
 
-# Important config files
+# Libinput configuration
 safecp /etc/X11/xorg.conf.d/*libinput.conf $SLACK_BACKUP_DIR
 safecp /etc/X11/xorg.conf.d/*touchpad.conf $SLACK_BACKUP_DIR
 for FILE in /usr/share/X11/xorg.conf.d/*libinput.conf
 do
   safecp $FILE $SLACK_BACKUP_DIR/$(basename $FILE).system
 done
+xinput list > $SLACK_BACKUP_DIR/xinput-list.txt
+xinput list-props 12 > $SLACK_BACKUP_DIR/xinput-list-props-12.txt
+xinput list-props 13 > $SLACK_BACKUP_DIR/xinput-list-props-13.txt
 
 # bumblebee
 safecp /etc/bumblebee/bumblebee.conf $SLACK_BACKUP_DIR
@@ -79,7 +82,5 @@ ls /var/log/packages > $SLACK_BACKUP_DIR/packages.txt
 ls /var/log/packages | grep SBo > $SLACK_BACKUP_DIR/packages_SBo.txt
 ls /var/log/packages | grep alien > $SLACK_BACKUP_DIR/packages_alien.txt
 
-# libinput configuration
-xinput list > $SLACK_BACKUP_DIR/xinput-list.txt
-xinput list-props 12 > $SLACK_BACKUP_DIR/xinput-list-props-12.txt
-xinput list-props 13 > $SLACK_BACKUP_DIR/xinput-list-props-13.txt
+# groups
+groups $USER > $SLACK_BACKUP_DIR/groups-$USER.txt
