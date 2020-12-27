@@ -91,13 +91,18 @@ configure_sublime(){
 
   confstart "sublime"
 
-  local PACKDIR="$HOME/.config/sublime-text-3/Packages/User"
-  local PACKFILE="$PACKDIR/Package Control.sublime-settings"
+  local CONFIGS_DIR="$HOME/.config/sublimxe-text-3/Packages/User"
+  local PACKAGES_FILE="$CONFIGS_DIR/Package Control.sublime-settings"
   local INSTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed Packages"
 
-  # Install the keyboard shortcuts and settings files
-  safecp "$BACKUP_CONF_FILES_DIR/Default (Linux).sublime-keymap" "$PACKDIR"
-  safecp "$BACKUP_CONF_FILES_DIR/Preferences.sublime-settings" "$PACKDIR"
+  mkdir -p "$CONFIGS_DIR"
+
+  # Install the configuration files
+  safecp "$BACKUP_CONF_FILES_DIR/Preferences.sublime-settings" "$CONFIGS_DIR"  # General settings
+  safecp "$BACKUP_CONF_FILES_DIR/Default (Linux).sublime-keymap" "$CONFIGS_DIR"  # Keyboard shortcuts
+  safecp "$BACKUP_CONF_FILES_DIR/Python.sublime-settings" $CONFIGS_DIR  # Python-specfic settings
+  safecp "$BACKUP_CONF_FILES_DIR/XML.sublime-settings" $CONFIGS_DIR  # XML-specific settings
+  safecp "$BACKUP_CONF_FILES_DIR/PythonBreakpoints.sublime-settings" $CONFIGS_DIR  # Python-breakpoints settings
 
   # Install package control
   wget https://packagecontrol.io/Package%20Control.sublime-package
@@ -105,8 +110,7 @@ configure_sublime(){
   mv Package\ Control.sublime-package "$INSTALLED_PACKDIR/"
 
   # Set up packages which will automatically be installed on next sublime startup
-  mkdir -p "$PACKDIR"
-  safecp "$COMMON_DIRPATH/sublime_packages.json" "$PACKFILE"
+  safecp "$COMMON_DIRPATH/sublime_packages.json" "$PACKAGES_FILE"
 
   confend "sublime"
 }
