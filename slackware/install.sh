@@ -185,6 +185,10 @@ slackpkg install vlc
 slackpkg install npapi-vlc
 
 
+# ------------------------ VNC ------------------------
+slackpkg install tigervnc
+
+
 # ------------------------ common packages ------------------------
 installsbo "FontAwesome"
 installsbo "git-lfs"
