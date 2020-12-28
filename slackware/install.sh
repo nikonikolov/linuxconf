@@ -137,7 +137,8 @@ installsbo "pptp"
 installsbo "NetworkManager-pptp"
 #
 installsbo "NetworkManager-l2tp"
-installsbo "xl2tpd"
+# installsbo "xl2tpd"
+installfromsource "xl2tpd"
 installsbo "strongswan"
 #
 installsbo "NetworkManager-openvpn"
@@ -165,7 +166,7 @@ slackpkg install ffmpeg3-compat
 
 # ------------------------ plex ------------------------
 installsbo "plexmediaserver" "!!!!!!!!! NOTE: Make sure to add the plex user and group when prompted by SBo !!!!!!!!!"
-
+chmod +x /etc/rc.d/rc.plexmediaserver
 
 # ------------------------ jdk ------------------------
 installfromsource "jdk"
