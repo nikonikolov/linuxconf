@@ -21,7 +21,7 @@ if [ "$ready" != "y" ]; then
 else
   echo "Continuing execution"
 fi
-# ===================== CONFIRM READY =====================
+# ===================== HELPER VARIABLES =====================
 
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 SLACK_BACKUP_DIR="$DIRPATH/configs"
@@ -30,6 +30,8 @@ source $DIRPATH/../common/helpers.sh
 
 SBOTOOLS_VERSION=2.7
 SLACKWARE_VERSION=14.2
+
+HOME_USER=/home/$SUDO_USER
 
 # ===================== HELPER FUNCTIONS =====================
 
@@ -184,6 +186,11 @@ slackpkg install dropbox-client
 # ------------------------ vlc ------------------------
 slackpkg install vlc
 slackpkg install npapi-vlc
+# Configure keyboard shortcuts
+sed -i '/key-jump-extrashort=/c\key-jump-extrashort=Left' $HOME_USER/.config/vlc/vlcrc
+sed -i '/key-jump+extrashort=/c\key-jump+extrashort=Right' $HOME_USER/.config/vlc/vlcrc
+sed -i '/key-jump-short=/c\key-jump-short=Shift+Left' $HOME_USER/.config/vlc/vlcrc
+sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vlcrc
 
 
 # ------------------------ VNC ------------------------
