@@ -72,7 +72,13 @@ installsbo(){
     read -n 1 -s -r
   fi
   sboinstall -j7 $PACKAGE
-  installend $PACKAGE
+  if [ $? != 0 ]; then
+    printf "\nPackage \e[1m$PACKAGE\e[0m did NOT install successfully\n"
+    printf "Press any key to continue\n"
+    read -n 1 -s -r
+  else
+    installend $PACKAGE
+  fi
 }
 
 
