@@ -144,6 +144,8 @@ installfromsource "xl2tpd"
 installsbo "strongswan"
 #
 installsbo "NetworkManager-openvpn"
+# Needed for ProtonVPN
+installsbo "openresolv" "!!!!!!!!! NOTE: Make sure to pass OPENVPN=yes !!!!!!!!!"
 
 
 # ------------------------ MasterPDFEditor ------------------------
