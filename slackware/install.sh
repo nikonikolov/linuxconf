@@ -212,6 +212,12 @@ installsbo "unrar"
 installsbo "zoom"
 
 
+# ------------------------ python packages ------------------------
+pip3 install -U ipython
+pip3 install -U matplotlib
+pip3 install -U numpy
+
+
 # ------------------------ google-chrome ------------------------
 # installbinary "google-chrome" "google-chrome/google-chrome-*-x86_64-1.txz"
 
