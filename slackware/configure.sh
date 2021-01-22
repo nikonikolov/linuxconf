@@ -125,6 +125,11 @@ sudo cp $SLACK_BACKUP_DIR/rc.modules.local /etc/rc.d/rc.modules.local
 sudo chmod +x /etc/rc.d/rc.modules.local
 
 
+# ------------------------ elogind sleep hook ------------------------
+sudo cp $SLACK_BACKUP_DIR/elogind_umount_hook.sh /etc/elogind/system-sleep/umount_hook.sh
+sudo chmod +x /etc/elogind/system-sleep/umount_hook.sh
+
+
 # ------------------------ DHCP ------------------------
 message "Setting DHCP client"
 sudo sed -i '/dhcp=dhcpcd/c\#dhcp=dhcpcd' /etc/NetworkManager/conf.d/00-dhcp-client.conf
