@@ -200,6 +200,10 @@ sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vl
 slackpkg install tigervnc
 
 
+# ------------------------ emoji ------------------------
+installsbo "noto-emoji"  # Needed for emoji to show up properly in KDE emoji selector
+
+
 # ------------------------ common packages ------------------------
 installsbo "FontAwesome"
 installsbo "git-lfs"
@@ -210,6 +214,7 @@ installsbo "texlive-extra"
 installsbo "texlive-fonts"
 installsbo "unrar"
 installsbo "zoom"
+installsbo "deb2tgz"
 
 
 # ------------------------ python packages ------------------------
