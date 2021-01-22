@@ -77,6 +77,9 @@ safecp /etc/modprobe.d/blacklist.conf $SLACK_BACKUP_DIR
 # hosts
 safecp /etc/hosts $SLACK_BACKUP_DIR
 
+# elogind
+safecp /etc/elogind/system-sleep/umount_hook.sh $SLACK_BACKUP_DIR/elogind_umount_hook.sh
+
 # installed packages
 ls /var/log/packages > $SLACK_BACKUP_DIR/packages.txt
 ls /var/log/packages | grep SBo > $SLACK_BACKUP_DIR/packages_SBo.txt
