@@ -36,7 +36,14 @@ safecp $HOME/.tmux.conf $SLACK_BACKUP_DIR/tmux.conf
 safecp $HOME/bin/nvidia_control.sh $SLACK_BACKUP_DIR
 
 # KDE shortcuts
-safecp $HOME/.kde/share/config/kglobalshortcutsrc $SLACK_BACKUP_DIR
+safecp $HOME/.config/kglobalshortcutsrc $SLACK_BACKUP_DIR
+safecp $HOME/.config/khotkeysrc $SLACK_BACKUP_DIR
+
+# konsole configuration
+for FILE in $HOME/.local/share/konsole/*
+do
+  safecp $FILE $SLACK_BACKUP_DIR/konsole/$(basename $FILE)
+done
 
 # Libinput configuration
 safecp /etc/X11/xorg.conf.d/*libinput.conf $SLACK_BACKUP_DIR
