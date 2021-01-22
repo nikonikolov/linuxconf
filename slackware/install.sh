@@ -64,8 +64,9 @@ installbinary(){
 
 installsbo(){
   local PACKAGE="$1"
+  local MESSAGE="$2"
   installstart $PACKAGE
-  if [ -z "$MESSAGE" ]; then
+  if [ ! -z "$MESSAGE" ]; then
     printf "\n$MESSAGE\n"
     printf "Press any key to continue\n"
     read -n 1 -s -r
