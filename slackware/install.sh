@@ -125,7 +125,7 @@ installsbo "geoclue2" "!!!!!!!!! NOTE: Make sure to pass AVAHI=yes !!!!!!!!!"
 
 # ------------------------ redshift ------------------------
 installsbo "redshift"
-sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf ~/.config/
+sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
 sudo -u $SUDO_USER redshift &
 
 
