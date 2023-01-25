@@ -94,3 +94,6 @@ ls /var/log/packages | grep alien > $SLACK_BACKUP_DIR/packages_alien.txt
 
 # groups
 groups $USER > $SLACK_BACKUP_DIR/groups-$USER.txt
+
+# chromium 
+safecp /etc/chromium/01-apikeys.conf $SLACK_BACKUP_DIR

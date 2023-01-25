@@ -29,7 +29,7 @@ SLACK_PKG_DIR="$DIRPATH/packages"
 source $DIRPATH/../common/helpers.sh
 
 SBOTOOLS_VERSION=2.7
-SLACKWARE_VERSION=14.2
+SLACKWARE_VERSION=15.0
 
 HOME_USER=/home/$SUDO_USER
 
@@ -86,7 +86,8 @@ installsbo(){
 
 # ------------------------ slackpkgplus ------------------------
 message "Installing slackpkg+"
-wget http://slakfinder.org/slackpkg+/pkg/slackpkg+-1.7.0-noarch-10mt.txz
+# wget http://slakfinder.org/slackpkg+/pkg/slackpkg+-1.7.0-noarch-10mt.txz
+wget https://slackware.nl/slackpkgplus15/pkg/slackpkg+-1.8.0-noarch-7mt.txz
 mv slackpkg+*.txz $SLACK_PKG_DIR
 installpkg $SLACK_PKG_DIR/slackpkg+*.txz
 cp $SLACK_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
@@ -121,6 +122,15 @@ installsbo "avahi"
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
 installsbo "geoclue2" "!!!!!!!!! NOTE: Make sure to pass AVAHI=yes !!!!!!!!!"
+# Add redshift to allowed programs for geoclue
+sudo cat >> /etc/geoclue/geoclue.conf <<- EOM
+
+[redshift]
+allowed=true
+system=false
+users=
+
+EOM
 
 
 # ------------------------ redshift ------------------------
@@ -131,6 +141,8 @@ sudo -u $SUDO_USER redshift &
 
 # ------------------------ chromium ------------------------
 slackpkg install chromium
+# Set up keys to enable chromium syncing with the cloud
+sudo cp $SLACK_BACKUP_DIR/01-apikeys.conf /etc/chromium/01-apikeys.conf
 
 
 # ------------------------ bash-completion ------------------------
@@ -203,7 +215,12 @@ sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vl
 
 
 # ------------------------ VNC ------------------------
+slackpkg install fltk  # Needed for tigervnc to work
 slackpkg install tigervnc
+
+
+# ------------------------ libreoffice ------------------------
+slackpkg install libreoffice
 
 
 # ------------------------ emoji ------------------------
@@ -227,6 +244,7 @@ installsbo "deb2tgz"
 pip3 install -U ipython
 pip3 install -U matplotlib
 pip3 install -U numpy
+pip3 install -U youtube-dl
 
 
 # ------------------------ google-chrome ------------------------

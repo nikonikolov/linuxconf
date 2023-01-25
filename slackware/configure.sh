@@ -26,7 +26,8 @@ sudo chmod -x /etc/profile.d/bsd-games-login-fortune.sh
 
 # ------------------------ groups ------------------------
 message "Adding to power group"
-sudo usermod -aG power niko
+# sudo usermod -aG power niko
+sudo -u $SUDO_USER usermod -aG power $SUDO_USER
 
 
 # ------------------------ git ------------------------
@@ -52,8 +53,10 @@ configure_tmux $SLACK_BACKUP_DIR
 
 # ------------------------ vim ------------------------
 configure_vim $SLACK_BACKUP_DIR
-sudo ln -s /home/niko/.vimrc /root/.vimrc
-sudo ln -s /home/niko/.vim /root/.vim
+sudo -u $SUDO_USER ln -s "/home/$SUDO_USER/.vimrc" /root/.vimrc
+sudo -u $SUDO_USER ln -s "/home/$SUDO_USER/.vim" /root/.vim
+# sudo ln -s /home/niko/.vimrc /root/.vimrc
+# sudo ln -s /home/niko/.vim /root/.vim
 
 
 # ------------------------ swappiness ------------------------
