@@ -1,6 +1,12 @@
-apache-ant-1.9.7-noarch-1alien
-chromium-86.0.4240.183-x86_64-1alien
+audacity-3.2.2-x86_64-1alien
+chromium-109.0.5414.74-x86_64-1alien
 dropbox-client-1.6.1-x86_64-1alien
+ffmpeg-5.1.2-x86_64-1alien
 ffmpeg3-compat-3.4.6-x86_64-1alien
+jack2-1.9.20-x86_64-1alien
+libreoffice-7.4.4-x86_64-1alien
 npapi-vlc-20171129-x86_64-1alien
-vlc-3.0.11.1-x86_64-1alien
+vamp-aubio-plugins-0.5.1-x86_64-1alien
+vamp-plugin-sdk-2.8.0-x86_64-2alien
+vlc-3.0.17.4-x86_64-1alien
+x264-20211120-x86_64-1alien

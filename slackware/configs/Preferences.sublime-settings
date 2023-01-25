@@ -3,9 +3,9 @@
 	"font_size": 8,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"tab_size": 2,
 	"theme": "Monokai Pro (Filter Machine).sublime-theme",
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
 }

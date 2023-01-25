@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # /etc/rc.d/rc.modules.local
 
@@ -16,3 +16,5 @@
 #/sbin/modprobe sg             # Generic SCSI support for SATA DVD-RW
 
 /sbin/modprobe i8k force=1     # Dell hardware module
+# TODO: Remove when bumblebee installed
+/sbin/modprobe bbswitch

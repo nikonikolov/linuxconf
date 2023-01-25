@@ -7,7 +7,6 @@ GRUB_HIDDEN_TIMEOUT_QUIET=false
 GRUB_TIMEOUT=10
 GRUB_DISTRIBUTOR=$( sed 's/Slackware /Slackware-/' /etc/slackware-version )
 GRUB_CMDLINE_LINUX_DEFAULT=""
-#GRUB_CMDLINE_LINUX_DEFAULT="nvme_core.default_ps_max_latency_us=5500"
 GRUB_CMDLINE_LINUX=""
 
 # Uncomment to disable graphical terminal (grub-pc only)
