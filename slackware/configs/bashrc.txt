@@ -12,6 +12,9 @@ source /etc/profile
 # P_WHITE="\[$(tput setaf 7)\]"
 # P_RESET="\[$(tput sgr0)\]"
 
+# Get the current user. Note this works for su and sudo too!
+MYUSER=$(who am i | awk '{print $1}')
+
 #Bold
 BWhite='\e[1;37m'      # White
 BBlue='\e[1;34m'       # Blue
@@ -61,10 +64,10 @@ export LESS=${LESS}r
 # ================================== CDPATH ==================================
 
 # Add a folder to CDPATH VAR so that you can cd there from any folder
-CDPATH=$CDPATH:/home/niko
-CDPATH=$CDPATH:/home/niko/Workspace
-CDPATH=$CDPATH:/home/niko/Dropbox
-CDPATH=$CDPATH:/home/niko/Downloads
+# CDPATH=$CDPATH:/home/niko
+# CDPATH=$CDPATH:/home/niko/Workspace
+# CDPATH=$CDPATH:/home/niko/Dropbox
+# CDPATH=$CDPATH:/home/niko/Downloads
 
 
 # ================================== TEXT EDITOR ==================================
@@ -83,7 +86,7 @@ PATH=$PATH:/sbin
 
 # Make aliases
 alias grep='grep --color=auto'
-alias download='wget -r --no-parent --reject="index.html*" -P /home/niko/Downloads/' 
+alias download='wget -r --no-parent --reject="index.html*" -P /home/$MYUSER/Downloads/' 
 # alias package='ls /var/log/packages | grep -i'
 alias package='ls /var/lib/pkgtools/packages | grep -i'
 alias networkmanager='sudo /etc/rc.d/rc.networkmanager'
@@ -92,13 +95,14 @@ alias library='ldconfig -p | grep -i'
 alias tmux='tmux -2'
 alias diskprops='df -h'
 alias loadhist='history -n'
+alias mypublicip='dig +short myip.opendns.com @resolver1.opendns.com'
 props(){ du -a -h --max-depth=1 "$*" | sort -hr; }
 
 # ================================== PATH ==================================
 
 # General executables
-PATH=$PATH:/home/niko/Workspace
-PATH=$PATH:/home/niko/bin
+PATH=$PATH:/home/$MYUSER/Workspace
+PATH=$PATH:/home/$MYUSER/bin
 
 # Add ccache at the beginning of PATH so it comes before any compiler
 PATH=/usr/bin/ccache:$PATH
@@ -124,7 +128,7 @@ export PATH=$HOME/.gem/bin:$PATH
 # ================================== nVidia ==================================
 
 nvidia(){
-  /home/niko/bin/nvidia_control.sh $*
+  /home/$MYUSER/bin/nvidia_control.sh $*
 }
 
 
@@ -139,16 +143,16 @@ findf(){
     echo "Usage: findf [directory] [type d|f] [name]"
   else
     if [ $1 == "/" ]; then
-      #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
+      #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
       #echo "Remember /proc/fs and /sys/kernel are not included"
-      sudo find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
+      sudo find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
       echo "Remember /proc and /sys/kernel are not included"
     else
-      #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
-      find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
+      #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+      find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
     fi
   fi
-# sudo find $1 -path /proc -prune -o -path /sys -prune -o -path /home/niko/.gvfs -prune -o -type $2 -name $3 -print
+# sudo find $1 -path /proc -prune -o -path /sys -prune -o -path /home/$MYUSER/.gvfs -prune -o -type $2 -name $3 -print
 # sudo find / -path /proc -prune -o -path /sys -prune -o -name 'lm_sensors'
 }
 
@@ -160,11 +164,14 @@ findr(){
     echo "Two arguments required"
     echo "Usage: findr / [type d|f] [name]"
   else
-    #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
+    #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
     #echo "Remember /proc/fs and /sys/kernel are not included"
     sudo find / -path /proc -prune -o -path /sys/kernel -prune -o -path /home -prune -o -type $1 -iname $2 -print
     echo "Remember /home, /proc and /sys/kernel are not included"
-    #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
-    #find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/niko/.gvfs -type $2 -iname $3 -print
+    #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+    #find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
   fi
 }
+
+# Unset variable used in this file only
+unset MYUSER
