@@ -7,15 +7,17 @@
   4. [Possible Dependencies](#slackware-4)
 2. [Ubuntu](#ubuntu)
 3. [Developing](#developing)
-  1. [Good practice](#dev-1)
+  1. [Good practices](#dev-1)
   2. [Common tool usage](#dev-2)
   3. [TODO](#dev-3)
 
 ## Slackware
 - Assumes that the directory is locally copied
 - You need to clone packages with `git lfs`
-- On a first time setup, enable `sudo`, NetworkManager and connect to the internet
-- Then run
+
+### Automatic setup steps
+
+To be able to run the automatic setup, you first need to manually enable sudo and connect to the internet. Then run
 ```
 ./slackware/configure.sh
 ./slackware/install.sh
