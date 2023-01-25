@@ -158,8 +158,8 @@ installsbo "pptp"
 installsbo "NetworkManager-pptp"
 #
 installsbo "NetworkManager-l2tp"
-# installsbo "xl2tpd"
-installfromsource "xl2tpd"
+installsbo "xl2tpd"
+# installfromsource "xl2tpd"
 installsbo "strongswan"
 #
 installsbo "NetworkManager-openvpn"
@@ -218,6 +218,11 @@ sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vl
 slackpkg install fltk  # Needed for tigervnc to work
 slackpkg install tigervnc
 
+# ------------------------ FFMPEG ------------------------
+# Update ffmpeg to alienbob's version as it's compiled with x264 and x265 support
+# Preference already configured in slackpkgplus.conf
+slackpkg upgrade ffmpeg
+installsbo "x265"
 
 # ------------------------ libreoffice ------------------------
 slackpkg install libreoffice
