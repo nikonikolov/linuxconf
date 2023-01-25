@@ -241,7 +241,7 @@ installsbo "teamviewer"
 installsbo "texlive-extra"
 installsbo "texlive-fonts"
 installsbo "unrar"
-installsbo "zoom"
+installsbo "zoom-linux"
 installsbo "deb2tgz"
 
 

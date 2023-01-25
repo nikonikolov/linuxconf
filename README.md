@@ -1,5 +1,16 @@
 # Linux Configuration Scripts
 
+1. [Slackware](#slackware)
+  1. [Automatic setup steps](#slackware-1)
+  2. [Manual setup steps](#slackware-2)
+  3. [Install additional pacakges](#slackware-3)
+  4. [Possible Dependencies](#slackware-4)
+2. [Ubuntu](#ubuntu)
+3. [Developing](#developing)
+  1. [Good practice](#dev-1)
+  2. [Common tool usage](#dev-2)
+  3. [TODO](#dev-3)
+
 ## Slackware
 - Assumes that the directory is locally copied
 - You need to clone packages with `git lfs`
@@ -9,7 +20,15 @@
 ./slackware/configure.sh
 ./slackware/install.sh
 ```
-- To install bumblebee:
+
+### Manual setup steps
+
+These are steps that either couldn't be automated or the process is very brittle or complicated
+1. Configure grub
+2. Make initrd
+3. Install `virtualbox`
+3. Install *The Great Suspender* extension from your sources. Check the `README.md` in its source folder for instructions
+4. Install `bumblebee` and `nvidia` drivers
   - First clone your repo
     
     ```
@@ -24,14 +43,12 @@
     ./slackware/configure_nvidia.sh
     ```
 
-### Installing additional packages
+### Install additional pacakges
 
 - To install `CUDA`, use your repo and follow the instructions
 ```
 git clone git@github.com:nikonikolov/slackbuilds.git
 ```
-
-- To install `virtualbox`, just download the files and follow the instructions
 
 - Some old packages are available on your external hard drive:
   - `gcc-arm-none-eabi`
@@ -72,3 +89,35 @@ cat $HOME/.ssh/id_rsa.pub | ssh user@hostname "cat - >> .ssh/authorized_keys"
 ```
 ./ubuntu/configure_server.sh
 ```
+
+---
+---
+
+## Developing
+
+### Good practices
+1. Installation of new packages goes in `install.sh` scripts. Try to keep any additional configuration for a new package together with the installation
+2. Configuration of existing packages and system goes in `configure.sh`
+3. Configuration files
+  - System files: code up the configuration as part of the scripts. System files change quite often, better just add the custom configuration you need
+  - Files which are completely written by you: backup the files and configure on the new system by restoring the copy. Good idea to have backups and use them - higher chance of being up to date and working than coding up in the scripts
+4. Packages which aren't updated on slackbuilds.org
+  - Try to submit update to a new version
+  - If not, sync them with LFS and use your `installfromsource` utility
+
+### Common tool usage
+1. Example of getting access to the correct `$USER` variable in a command
+```bash
+sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
+```
+
+### TODO
+
+1. Slackware
+  - Make a backup of alienbob config and script for mirrors
+  - TLP
+  - Google Chrome (deprioritized)
+  - Don't remember why I needed these packages
+    - `graphviz`
+    - `portaudio`
+    - `xournalapp`

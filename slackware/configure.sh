@@ -47,6 +47,16 @@ cp $SLACK_BACKUP_DIR/bashrc.txt ~/.bashrc
 source ~/.bashrc
 
 
+# ------------------------ konsole profiles ------------------------
+message "Configuring konsole profiles"
+
+for FILE in $HOME/.local/share/konsole/*
+do
+  mv $FILE "$FILE.original"
+done
+cp $SLACK_BACKUP_DIR/* $HOME/.local/share/konsole/
+
+
 # ------------------------ tmux ------------------------
 configure_tmux $SLACK_BACKUP_DIR
 
