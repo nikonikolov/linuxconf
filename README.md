@@ -1,15 +1,15 @@
 # Linux Configuration Scripts
 
-1. [Slackware](#slackware)
-  1. [Automatic setup steps](#slackware-1)
-  2. [Manual setup steps](#slackware-2)
-  3. [Install additional pacakges](#slackware-3)
-  4. [Possible Dependencies](#slackware-4)
-2. [Ubuntu](#ubuntu)
-3. [Developing](#developing)
-  1. [Good practices](#dev-1)
-  2. [Common tool usage](#dev-2)
-  3. [TODO](#dev-3)
+* [Slackware](#slackware)
+  * [Automatic setup steps](#slackware-1)
+  * [Manual setup steps](#slackware-2)
+  * [Install additional pacakges](#slackware-3)
+  * [Possible Dependencies](#slackware-4)
+* [Ubuntu](#ubuntu)
+* [Developing](#developing)
+  * [Good practices](#dev-1)
+  * [Common tool usage](#dev-2)
+  * [TODO](#dev-3)
 
 ## Slackware
 - Assumes that the directory is locally copied
