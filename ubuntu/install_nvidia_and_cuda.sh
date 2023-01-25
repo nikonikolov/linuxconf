@@ -5,8 +5,11 @@ NVIDIA_VERSION=375
 # Ubuntu 16.04
 sudo service lightdm stop
 
-sudo echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
-sudo echo "options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
+sudo tee -a /etc/modprobe.d/blacklist-nouveau.conf > /dev/null <<EOT
+blacklist nouveau
+options nouveau modeset=0
+EOT
+
 sudo update-initramfs -u
 
 # Install nvidia
