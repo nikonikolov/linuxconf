@@ -97,3 +97,8 @@ groups $USER > $SLACK_BACKUP_DIR/groups-$USER.txt
 
 # chromium 
 safecp /etc/chromium/01-apikeys.conf $SLACK_BACKUP_DIR
+
+# Alienbob script for mirroring slackware sources
+safecp $HOME/SlackWare/mirrors/mirror-slackware-current.conf $SLACK_BACKUP_DIR
+safecp $HOME/SlackWare/mirrors/mirror-slackware-current.exclude $SLACK_BACKUP_DIR
+safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SLACK_BACKUP_DIR

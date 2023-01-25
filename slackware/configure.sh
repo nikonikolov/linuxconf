@@ -112,7 +112,15 @@ EOT
 
 # ------------------------ slackpkg mirror ------------------------
 LINE_NUM=$(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
-sudo sed -i "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+sudo -u $SUDO_USER sed -i "$LINE_NUM a file://home/$SUDO_USER/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+# sudo sed -i "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+
+
+# ------------------------ aleinbob scripts for mirroring slackware sources ------------------------
+mkdir -p $HOME/SlackWare/mirrors
+cp $SLACK_BACKUP_DIR/mirror-slackware-current.conf $HOME/SlackWare/mirrors/
+cp $SLACK_BACKUP_DIR/mirror-slackware-current.exclude $HOME/SlackWare/mirrors/
+cp $SLACK_BACKUP_DIR/mirror-slackware-current.sh $HOME/SlackWare/mirrors/
 
 
 # ------------------------ libinput ------------------------
@@ -139,6 +147,7 @@ sudo chmod +x /etc/rc.d/rc.modules.local
 
 
 # ------------------------ elogind sleep hook ------------------------
+sudo mkdir -p /etc/elogind/system-sleep
 sudo cp $SLACK_BACKUP_DIR/elogind_umount_hook.sh /etc/elogind/system-sleep/umount_hook.sh
 sudo chmod +x /etc/elogind/system-sleep/umount_hook.sh
 

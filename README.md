@@ -116,7 +116,6 @@ sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
 ### TODO
 
 1. Slackware
-  - Make a backup of alienbob config and script for mirrors
   - TLP
   - Google Chrome (deprioritized)
   - Don't remember why I needed these packages
