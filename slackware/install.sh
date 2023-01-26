@@ -123,7 +123,7 @@ installsbo "avahi"
 # Needed for redshift automatic location. Must be installed BEFORE redshift
 installsbo "geoclue2" "!!!!!!!!! NOTE: Make sure to pass AVAHI=yes !!!!!!!!!"
 # Add redshift to allowed programs for geoclue
-sudo cat >> /etc/geoclue/geoclue.conf <<- EOM
+sudo tee -a > /etc/geoclue/geoclue.conf <<- EOM
 
 [redshift]
 allowed=true
