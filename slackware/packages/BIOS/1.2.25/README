@@ -1,0 +1,17 @@
+
+Fixes & Enhancements
+1. Updated Intel ME Firmware to address security advisory CVE-2017-5689 / INTEL-SA-00075"
+2. Support TPM 2.0 on Win7
+
+Version 1.2.25, 1.2.25
+
+Release date
+12 May 2017
+
+Last Updated
+15 May 2017
+
+
+MD5: f519b784c0717ca49bf035210eb292ed
+SHA1: 009c876f9c24396d356c2cf1338b351b217ceed4
+SHA-256: 5070372bdca8d4d4b59119ede4e8a02477435602c08d1ac17682fad74b747fb6

@@ -1,0 +1,27 @@
+
+This package contains the BIOS version 1.8.0 for Dell XPS 15 9550. The package contains Intel ME firmware update to address Intel security advisories INTEL-SA-00125 (CVE-2018-3655), Intel-SA-00131 (CVE-2018-3643 and CVE-2018-3644) and INTEL-SA-00141 (CVE-2018-3657, CVE-2018-3658 and CVE-2018-3616). The package contains update for CPU microcode to address Intel Security Advisory INTEL-SA-00115 (CVE-2018-3639 and CVE-2018-3640). For more information regarding fixes and enhancements click View full driver details.
+Fixes & Enhancements
+Fixes:
+- Updated Intel ME Firmware to address security advisories INTEL-SA-00125 (CVE-2018-3655), Intel-SA-00131 (CVE-2018-3643 and CVE-2018-3644) and INTEL-SA-00141 (CVE-2018-3657, CVE-2018-3658 and CVE-2018-3616).
+- Updated CPU microcode to address Intel Security Advisory INTEL-SA-00115 (CVE-2018-3639 and CVE-2018-3640).
+- Fixed the TPM configuration on a TPM startup error during S3 resume.
+- Fixed the internal LCD display issue where it stays on after lid is closed.
+- Updated Intel ME Firmware to address security advisory INTEL-SA-00118 (CVE-2018-3627).
+
+Enhancements:
+- Improved startup stability when Thunderbolt Technology Support is enabled.
+- Prevents ghost key trigger while pressing multiple keys at the same time.
+- Improved system enter Hibernate duration time when Dell Thunderbolt Dock TB16 is connected.
+
+Version 1.8.0, 1.8.0
+
+Release date
+05 Oct 2018
+
+Last Updated
+05 Oct 2018
+
+
+MD5:  5d812b52d62b12badefaad6b8633663c
+SHA1: a1db9c885adda0929d6f8def8f39a0dabebb6e2a
+SHA-256: 0061b69087348e9091d5a48eec9415dec2e3a986be021044626761c2705615da

@@ -1,0 +1,24 @@
+This package contains the Dell system BIOS update version 1.9.0 for XPS 15 9550. BIOS is a firmware that is embedded on a small memory chip on the computer's system board. It controls the keyboard, monitor, disk drives and other devices. The package fixes a potential issue where system stops responding when an incorrectly formatted password is entered at the BIOS Security Manager (BIOS pre-boot password) prompt. For more information regarding fixes and enhancements click View full driver details.
+
+Fixes & Enhancements
+
+Fixes:
+- Fixed a potential issue where system stops responding when an incorrectly formatted password is entered at the BIOS Security Manager (BIOS pre-boot password) prompt.
+
+Enhancements:
+- Enable WSMT security enhancement for Windows 10 Creators Update.
+- Added TPM PPI Bypass for Clear Command support.
+- Added BIOS Password Feature: Master Password Lockout.
+
+Version 1.9.0, 1.9.0
+
+Release date
+25 Oct 2018
+
+Last Updated
+25 Oct 2018
+
+
+MD5: 267c75e2bf48e721868ce2589a26b76f
+SHA1: 8ec3446ed5a8242594bf91b8b71ee2caea6d734c
+SHA-256: fdd2f91b3b907bdde22d0664f3fe0e4d8b9ed4a2b75428f809c12241c3354e82

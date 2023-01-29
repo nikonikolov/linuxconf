@@ -1,0 +1,16 @@
+MD5: 0b68d868b6661d6b42553f11d255c006
+SHA1: d08ed0dcb2057e9758d447ce963756f1cc8a13b1
+SHA-256: 7197c21aca31ead9f43e0e02eee8b08776404b28e21b5ef7e53d727502cf4464
+
+Fixes & Enhancements
+- Firmware updates to address the Intel Security Advisories INTEL-SA-00289 (CVE-2019-11157) and INTEL-SA-00317 (CVE-2019-14607).
+- Fixed the issue where the SMM Security Mitigation gets disabled while loading BIOS defaults.
+
+Version
+Version 1.14.0, 1.14.0
+
+Release date
+06 Oct 2020
+
+Last Updated
+06 Oct 2020

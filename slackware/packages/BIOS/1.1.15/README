@@ -1,0 +1,20 @@
+
+
+XPS 15 9550 01.01.15 BIOS
+
+Fixes & Enhancements
+1. Improve Audio performance
+2. Improve NVMe Battery Life
+3. Fix CPU i7 CPU performance became low after AC remove and insert.
+4. Enhance system Boot time
+5. Fix System may saw NO Boot Devie error message with NVMe storage.
+6. Enhance battery mode sleep resume time too long.
+
+Version 01.01.15, 01.01.15
+
+Release date
+05 Jan 2016
+
+MD5: 00c2bb2b9ad1281368d20a82474dee92
+SHA1: 7bfd6ee0705c1b2c03da555e48278120037b5260
+SHA-256: 7153c102f78361d24729aaaa7422e1046cc360fd57b27fdba762f8fe81f39a3a

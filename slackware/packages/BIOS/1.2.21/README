@@ -1,0 +1,18 @@
+
+Fixes & Enhancements
+Fix:
+1. SUT will show incorrect massage after run DG_Readinesstool_v2.0.ps1 on Enterprise OS
+2. Clear TPM Option greyed out in BIOS
+3. Enable Attempt Legacy Boot" cannot be enabled in BIOS
+4. USB LAN and Audio of IE dock still working after disable Dell Docks and Ext. USB
+
+Version 1.2.21, 1.2.21
+
+
+Release date
+31 Mar 2017
+
+MD5: da20e297afa1a60100cd47e9584b458c
+SHA1: 622d47fb5c7a5efd6a17bed8effd8cbc926c116e
+SHA-256: b46430489b52c6e98732102166d58590d042c64e3284725f953eaad8b1de103d
+
