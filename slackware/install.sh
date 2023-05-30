@@ -179,6 +179,10 @@ installsbo "i8kutils"
 installsbo "telegram"
 
 
+# ------------------------ wireplumber ------------------------
+installsbo "wireplumber"
+
+
 # ------------------------ spotify ------------------------
 installfromsource "spotify"
 # installsbo "spotify"
