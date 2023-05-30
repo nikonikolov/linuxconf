@@ -192,7 +192,9 @@ installsbo "plexmediaserver" "!!!!!!!!! NOTE: Make sure to add the plex user and
 chmod +x /etc/rc.d/rc.plexmediaserver
 
 # ------------------------ jdk ------------------------
-installfromsource "jdk"
+# installfromsource "jdk"
+slackpkg install openjdk  # alien complies the library himself - no need to download
+slackpkg install openjre
 
 
 # ------------------------ mendeleydesktop ------------------------
@@ -218,14 +220,19 @@ sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vl
 slackpkg install fltk  # Needed for tigervnc to work
 slackpkg install tigervnc
 
+
 # ------------------------ FFMPEG ------------------------
 # Update ffmpeg to alienbob's version as it's compiled with x264 and x265 support
 # Preference already configured in slackpkgplus.conf
 slackpkg upgrade ffmpeg
 installsbo "x265"
 
+
 # ------------------------ libreoffice ------------------------
+slackpkg install openjdk11
 slackpkg install libreoffice
+# This might be incomplete. Might need boost-compat and icu4c-compat as well as `export MESA_LOADER_DRIVER_OVERRIDE=i915`
+# Check your Slackware.md notes and the latest announcements from alien
 
 
 # ------------------------ emoji ------------------------
