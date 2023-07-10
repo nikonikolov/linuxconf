@@ -168,8 +168,9 @@ sudo mv /etc/xdg/autostart/wireplumber.desktop.sample /etc/xdg/autostart/wireplu
 # Disable pulseaudio autostart configuration file
 sudo mv /etc/xdg/autostart/pulseaudio.desktop /etc/xdg/autostart/pulseaudio.desktop.sample
 # Disable pulseaudio
-sudo sed -i '/autospawn = yes/c\autospawn = no' /etc/pulse/client.conf
-
+# sudo sed -i '/autospawn = yes/c\autospawn = no' /etc/pulse/client.conf
+sudo sed -i "s/autospawn = yes/autospawn = no/g" /etc/pulse/client.conf
+sudo sed -i "s/allow-autospawn-for-root = yes/allow-autospawn-for-root = no/g" /etc/pulse/client.conf
 
 # ===============================================
 # ===================== OLD =====================
