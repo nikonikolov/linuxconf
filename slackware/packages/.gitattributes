@@ -1,6 +1,4 @@
 /**/*.svg filter=lfs diff=lfs merge=lfs -text
-/**/*.png filter=lfs diff=lfs merge=lfs -text
-/**/*.jpg filter=lfs diff=lfs merge=lfs -text
 /**/*.tgz filter=lfs diff=lfs merge=lfs -text
 /**/*.txz filter=lfs diff=lfs merge=lfs -text
 /**/*.tar.gz filter=lfs diff=lfs merge=lfs -text
@@ -12,3 +10,20 @@
 # google-chrome/** filter=lfs diff=lfs merge=lfs -text
 # bumblebee/nvidia/** filter=lfs diff=lfs merge=lfs -text
 # sublime_text/** filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/chromeDevDefaultFavicon.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/suspendy-guy-uh-oh.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_48x48.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/suspendy-guy-oops.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/suspendy-guy.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_32x32_grey.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/chromeDefaultFavicon.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_16x16.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_16x16_grey.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_32x32.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/chromeDefaultFaviconSml.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/chromeDevDefaultFaviconSml.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/ic_suspendy_128x128.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/img/suspendy-guy-alt.png filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/font/fontello.woff2 filter=lfs diff=lfs merge=lfs -text
+thegreatsuspender-7.1.6/src/font/fontello.woff filter=lfs diff=lfs merge=lfs -text
+/**/*.png filter=lfs diff=lfs merge=lfs -text
