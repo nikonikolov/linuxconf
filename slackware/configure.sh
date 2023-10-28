@@ -148,8 +148,8 @@ sudo chmod +x /etc/rc.d/rc.modules.local
 
 # ------------------------ elogind sleep hook ------------------------
 sudo mkdir -p /etc/elogind/system-sleep
-sudo cp $SLACK_BACKUP_DIR/elogind_umount_hook.sh /etc/elogind/system-sleep/umount_hook.sh
-sudo chmod +x /etc/elogind/system-sleep/umount_hook.sh
+sudo cp $SLACK_BACKUP_DIR/elogind_network_hook.sh /etc/elogind/system-sleep/network_hook.sh
+sudo chmod +x /etc/elogind/system-sleep/network_hook.sh
 
 
 # ------------------------ DHCP ------------------------
