@@ -257,10 +257,14 @@ installsbo "deb2tgz"
 
 
 # ------------------------ python packages ------------------------
-pip3 install -U ipython
-pip3 install -U matplotlib
-pip3 install -U numpy
-pip3 install -U youtube-dl
+sudo pip3 install -U ipython
+sudo pip3 install -U matplotlib
+sudo pip3 install -U numpy
+sudo pip3 install -U youtube-dl
+# Make sure to install cv2 with -no-binary option so it uses the system opencv library. Otherwise, there's a conflict
+# in the libraries and you get errors displaying any images. This would probably have to be updated every time you
+# update the system opencv
+sudo pip3 install -U --no-binary opencv-python opencv-python
 
 
 # ------------------------ google-chrome ------------------------
