@@ -13,7 +13,7 @@ source /etc/profile
 # P_RESET="\[$(tput sgr0)\]"
 
 # Get the current user. Note this works for su and sudo too!
-MYUSER=$(who am i | awk '{print $1}')
+MYUSER=$(whoami | awk '{print $1}')
 
 #Bold
 BWhite='\e[1;37m'      # White
@@ -127,10 +127,11 @@ export PATH=$HOME/.gem/bin:$PATH
 
 # ================================== nVidia ==================================
 
-nvidia(){
-  /home/$MYUSER/bin/nvidia_control.sh $*
-}
+NV_PATH=/home/$MYUSER/bin/nvidia_control.sh
 
+nvidia(){
+  $NV_PATH $*
+}
 
 # ================================== find ==================================
 
