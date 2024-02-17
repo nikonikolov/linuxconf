@@ -5,11 +5,11 @@ SLACK_BACKUP_DIR="$DIRPATH/configs"
 source $DIRPATH/../common/helpers.sh
 
 # sublime key shortcuts
-safecp "$HOME/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text-3/Packages/User/Preferences.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text-3/Packages/User/Python.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text-3/Packages/User/PythonBreakpoints.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text-3/Packages/User/XML.sublime-settings" $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap" $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text/Packages/User/Preferences.sublime-settings" $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text/Packages/User/Python.sublime-settings" $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text/Packages/User/PythonBreakpoints.sublime-settings" $SLACK_BACKUP_DIR
+safecp "$HOME/.config/sublime-text/Packages/User/XML.sublime-settings" $SLACK_BACKUP_DIR
 
 # slackpkgplus
 safecp /etc/slackpkg/slackpkgplus.conf $SLACK_BACKUP_DIR

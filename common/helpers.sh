@@ -91,9 +91,9 @@ configure_sublime(){
 
   confstart "sublime"
 
-  local CONFIGS_DIR="$HOME/.config/sublimxe-text-3/Packages/User"
+  local CONFIGS_DIR="$HOME/.config/sublime-text/Packages/User"
   local PACKAGES_FILE="$CONFIGS_DIR/Package Control.sublime-settings"
-  local INSTALLED_PACKDIR="$HOME/.config/sublime-text-3/Installed Packages"
+  local INSTALLED_PACKDIR="$HOME/.config/sublime-text/Installed Packages"
 
   mkdir -p "$CONFIGS_DIR"
 
