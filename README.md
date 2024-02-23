@@ -105,7 +105,10 @@ cat $HOME/.ssh/id_rsa.pub | ssh user@hostname "cat - >> .ssh/authorized_keys"
   - Files which are completely written by you: backup the files and configure on the new system by restoring the copy. Good idea to have backups and use them - higher chance of being up to date and working than coding up in the scripts
 4. Packages which aren't updated on slackbuilds.org
   - Try to submit update to a new version
-  - If not, sync them with LFS and use your `installfromsource` utility
+  - If not, add the compilation scripts to this repo and use `installfromsource` utility
+  - Avoid adding any `tar` or `zip` files, but download them on the go (the correct links are populated in the `.info` file of the package
+  - Only when very problematic, add `tar` or `zip` files via git lfs
+5. Package which you maintain on slackbuilds.org go to the (SlackBuilds repo)[https://github.com/nikonikolov/slackbuilds]
 
 ### Common tool usage
 1. Example of getting access to the correct `$USER` variable in a command
