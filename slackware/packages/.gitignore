@@ -10,3 +10,6 @@ cudatoolkit/
 virtualbox/
 *.tgz
 *.txz
+**/*.tar.xz
+**/*.tar.gz
+**/*.zip
