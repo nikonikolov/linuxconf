@@ -27,3 +27,6 @@
 
 # Start plexmediaserver
 [ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver start
+
+# Start docker
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start

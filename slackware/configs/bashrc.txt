@@ -85,6 +85,7 @@ PATH=$PATH:/sbin
 # ================================== ALIASES ==================================
 
 # Make aliases
+alias vscode='code'
 alias grep='grep --color=auto'
 alias download='wget -r --no-parent --reject="index.html*" -P /home/$MYUSER/Downloads/' 
 # alias package='ls /var/log/packages | grep -i'
@@ -118,6 +119,14 @@ export CUDA_HOME=/usr/share/cuda
 export PATH=$PATH:$CUDA_HOME/bin
 
 alias loadconda="PATH=$HOME/miniconda3/bin:$PATH"
+
+# ================================== BAZEL ==================================
+
+BZL_COMPLETE_FILE=/usr/share/bash-completion/completions/bazel/bazel-complete.bash
+
+if [ -f $BZL_COMPLETE_FILE ]; then
+  source $BZL_COMPLETE_FILE
+fi
 
 # ================================== RUBY ==================================
 

@@ -20,3 +20,6 @@
 
 # Stop plexmediaserver
 [ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver stop
+
+# Stop docker
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker stop
