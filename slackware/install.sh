@@ -42,6 +42,10 @@ installfromsource(){
   PACKAGE_SLACKBUILD_DIR=$SLACK_PKG_DIR/$PACKAGE_NAME
   if [ -d $PACKAGE_SLACKBUILD_DIR ]; then
     cd $PACKAGE_SLACKBUILD_DIR
+    # Parse the .info file and download the source
+    local PACKAGE_SOURCE_URL=$(grep -oP 'DOWNLOAD_x86_64="\K[^"]+' $PACKAGE_NAME.info)
+    wget $PACKAGE_SOURCE_URL
+    # Compile
     ./$PACKAGE_NAME.SlackBuild
     installpkg /tmp/$PACKAGE_NAME-*-x86_64-*.tgz
   else 
@@ -307,6 +311,13 @@ installsbo "libnvidia-container"
 # deg2tgz nvidia-container-toolkit_1.14.5-1_amd64.deb
 # sudo installpkg nvidia-container-toolkit_1.14.5-1_amd64.txz
 # cd -
+
+# ------------------------ bazel ------------------------
+
+# You don't need zulu-openjdk11 as long as you have jdk11 from alienbob
+# zulu-openjdk11 is just an open-source version
+installfromsource "bazel"
+
 
 # ------------------------ google-chrome ------------------------
 # installbinary "google-chrome" "google-chrome/google-chrome-*-x86_64-1.txz"
