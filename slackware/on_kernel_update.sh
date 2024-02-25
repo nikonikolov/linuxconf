@@ -13,10 +13,10 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # Update bbswitch
 echo "Updating bbswitch"
 cd /home/niko/Packages/bumblebee/bumblebee/bbswitch
-KENREL=$KERNEL ./bbswitch.SlackBuild
+KERNEL=$KERNEL ./bbswitch.SlackBuild
 sudo upgradepkg --reinstall --install-new /tmp/bbswitch-*$KERNEL-*.txz
 
 echo "Updating nvidia-kernel"
 cd /home/niko/Packages/bumblebee/bumblebee/nvidia-kernel
-KENREL=$KERNEL ./nvidia-kernel.SlackBuild
+KERNEL=$KERNEL ./nvidia-kernel.SlackBuild
 sudo upgradepkg --reinstall --install-new /tmp/nvidia-kernel-*$KERNEL-*.txz
