@@ -54,7 +54,7 @@ for FILE in $HOME/.local/share/konsole/*
 do
   mv $FILE "$FILE.original"
 done
-cp $SLACK_BACKUP_DIR/* $HOME/.local/share/konsole/
+cp $SLACK_BACKUP_DIR/konsole/* $HOME/.local/share/konsole/
 
 
 # ------------------------ tmux ------------------------
