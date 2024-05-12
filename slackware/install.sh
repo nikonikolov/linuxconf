@@ -111,8 +111,8 @@ sbocheck
 # ------------------------ sublime ------------------------
 installsbo "sublime_text"
 ln -s /usr/bin/sublime_text /usr/bin/sublime
-# Configure keyboard shortcuts and extensions
-sudo -u $SUDO_USER configure_sublime $SLACK_BACKUP_DIR
+# Configure keyboard shortcuts and extensions for user
+configure_sublime $SLACK_BACKUP_DIR
 
 
 # ------------------------ avahi ------------------------
@@ -184,7 +184,7 @@ installsbo "telegram"
 
 
 # ------------------------ wireplumber ------------------------
-installsbo "wireplumber"
+# installsbo "wireplumber"
 
 
 # ------------------------ spotify ------------------------
