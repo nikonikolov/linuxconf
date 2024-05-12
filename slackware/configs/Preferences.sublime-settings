@@ -19,7 +19,7 @@
 
 	// File indexing parses all files in the sidebar, and builds an index of
 	// their symbols. This is required for Goto Definition to work.
-	// "index_files": false,
+	// "index_files": true,
 	"index_workers": 4,
 
 	// These files will still show up in the sidebar, but won't be included in
@@ -43,5 +43,4 @@
 
 	// Determines whether Goto Anything should exclude files ignored by git.
 	"goto_anything_exclude_gitignore": true,
-	"index_files": true,
 }

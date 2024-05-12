@@ -102,3 +102,6 @@ safecp /etc/chromium/01-apikeys.conf $SLACK_BACKUP_DIR
 safecp $HOME/SlackWare/mirrors/mirror-slackware-current.conf $SLACK_BACKUP_DIR
 safecp $HOME/SlackWare/mirrors/mirror-slackware-current.exclude $SLACK_BACKUP_DIR
 safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SLACK_BACKUP_DIR
+
+# default applications
+safecp $HOME/.config/mimeapps.list $SLACK_BACKUP_DIR

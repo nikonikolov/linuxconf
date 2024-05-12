@@ -1,0 +1,34 @@
+[Added Associations]
+application/json=sublime_text.desktop;
+application/pdf=MasterPDFEditor.desktop;
+audio/mpeg=vlc.desktop;
+inode/directory=org.kde.dolphin.desktop;
+text/html=chromium.desktop;kfmclient_html.desktop;org.kde.falkon.desktop;seamonkey.desktop;org.kde.kimagemapeditor.desktop;org.kde.itinerary.desktop;mozilla-firefox.desktop;org.kde.kate.desktop;org.kde.kwrite.desktop;okularApplication_txt.desktop;gvim.desktop;jmacs.desktop;emacs.desktop;org.kde.calligrawords_ascii.desktop;jstar.desktop;joe.desktop;jpico.desktop;
+text/plain=sublime_text.desktop;
+video/mp4=vlc.desktop;
+video/mpeg=vlc.desktop;mplayer.desktop;QMLPlayer.desktop;org.kde.dragonplayer.desktop;Player.desktop;xine.desktop;
+video/quicktime=vlc.desktop;
+video/webm=vlc.desktop;
+video/x-matroska=vlc.desktop;
+video/x-msvideo=vlc.desktop;
+x-scheme-handler/mailto=chromium.desktop;org.kde.kmail2.desktop;
+x-scheme-handler/webcal=chromium.desktop;
+
+[Default Applications]
+application/json=sublime_text.desktop;
+application/pdf=MasterPDFEditor.desktop;
+audio/mpeg=vlc.desktop;
+inode/directory=org.kde.dolphin.desktop;
+text/html=chromium.desktop
+text/plain=sublime_text.desktop;
+video/mp4=vlc.desktop;
+video/mpeg=vlc.desktop;
+video/quicktime=vlc.desktop;
+video/webm=vlc.desktop;
+video/x-matroska=vlc.desktop;
+video/x-msvideo=vlc.desktop;
+x-scheme-handler/http=chromium.desktop;
+x-scheme-handler/https=chromium.desktop;
+x-scheme-handler/mailto=chromium.desktop;
+x-scheme-handler/msteams=teams.desktop;
+x-scheme-handler/webcal=chromium.desktop

@@ -30,6 +30,7 @@ display=Display\tMeta+P,Display\tMeta+P,Switch Display
 [khotkeys]
 _k_friendly_name=Custom Shortcuts Service
 {9f9363d8-4682-4d24-8c81-19a1bd59ec75}=Ctrl+Right,none,Next Tab
+{aa8f65be-263c-4f7e-9109-c59f34c81842}=Ctrl+Shift+D,none,Duplicate Tab
 {d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none,none,Search
 {f42eb5c0-2ecc-4e3a-8476-c329372f4cff}=Ctrl+Left,none,Prev Tab
 
@@ -270,7 +271,7 @@ Turn Off Screen=none,none,Turn Off Screen
 _k_friendly_name=Power Management
 
 [plasmashell]
-_k_friendly_name=Plasma
+_k_friendly_name=Activity switching
 activate task manager entry 1=Meta+1,Meta+1,Activate Task Manager Entry 1
 activate task manager entry 10=Meta+0,Meta+0,Activate Task Manager Entry 10
 activate task manager entry 2=Meta+2,Meta+2,Activate Task Manager Entry 2
