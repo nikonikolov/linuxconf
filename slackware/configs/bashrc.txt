@@ -87,7 +87,8 @@ PATH=$PATH:/sbin
 # Make aliases
 alias vscode='code'
 alias grep='grep --color=auto'
-alias download='wget -r --no-parent --reject="index.html*" -P /home/$MYUSER/Downloads/' 
+# alias download="wget -r --no-parent --reject="index.html*" -P /home/$MYUSER/Downloads/"
+alias download="wget -r --no-parent --reject='index.html*' --reject='*.meta4' --reject='*.metalink' --reject='*.mirrorlist' -P /home/$MYUSER/Downloads/"
 # alias package='ls /var/log/packages | grep -i'
 alias package='ls /var/lib/pkgtools/packages | grep -i'
 alias networkmanager='sudo /etc/rc.d/rc.networkmanager'
@@ -185,3 +186,9 @@ findr(){
 
 # Unset variable used in this file only
 unset MYUSER
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc'; fi
