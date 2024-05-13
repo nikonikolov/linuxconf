@@ -10,6 +10,25 @@ message(){
   echo ""
 }
 
+make_yellow() {
+  local text="$1"
+
+  local yellow_code="\033[1;33m"
+  local reset_code="\033[0m"
+
+  echo -n "${yellow_code}${text}${reset_code}"
+}
+
+make_red() {
+  local text="$1"
+
+  local red_code="\033[1;31m"
+  local reset_code="\033[0m"
+
+  echo -n "${red_code}${text}${reset_code}"
+}
+
+
 confstart(){
   message "Configuring $1"
 }

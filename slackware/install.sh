@@ -71,13 +71,13 @@ installsbo(){
   local MESSAGE="$2"
   installstart $PACKAGE
   if [ ! -z "$MESSAGE" ]; then
-    printf "\n$MESSAGE\n"
+    printf "$(make_yellow "\n$MESSAGE\n")"
     printf "Press any key to continue\n"
     read -n 1 -s -r
   fi
   sboinstall -j7 $PACKAGE
   if [ $? != 0 ]; then
-    printf "\nPackage \e[1m$PACKAGE\e[0m did NOT install successfully\n"
+    printf "$(make_red "\nPackage $PACKAGE did NOT install successfully\n")"
     printf "Press any key to continue\n"
     read -n 1 -s -r
   else
@@ -125,17 +125,27 @@ installsbo "avahi"
 
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
-installsbo "geoclue2" "!!!!!!!!! NOTE: Make sure to pass AVAHI=yes !!!!!!!!!"
+installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
 # Add redshift to allowed programs for geoclue
-sudo tee -a > /etc/geoclue/geoclue.conf <<- EOM
+# sudo tee -a > /etc/geoclue/geoclue.conf <<- EOM
 
-[redshift]
-allowed=true
-system=false
-users=
+# [redshift]
+# allowed=true
+# system=false
+# users=
 
-EOM
+# EOM
 
+# Recover geoclue.conf
+if [ -f /etc/geoclue/geoclue.conf ]; then
+  printf "$(make_yellow "/nWARN: /etc/geoclue/geoclue.conf exists. ")"
+  printf "$(make_yellow "Copying config file to /etc/geoclue/geoclue.conf.new. Make sure to resolve conflicts manually\n")"
+  printf "Press any key to continue\n"
+  read -n 1 -s -r
+  sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf.new
+else
+  sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf
+fi
 
 # ------------------------ redshift ------------------------
 installsbo "redshift"
@@ -168,7 +178,7 @@ installsbo "strongswan"
 #
 installsbo "NetworkManager-openvpn"
 # Needed for ProtonVPN
-installsbo "openresolv" "!!!!!!!!! NOTE: Make sure to pass OPENVPN=yes !!!!!!!!!"
+installsbo "openresolv" "NOTE: Make sure to pass OPENVPN=yes"
 
 
 # ------------------------ MasterPDFEditor ------------------------
@@ -198,7 +208,7 @@ installsbo "spotify"
 
 
 # ------------------------ plex ------------------------
-installsbo "plexmediaserver" "!!!!!!!!! NOTE: Make sure to add the plex user and group when prompted by SBo !!!!!!!!!"
+installsbo "plexmediaserver" "NOTE: Make sure to add the plex user and group when prompted by SBo"
 chmod +x /etc/rc.d/rc.plexmediaserver
 
 # ------------------------ VS Code ------------------------

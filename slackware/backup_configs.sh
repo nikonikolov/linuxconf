@@ -105,3 +105,6 @@ safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SLACK_BACKUP_DIR
 
 # default applications
 safecp $HOME/.config/mimeapps.list $SLACK_BACKUP_DIR
+
+# geoclue.conf
+safecp /etc/geoclue/geoclue.conf $SLACK_BACKUP_DIR
