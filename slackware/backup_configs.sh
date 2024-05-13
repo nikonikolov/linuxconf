@@ -108,3 +108,7 @@ safecp $HOME/.config/mimeapps.list $SLACK_BACKUP_DIR
 
 # geoclue.conf
 safecp /etc/geoclue/geoclue.conf $SLACK_BACKUP_DIR
+
+# slackpkg blacklist and greylist - not used, but backed up for reference
+safecp /etc/slackpkg/blacklist $SLACK_BACKUP_DIR/slackpkg-blacklist
+safecp /etc/slackpkg/greylist $SLACK_BACKUP_DIR/slackpkg-greylist

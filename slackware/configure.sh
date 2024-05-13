@@ -88,12 +88,13 @@ chmod +x ~/bin/nvidia_control.sh
 
 
 # ------------------------ slackpkg blacklist ------------------------
-message "Blacklisting Packages in slackpkg"
+message "Blacklisting packages in slackpkg"
 
 sudo tee -a /etc/slackpkg/blacklist > /dev/null <<EOT
+
 # Blacklist trustable sources:
-[0-9]+_SBo
 [0-9]+_bbsb
+# [0-9]+_SBo
 # [0-9]+alien
 # [0-9]+compat32
 
@@ -107,6 +108,14 @@ nethack
 xf86-video-nouveau
 # Blacklist specific packages
 google-chrome
+EOT
+
+message "Greylisting packages in slackpkg"
+
+sudo tee -a /etc/slackpkg/greylist > /dev/null <<EOT
+
+# Make sure installed SBo packages show on upgrade (will be deselected):
+[0-9]+_SBo
 EOT
 
 
