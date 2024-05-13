@@ -177,8 +177,9 @@ installsbo "xl2tpd"
 installsbo "strongswan"
 #
 installsbo "NetworkManager-openvpn"
-# Needed for ProtonVPN
-installsbo "openresolv" "NOTE: Make sure to pass OPENVPN=yes"
+#
+# openresolv needed for ProtonVPN, but is now part of official Slackware
+# installsbo "openresolv" "NOTE: Make sure to pass OPENVPN=yes"
 
 
 # ------------------------ MasterPDFEditor ------------------------
@@ -232,6 +233,14 @@ Keywords=vscode;
 EOT
 desktop-file-install --dir=$HOME/.local/share/applications $HOME_USER/Downloads/code-url-handler.desktop
 update-desktop-database ~/.local/share/applications
+if [ ! -f $HOME_USER/Downloads/code-url-handler.desktop ]; then
+  echo
+  printf "$(make_yellow "Run the following commands as normal user in a separate terminal:\n\n")"
+  echo "desktop-file-install --dir=$HOME/.local/share/applications $HOME_USER/Downloads/code-url-handler.desktop"
+  echo "update-desktop-database ~/.local/share/applications"
+  printf "\nPress any key when done and ready to continue\n"
+  read -n 1 -s -r
+fi
 rm -f $HOME_USER/Downloads/code-url-handler.desktop
 
 # ------------------------ jdk ------------------------
