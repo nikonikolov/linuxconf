@@ -13,3 +13,4 @@ virtualbox/
 **/*.tar.xz
 **/*.tar.gz
 **/*.zip
+**/*.rpm

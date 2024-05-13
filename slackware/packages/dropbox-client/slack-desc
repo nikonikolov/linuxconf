@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+              |-----handy-ruler------------------------------------------------------|
+dropbox-client: dropbox-client (store, sync and share files online)
+dropbox-client:
+dropbox-client: Dropbox is an extension that integrates the Dropbox web service
+dropbox-client: with your desktop. It consists of two major components: dropboxd
+dropbox-client: - a per-user closed-source daemon process that makes sure your
+dropbox-client: $HOME/Dropbox directory is properly synchronized with the web
+dropbox-client: Dropbox server/service, and dropbox-client, which connects to
+dropbox-client: your dropboxd and presents a GUI based on the information
+dropbox-client: dropboxd provides.
+dropbox-client:
+dropbox-client: dropbox-client home: http://www.getdropbox.com/

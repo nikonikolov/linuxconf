@@ -256,7 +256,9 @@ rm -f $HOME_USER/Downloads/code-url-handler.desktop
 
 
 # ------------------------ dropbox ------------------------
-slackpkg install dropbox-client
+# slackpkg install dropbox-client
+# Alienbob hasn't updated dropbox-client in ages. Use his scripts and a much newer version
+installfromsource "dropbox-client"
 
 
 # ------------------------ vlc ------------------------
