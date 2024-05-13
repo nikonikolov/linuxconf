@@ -160,17 +160,18 @@ sudo sed -i '/dhcp=dhclient/c\dhcp=dhclient' /etc/NetworkManager/conf.d/00-dhcp-
 
 # ------------------------ Pipewire ------------------------
 message "Configuring pipewire. Remember to reboot for changes to take effect"
-# Enable the pipewire autostart configuration files
-sudo mv /etc/xdg/autostart/pipewire-pulse.desktop.sample /etc/xdg/autostart/pipewire-pulse.desktop
-sudo mv /etc/xdg/autostart/pipewire.desktop.sample /etc/xdg/autostart/pipewire.desktop
-sudo mv /etc/xdg/autostart/wireplumber.desktop.sample /etc/xdg/autostart/wireplumber.desktop
-# sudo mv /etc/xdg/autostart/pipewire-media-session.desktop.sample /etc/xdg/autostart/pipewire-media-session.desktop
-# Disable pulseaudio autostart configuration file
-sudo mv /etc/xdg/autostart/pulseaudio.desktop /etc/xdg/autostart/pulseaudio.desktop.sample
-# Disable pulseaudio
-# sudo sed -i '/autospawn = yes/c\autospawn = no' /etc/pulse/client.conf
-sudo sed -i "s/autospawn = yes/autospawn = no/g" /etc/pulse/client.conf
-sudo sed -i "s/allow-autospawn-for-root = yes/allow-autospawn-for-root = no/g" /etc/pulse/client.conf
+sudo pipewire-enable.sh
+# # Enable the pipewire autostart configuration files
+# sudo mv /etc/xdg/autostart/pipewire-pulse.desktop.sample /etc/xdg/autostart/pipewire-pulse.desktop
+# sudo mv /etc/xdg/autostart/pipewire.desktop.sample /etc/xdg/autostart/pipewire.desktop
+# sudo mv /etc/xdg/autostart/wireplumber.desktop.sample /etc/xdg/autostart/wireplumber.desktop
+# # sudo mv /etc/xdg/autostart/pipewire-media-session.desktop.sample /etc/xdg/autostart/pipewire-media-session.desktop
+# # Disable pulseaudio autostart configuration file
+# sudo mv /etc/xdg/autostart/pulseaudio.desktop /etc/xdg/autostart/pulseaudio.desktop.sample
+# # Disable pulseaudio
+# # sudo sed -i '/autospawn = yes/c\autospawn = no' /etc/pulse/client.conf
+# sudo sed -i "s/autospawn = yes/autospawn = no/g" /etc/pulse/client.conf
+# sudo sed -i "s/allow-autospawn-for-root = yes/allow-autospawn-for-root = no/g" /etc/pulse/client.conf
 
 # ===============================================
 # ===================== OLD =====================
