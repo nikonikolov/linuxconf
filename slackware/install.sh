@@ -326,6 +326,7 @@ sudo usermod -aG docker niko
 message "Added to docker group. Remember to reboot for changes to take effect"
 installsbo "docker-buildx"
 installsbo "libnvidia-container"
+sudo chmod +x /etc/rc.d/rc.docker
 # TODO: Install nvidia-container-toolkit - code untested
 # cd $HOME_USER/Packages/
 # wget https://nvidia.github.io/libnvidia-container/stable/deb/amd64/nvidia-container-toolkit_1.14.5-1_amd64.deb
