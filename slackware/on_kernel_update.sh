@@ -21,7 +21,7 @@ sudo $(sudo /usr/share/mkinitrd/mkinitrd_command_generator.sh -k $KERNEL | sed '
 wait_to_continue "Generated initrd"
 
 # Reinstall grub if it was upgraded
-GRUB_EFI_VERSION=$(cat /boot/efi/EFI/Slackware/grub/version.txt)
+GRUB_EFI_VERSION=$(cat /boot/efi/EFI/Slackware/grub/version.txt 2>/dev/null || echo "grub")
 GRUB_VERSION=$(ls /var/lib/pkgtools/packages | grep ^grub)
 if [ $GRUB_VERSION != $GRUB_EFI_VERSION ]; then
   # Install grub
