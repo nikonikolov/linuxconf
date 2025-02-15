@@ -125,6 +125,7 @@ installsbo "avahi"
 
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
+# TODO: Make sure you get geoclue at least 2.7.2 and your latest geoclue config
 installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
 # Add redshift to allowed programs for geoclue
 # sudo tee -a > /etc/geoclue/geoclue.conf <<- EOM
@@ -313,6 +314,8 @@ sudo pip3 install -U ipython
 sudo pip3 install -U matplotlib
 sudo pip3 install -U numpy
 sudo pip3 install -U youtube-dl
+sudo pip3 install -U virtualenv
+sudo pip3 install -U ipdb
 # Make sure to install cv2 with -no-binary option so it uses the system opencv library. Otherwise, there's a conflict
 # in the libraries and you get errors displaying any images. This would probably have to be updated every time you
 # update the system opencv
@@ -339,6 +342,10 @@ sudo chmod +x /etc/rc.d/rc.docker
 # You don't need zulu-openjdk11 as long as you have jdk11 from alienbob
 # zulu-openjdk11 is just an open-source version
 installfromsource "bazel"
+
+# ------------------------ virtualbox ------------------------
+groupadd vboxusers
+sudo usermod -aG vboxusers $SUDO_USER
 
 
 # ------------------------ google-chrome ------------------------

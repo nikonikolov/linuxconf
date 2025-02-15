@@ -109,6 +109,9 @@ cat $HOME/.ssh/id_rsa.pub | ssh user@hostname "cat - >> .ssh/authorized_keys"
   - Avoid adding any `tar` or `zip` files, but download them on the go (the correct links are populated in the `.info` file of the package
   - Only when very problematic, add `tar` or `zip` files via git lfs
 5. Package which you maintain on slackbuilds.org go to the (SlackBuilds repo)[https://github.com/nikonikolov/slackbuilds]
+6. Package source code
+  - All source archives are ignored in `slackware/packages/.gitignore`
+  - The workflow requires you download them manually
 
 ### Common tool usage
 1. Example of getting access to the correct `$USER` variable in a command
