@@ -58,17 +58,13 @@ sudo cp /boot/initrd.gz /boot/efi/EFI/Slackware/elilo/
 wait_to_continue "Updated elilo configuration"
 
 
-# Update bbswitch
-# echo "Updating bbswitch"
-# cd /home/niko/Packages/bumblebee/bumblebee/bbswitch
-# sudo KERNEL=$KERNEL ./bbswitch.SlackBuild
-# sudo upgradepkg --reinstall --install-new /tmp/bbswitch-*$KERNEL-*.txz
-# wait_to_continue "Updated bbswitch"
+echo "Run manually DRIVER_VERSION=VERSION ./slackware/update_nvidia_version.sh to update nvidia kernel"
+wait_to_continue "Update nvidia manually"
 
-
-echo "Make sure to updat nvidia-kernel and nvidia-driver manually"
+# Updating NVIDIA via SBo packages
 # echo "Updating nvidia-kernel"
-# cd /home/niko/Packages/bumblebee/bumblebee/nvidia-kernel
-# sudo KERNEL=$KERNEL ./nvidia-kernel.SlackBuild
-# sudo upgradepkg --reinstall --install-new /tmp/nvidia-kernel-*$KERNEL-*.txz
+# sudo KERNEL=$KERNEL sboupgrade -f -j7 --nointeractive nvidia-kernel
 # wait_to_continue "Updated nvidia-kernel"
+# echo "Updating nvidia-driver"
+# sudo WINE=no sboupgrade -f -j7 --nointeractive nvidia-driver
+# wait_to_continue "Updated nvidia-driver"
