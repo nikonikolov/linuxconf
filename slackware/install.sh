@@ -115,6 +115,11 @@ ln -s /usr/bin/sublime_text /usr/bin/sublime
 configure_sublime $SLACK_BACKUP_DIR
 
 
+# ------------------------ neovim ------------------------
+installsbo "neovim"
+configure_neovim $SLACK_BACKUP_DIR
+
+
 # ------------------------ avahi ------------------------
 # Needed for geoclue2
 groupadd -g 214 avahi

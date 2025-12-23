@@ -78,6 +78,21 @@ configure_tmux(){
   confend "tmux"
 }
 
+
+configure_neovim(){
+  confstart "neovim"
+
+  # Backup configuration
+  if [ -d $HOME/.config/nvim ]; then
+    mv $HOME/.config/nvim $HOME/.config/nvim-backup
+  fi
+  mkdir -p $HOME/.config/nvim
+  safecp $BACKUP_CONF_FILES_DIR/nvim-init.lua $HOME/.config/nvim/init.lua
+
+  confend "neovim"
+}
+
+
 configure_vim(){
   confstart "vim"
 
@@ -86,6 +101,8 @@ configure_vim(){
   git clone https://github.com/flazz/vim-colorschemes
   mv vim-colorschemes/colors $HOME/.vim/
   rm -rf vim-colorschemes
+  # Backup .vimrc
+  mv $HOME/.vimrc $HOME/.vimrc.orig || true
   # Get the .vimrc
   curl https://raw.githubusercontent.com/grigio/vim-sublime/master/vimrc > $HOME/.vimrc
   # Remove unwanted plugins

@@ -18,9 +18,11 @@ sudo apt install -y tmux
 setupbashrc
 
 # ------------- Configure vim and tmux -------------
-install_vim
+# install_vim
+install_neovim
 install_tmux
-configure_vim
+# configure_vim
+configure_neovim
 configure_tmux $UBUNTU_BACKUP_DIR
 
 # ------------- Install sublime text 3 -------------
