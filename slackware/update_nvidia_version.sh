@@ -10,7 +10,7 @@ fi
 SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # SLACKBUILDS_ROOT=$(dirname $SCRIPT_ROOT)
 SLACKBUILDS_ROOT=$SCRIPT_ROOT/packages/slackbuilds
-NVIDIADIR=$SCRIPT_ROOT/v${DRIVER_VERSION}
+NVIDIADIR=$SLACKBUILDS_ROOT/nvidia/v${DRIVER_VERSION}
 # KERNEL=$(uname -r)
 KERNEL=$(ls /var/lib/pkgtools/packages | grep -i kernel-generic | grep -oP '\d+\.\d+\.\d+')
 

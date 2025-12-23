@@ -259,6 +259,9 @@ rm -f $HOME_USER/Downloads/code-url-handler.desktop
 # ------------------------ dropbox ------------------------
 # slackpkg install dropbox-client
 # Alienbob hasn't updated dropbox-client in ages. Use his scripts and a much newer version
+# TODO: Update version in the source or look into installing from source
+# https://slackbuilds.org/repository/15.0/network/dropbox/
+# https://github.com/dropbox/nautilus-dropbox
 installfromsource "dropbox-client"
 
 
@@ -325,7 +328,7 @@ sudo pip3 install -U --no-binary opencv-python opencv-python
 # ------------------------ docker ------------------------
 installsbo "docker-cli"  # If it doesn't work, use a new terminal or install manually locally. Had such problems before
 # source /etc/profile.d/go.sh
-sudo usermod -aG docker niko
+sudo usermod -aG docker $SUDO_USER
 message "Added to docker group. Remember to reboot for changes to take effect"
 installsbo "docker-buildx"
 installsbo "libnvidia-container"
