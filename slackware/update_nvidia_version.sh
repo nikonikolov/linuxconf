@@ -76,9 +76,11 @@ ln -s $NVIDIADIR/nvidia-xconfig-${DRIVER_VERSION}.tar.bz2 $SLACKBUILDS_ROOT/syst
 
 # # Compile nvidia-kernel and nvidia-driver
 cd $SLACKBUILDS_ROOT/system/nvidia-kernel
+chmod +x ./nvidia-kernel.SlackBuild
 sudo VERSION=$DRIVER_VERSION KERNEL=$KERNEL OPEN=yes ./nvidia-kernel.SlackBuild
 cd -
 cd $SLACKBUILDS_ROOT/system/nvidia-driver
+chmod +x ./nvidia-driver.SlackBuild
 sudo VERSION=$DRIVER_VERSION WINE=no ./nvidia-driver.SlackBuild
 cd -
 
