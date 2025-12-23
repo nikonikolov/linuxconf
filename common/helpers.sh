@@ -82,6 +82,8 @@ configure_tmux(){
 configure_neovim(){
   confstart "neovim"
 
+  local BACKUP_CONF_FILES_DIR="$1"  # $1: Backup directory where the configuration files are
+
   # Backup configuration
   if [ -d $HOME/.config/nvim ]; then
     mv $HOME/.config/nvim $HOME/.config/nvim-backup

@@ -121,26 +121,19 @@ configure_neovim $SLACK_BACKUP_DIR
 
 
 # ------------------------ avahi ------------------------
+# NOTE: avahi is now part of official slackware64
 # Needed for geoclue2
-groupadd -g 214 avahi
-useradd -u 214 -g 214 -c "Avahi User" -d /dev/null -s /bin/false avahi
-installsbo "avahi"
-/etc/rc.d/rc.avahidaemon start
+# groupadd -g 214 avahi
+# useradd -u 214 -g 214 -c "Avahi User" -d /dev/null -s /bin/false avahi
+# installsbo "avahi"
+# /etc/rc.d/rc.avahidaemon start
 
 
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
 # TODO: Make sure you get geoclue at least 2.7.2 and your latest geoclue config
+# TODO: Installing from source requires passing AVAHI=yes
 installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
-# Add redshift to allowed programs for geoclue
-# sudo tee -a > /etc/geoclue/geoclue.conf <<- EOM
-
-# [redshift]
-# allowed=true
-# system=false
-# users=
-
-# EOM
 
 # Recover geoclue.conf
 if [ -f /etc/geoclue/geoclue.conf ]; then
