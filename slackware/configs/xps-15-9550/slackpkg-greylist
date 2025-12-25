@@ -22,6 +22,7 @@
 # Make sure installed SBo packages show on upgrade (will be deselected):
 [0-9]+_SBo
 
-# Temporary issue - wireguard doesn't work with openresolv versions beyond 3.16.5
-openresolv
+# Temporary issue - wpa_supplicant above 2.10 causes network auth failures
+# https://bbs.archlinux.org/viewtopic.php?id=298171
+wpa_supplicant
 

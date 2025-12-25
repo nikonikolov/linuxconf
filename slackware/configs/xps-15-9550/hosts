@@ -10,5 +10,5 @@
 # For loopbacking.
 127.0.0.1		localhost
 ::1			localhost
-127.0.0.1		dell-xps15.niko-pc dell-xps15
-::1			dell-xps15.niko-pc dell-xps15
+127.0.0.1		dell-xps15.bojo-pc dell-xps15
+::1			dell-xps15.bojo-pc dell-xps15
