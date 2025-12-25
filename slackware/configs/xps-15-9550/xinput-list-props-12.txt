@@ -1,0 +1,10 @@
+Device 'Intel HID 5 button array':
+	Device Enabled (189):	1
+	Coordinate Transformation Matrix (191):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+	libinput Rotation Angle (305):	0.000000
+	libinput Rotation Angle Default (306):	0.000000
+	libinput Send Events Modes Available (307):	1, 0
+	libinput Send Events Mode Enabled (308):	0, 0
+	libinput Send Events Mode Enabled Default (309):	0, 0
+	Device Node (310):	"/dev/input/event4"
+	Device Product ID (311):	0, 0

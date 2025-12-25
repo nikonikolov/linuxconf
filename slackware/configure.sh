@@ -133,8 +133,8 @@ cp $SLACK_BACKUP_DIR/mirror-slackware-current.sh $HOME/SlackWare/mirrors/
 
 
 # ------------------------ libinput ------------------------
-sudo cp $SLACK_BACKUP_DIR/*-touchpad.conf /etc/X11/xorg.conf.d/
-sudo cp $SLACK_BACKUP_DIR/*-libinput.conf /etc/X11/xorg.conf.d/
+sudo cp $SLACK_BACKUP_DIR/libinput/*-touchpad.conf /etc/X11/xorg.conf.d/
+sudo cp $SLACK_BACKUP_DIR/libinput/*-libinput.conf /etc/X11/xorg.conf.d/
 
 
 # ------------------------ rc.local ------------------------

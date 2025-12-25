@@ -1,0 +1,54 @@
+# If you change this file, run grub-mkconfig -o /boot/grub/grub.cfg
+# afterwards to update /boot/grub/grub.cfg.
+
+GRUB_DEFAULT=0
+#GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=false
+GRUB_TIMEOUT=10
+GRUB_DISTRIBUTOR=$( sed 's/Slackware /Slackware-/' /etc/slackware-version )
+GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX=""
+
+# Uncomment to disable graphical terminal (grub-pc only):
+#GRUB_TERMINAL=console
+
+# The resolution used on graphical terminal.
+# Note that you can use only modes which your graphic card supports via VBE.
+# You can see them in real GRUB with the command `vbeinfo'.
+# We will enable this by default to prevent very small text on HiDPI displays.
+# Please note that GRUB draws the display with NO video acceleration, so
+# depending on the video hardware a resolution greater than 1024x768 may
+# result in a very slow menu.
+GRUB_GFXMODE=1024x768,800x600,640x480,auto
+
+# Font used on the graphical terminal:
+GRUB_FONT=/boot/grub/fonts/hack.pf2
+
+# Have the Linux kernel keep the GRUB_GFXMODE resolution.
+# This is safer for penguins.
+GRUB_GFXPAYLOAD_LINUX=keep
+
+# Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to Linux:
+#GRUB_DISABLE_LINUX_UUID=true
+
+# Uncomment to disable generation of recovery mode menu entries:
+GRUB_DISABLE_RECOVERY="true"
+
+# Search for other operating systems with os-prober.
+# If you don't want this, you can do any of these things to disable it:
+# - change to "true"
+# - comment it out, since disabled is the default
+# - remove the executable bit from /etc/grub.d/30_os-prober
+GRUB_DISABLE_OS_PROBER="false"
+
+# Disable the submenus:
+GRUB_DISABLE_SUBMENU="true"
+
+# What kernel filetypes to display in the menu. This may be set to "files"
+# (only display kernels that are files), "symlinks" (only display kernels
+# that are symbolic links), or "both".
+GRUB_DISPLAY_KERNEL_FILETYPES=both
+
+# This option allows defining an initrd name that will match any kernel as a
+# fallback if no other matching initrd is found. You may use any name you like.
+#GRUB_INITRD_FALLBACK_NAME=initrd.gz

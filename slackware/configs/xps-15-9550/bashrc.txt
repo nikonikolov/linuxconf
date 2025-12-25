@@ -1,0 +1,218 @@
+# Load the system-wide environment: obligatory
+source /etc/profile
+
+# Define foreground variables
+# P_BLACK="\[$(tput setaf 0)\]"
+# P_RED="\[$(tput setaf 1)\]"
+# P_GREEN="\[$(tput setaf 2)\]"
+# P_YELLOW="\[$(tput setaf 3)\]"
+# P_BLUE="\[$(tput setaf 4)\]"
+# P_MAGENTA="\[$(tput setaf 5)\]"
+# P_CYAN="\[$(tput setaf 6)\]"
+# P_WHITE="\[$(tput setaf 7)\]"
+# P_RESET="\[$(tput sgr0)\]"
+
+# Get the current user. Note this works for su and sudo too!
+MYUSER=$(whoami | awk '{print $1}')
+
+#Bold
+BWhite='\e[1;37m'      # White
+BBlue='\e[1;34m'       # Blue
+LGreen='\e[1;92m'      # Light Green
+NC='\e[m'              # Color Reset
+
+# Color Table
+# 31  = red
+# 32  = green
+# 33  = orange
+# 34  = blue
+# 35  = purple
+# 36  = cyan
+# 37  = grey
+# 90  = dark grey
+# 91  = light red
+# 92  = light green
+# 93  = yellow
+# 94  = light blue
+# 95  = light purple
+# 96  = turquoise
+
+# Make prompt more informative
+# export PS1='\[${BBlue}\]\u@\h: \w \\$ \[${NC}\]'
+export PS1="\[${LGreen}\]\u@\h: \w \\$ \[${NC}\]"
+export PS2="> "
+
+# ================================== HISTORY ==================================
+
+# Set the size
+export HISTSIZE=3000
+export HISTFILESIZE=3000
+
+# Avoid duplicate entries
+# export HISTCONTROL=ignoredups:erasedups
+export HISTCONTROL=ignoredups
+
+# Append to history instead of overwriting it
+shopt -s histappend
+
+# ================================== SPECIAL CHARS ==================================
+
+# Fix ESC showing in terminal
+export LESS=${LESS}r
+# LESS=${LESS}eirX
+
+# ================================== CDPATH ==================================
+
+# Add a folder to CDPATH VAR so that you can cd there from any folder
+# CDPATH=$CDPATH:/home/niko
+# CDPATH=$CDPATH:/home/niko/Workspace
+# CDPATH=$CDPATH:/home/niko/Dropbox
+# CDPATH=$CDPATH:/home/niko/Downloads
+
+
+# ================================== TEXT EDITOR ==================================
+
+# DEFUALT TEXT EDITOR
+export VISUAL=sublime_text
+export EDITOR=sublime_text
+
+# ================================== SUDO ==================================
+
+# Amend PATH so that sudo works
+PATH=$PATH:/usr/sbin
+PATH=$PATH:/sbin
+
+# ================================== ALIASES ==================================
+
+if [ ! -z $(which nvim) ]; then
+  alias vim='nvim'
+fi
+
+# Make aliases
+alias vscode='code'
+alias grep='grep --color=auto'
+# alias download="wget -r --no-parent --reject="index.html*" -P /home/$MYUSER/Downloads/"
+alias download="wget -r --no-parent --reject='index.html*' --reject='*.meta4' --reject='*.metalink' --reject='*.mirrorlist' -P /home/$MYUSER/Downloads/"
+# alias package='ls /var/log/packages | grep -i'
+alias package='ls /var/lib/pkgtools/packages | grep -i'
+alias networkmanager='sudo /etc/rc.d/rc.networkmanager'
+alias bumblebee='sudo /etc/rc.d/rc.bumblebeed'
+alias library='ldconfig -p | grep -i'
+alias tmux='tmux -2'
+alias diskprops='df -h'
+alias loadhist='history -n'
+alias mypublicip='dig +short myip.opendns.com @resolver1.opendns.com'
+props(){ du -a -h --max-depth=1 "$*" | sort -hr; }
+pidps() {
+  local PS_FLAGS='-eo user,pid,ppid,lstart,cmd'
+  if [ $# == 0 ]; then
+    ps $PS_FLAGS
+  else
+    ps $PS_FLAGS | head -1; ps $PS_FLAGS | grep "$1"
+  fi
+  # ps $PS_FLAGS | head -1; ps $PS_FLAGS | grep "$1"
+  # ps -eaf | head -1; ps -eaf | grep "$1"
+  # ps -eo uid,pid,ppid,lstart,cmd
+}
+# Check memory usage of a process
+# Usage: mem <proc_name>
+mem()
+{
+  ps -eo rss,pid,euser,args:100 --sort %mem | grep -v grep | grep -i $@ | awk '{printf $1/1024 "MB"; $1=""; print }'
+}
+
+# ================================== PATH ==================================
+
+# General executables
+PATH=$PATH:/home/$MYUSER/Workspace
+PATH=$PATH:/home/$MYUSER/bin
+
+# Add ccache at the beginning of PATH so it comes before any compiler
+PATH=/usr/bin/ccache:$PATH
+
+# NVIDIA
+# 64-bit
+PATH=$PATH:/usr/lib64/nvidia-bumblebee
+# 32-bit
+# PATH=$PATH:/usr/lib/nvidia-bumblebee
+
+# CUDA
+export CUDA_HOME=/usr/share/cuda
+export PATH=$PATH:$CUDA_HOME/bin
+
+alias loadconda="PATH=$HOME/miniconda3/bin:$PATH"
+
+# ================================== BAZEL ==================================
+
+if [ ! -z $(which bazel) ]; then
+  BAZEL_VERSION=$(bazel --version | grep -o '[0-9.]*')
+  # BZL_COMPLETE_FILE=/usr/share/bash-completion/completions/bazel/bazel-complete.bash
+  BZL_COMPLETE_FILE=$HOME/.bazel-${BAZEL_VERSION}/bin/bazel-complete.bash
+  if [ -f $BZL_COMPLETE_FILE ]; then
+    source $BZL_COMPLETE_FILE
+  fi
+fi
+
+# ================================== RUBY ==================================
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME=$HOME/.gem
+export PATH=$HOME/.gem/bin:$PATH
+
+# ================================== nVidia ==================================
+
+NV_PATH=/home/$MYUSER/bin/nvidia_control.sh
+
+nvidia(){
+  $NV_PATH $*
+}
+
+# ================================== find ==================================
+
+findf(){
+  if [ $# != 3 ]; then
+    if [ $1 != "--help" ]; then
+      echo Invalid argument
+    fi
+    echo "Three arguments required"
+    echo "Usage: findf [directory] [type d|f] [name]"
+  else
+    if [ $1 == "/" ]; then
+      #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+      #echo "Remember /proc/fs and /sys/kernel are not included"
+      sudo find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+      echo "Remember /proc and /sys/kernel are not included"
+    else
+      #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+      find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+    fi
+  fi
+# sudo find $1 -path /proc -prune -o -path /sys -prune -o -path /home/$MYUSER/.gvfs -prune -o -type $2 -name $3 -print
+# sudo find / -path /proc -prune -o -path /sys -prune -o -name 'lm_sensors'
+}
+
+findr(){
+  if [ $# != 2 ]; then
+    if [ $1 != "--help" ]; then
+      echo Invalid argument
+    fi
+    echo "Two arguments required"
+    echo "Usage: findr / [type d|f] [name]"
+  else
+    #sudo find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+    #echo "Remember /proc/fs and /sys/kernel are not included"
+    sudo find / -path /proc -prune -o -path /sys/kernel -prune -o -path /home -prune -o -type $1 -iname $2 -print
+    echo "Remember /home, /proc and /sys/kernel are not included"
+    #find $1 -path /proc/fs -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+    #find $1 -path /proc -prune -o -path /sys/kernel -prune -o ! -path /home/$MYUSER/.gvfs -type $2 -iname $3 -print
+  fi
+}
+
+# Unset variable used in this file only
+unset MYUSER
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc'; fi

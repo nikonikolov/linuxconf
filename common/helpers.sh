@@ -2,6 +2,9 @@
 
 COMMON_DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
+# Unique ID for the hardware, e.g. xps-15-9550, xps-15-9530
+HARDWARE_ID="$(cat /sys/class/dmi/id/product_name | tr ' [:upper:]' '-[:lower:]')"
+
 message(){
   echo ""
   echo "-------------------------------------------------------------------------------"
@@ -50,6 +53,7 @@ safecp(){
   local DESTIONATION_PATH="$2"   # $2: destination path
 
   if [ -f "$SOURCE_PATH" ]; then
+    mkdir -p $(dirname "$DESTIONATION_PATH")
     cp "$SOURCE_PATH" "$DESTIONATION_PATH"
   else
     echo "[WARNING]: File $SOURCE_PATH does not exist. IGNORING"
@@ -136,11 +140,11 @@ configure_sublime(){
   mkdir -p "$CONFIGS_DIR"
 
   # Install the configuration files
-  safecp "$BACKUP_CONF_FILES_DIR/Preferences.sublime-settings" "$CONFIGS_DIR"  # General settings
-  safecp "$BACKUP_CONF_FILES_DIR/Default (Linux).sublime-keymap" "$CONFIGS_DIR"  # Keyboard shortcuts
-  safecp "$BACKUP_CONF_FILES_DIR/Python.sublime-settings" $CONFIGS_DIR  # Python-specfic settings
-  safecp "$BACKUP_CONF_FILES_DIR/XML.sublime-settings" $CONFIGS_DIR  # XML-specific settings
-  safecp "$BACKUP_CONF_FILES_DIR/PythonBreakpoints.sublime-settings" $CONFIGS_DIR  # Python-breakpoints settings
+  safecp "$BACKUP_CONF_FILES_DIR/sublime/Preferences.sublime-settings" "$CONFIGS_DIR"  # General settings
+  safecp "$BACKUP_CONF_FILES_DIR/sublime/Default (Linux).sublime-keymap" "$CONFIGS_DIR"  # Keyboard shortcuts
+  safecp "$BACKUP_CONF_FILES_DIR/sublime/Python.sublime-settings" $CONFIGS_DIR  # Python-specfic settings
+  safecp "$BACKUP_CONF_FILES_DIR/sublime/XML.sublime-settings" $CONFIGS_DIR  # XML-specific settings
+  safecp "$BACKUP_CONF_FILES_DIR/sublime/PythonBreakpoints.sublime-settings" $CONFIGS_DIR  # Python-breakpoints settings
 
   # Install package control
   wget https://packagecontrol.io/Package%20Control.sublime-package

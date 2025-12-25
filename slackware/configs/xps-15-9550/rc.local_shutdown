@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# /etc/rc.d/rc.local_shutdown: Runs when system is being shutdown
+#
+
+# Delete the contents of /tmp on shutdown
+/usr/bin/find /tmp -mindepth 1 -maxdepth 1 -exec /bin/rm -rf {} +;
+
+# Make bumblebeed stop with the system
+[ -x /etc/rc.d/rc.bumblebeed ] && /etc/rc.d/rc.bumblebeed stop
+
+# Stop docker daemon
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker stop
+
+# Optional: Stop avahidnsconfd
+# [ -x /etc/rc.d/rc.avahidnsconfd ] && /etc/rc.d/rc.avahidnsconfd stop
+
+# Stop avahidaemon
+[ -x /etc/rc.d/rc.avahidaemon ] && /etc/rc.d/rc.avahidaemon stop
+
+# Stop plexmediaserver
+[ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver stop
+
+# Stop docker
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker stop

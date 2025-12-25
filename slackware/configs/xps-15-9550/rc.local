@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# /etc/rc.d/rc.local:  Local system initialization script.
+#
+# Put any local startup commands in here.  Also, if you have
+# anything that needs to be run at shutdown time you can
+# make an /etc/rc.d/rc.local_shutdown script and put those
+# commands in there.
+
+# Create missing nvidia device nodes after reboot
+[ -x /usr/bin/nvidia-modprobe ] && /usr/bin/nvidia-modprobe -c 0 -u
+
+# Start docker
+[ -x /etc/rc.d/rc.docker ] && /etc/rc.d/rc.docker start
+
+# Start avahidaemon
+[ -x /etc/rc.d/rc.avahidaemon ] && /etc/rc.d/rc.avahidaemon start
+
+# Optional: Start avahidnsconfd
+# [ -x /etc/rc.d/rc.avahidnsconfd ] && /etc/rc.d/rc.avahidnsconfd start
+
+# Start plexmediaserver
+# [ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver start
+

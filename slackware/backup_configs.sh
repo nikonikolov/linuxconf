@@ -1,114 +1,161 @@
 #!/bin/bash
 
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-SLACK_BACKUP_DIR="$DIRPATH/configs"
 source $DIRPATH/../common/helpers.sh
 
+# Setup the backup directory
+SYSTEM_BACKUP_DIR="$DIRPATH/configs/$HARDWARE_ID"
+mkdir -p $SYSTEM_BACKUP_DIR
+
+# Setup what files should be tracked
+MAIN_HARDWARE_ID=xps-15-9530  # The 'source-of-truth' hardware
+MAIN_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"  # The 'source-of-truth' backup directory
+
+if [ "$HARDWARE_ID" == "$MAIN_HARDWARE_ID" ]; then
+    IS_MAIN="true"
+else
+    IS_MAIN="false"
+fi
+
 # sublime key shortcuts
-safecp "$HOME/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text/Packages/User/Preferences.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text/Packages/User/Python.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text/Packages/User/PythonBreakpoints.sublime-settings" $SLACK_BACKUP_DIR
-safecp "$HOME/.config/sublime-text/Packages/User/XML.sublime-settings" $SLACK_BACKUP_DIR
+mkdir -p $SYSTEM_BACKUP_DIR/sublime/
+if [ "$IS_MAIN" = "true" ]; then
+  safecp "$HOME/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap" $SYSTEM_BACKUP_DIR/sublime/
+  safecp "$HOME/.config/sublime-text/Packages/User/Preferences.sublime-settings" $SYSTEM_BACKUP_DIR/sublime/
+  safecp "$HOME/.config/sublime-text/Packages/User/Python.sublime-settings" $SYSTEM_BACKUP_DIR/sublime/
+  safecp "$HOME/.config/sublime-text/Packages/User/PythonBreakpoints.sublime-settings" $SYSTEM_BACKUP_DIR/sublime/
+  safecp "$HOME/.config/sublime-text/Packages/User/XML.sublime-settings" $SYSTEM_BACKUP_DIR/sublime/
+else
+  ln -sf "$MAIN_BACKUP_DIR/sublime/Default (Linux).sublime-keymap" "$SYSTEM_BACKUP_DIR/sublime/Default (Linux).sublime-keymap"
+  ln -sf "$MAIN_BACKUP_DIR/sublime/Preferences.sublime-settings" "$SYSTEM_BACKUP_DIR/sublime/Preferences.sublime-settings"
+  ln -sf "$MAIN_BACKUP_DIR/sublime/Python.sublime-settings" "$SYSTEM_BACKUP_DIR/sublime/Python.sublime-settings"
+  ln -sf "$MAIN_BACKUP_DIR/sublime/PythonBreakpoints.sublime-settings" "$SYSTEM_BACKUP_DIR/sublime/PythonBreakpoints.sublime-settings"
+  ln -sf "$MAIN_BACKUP_DIR/sublime/XML.sublime-settings" "$SYSTEM_BACKUP_DIR/sublime/XML.sublime-settings"
+fi
 
-# slackpkgplus
-safecp /etc/slackpkg/slackpkgplus.conf $SLACK_BACKUP_DIR
 
-# redshift
-safecp $HOME/.config/redshift.conf $SLACK_BACKUP_DIR
+if [ "$IS_MAIN" = "true" ]; then
+  # redshift
+  safecp $HOME/.config/redshift.conf $SYSTEM_BACKUP_DIR
 
-# .bashrc
-safecp $HOME/.bashrc $SLACK_BACKUP_DIR/bashrc.txt
+  # .bashrc
+  safecp $HOME/.bashrc $SYSTEM_BACKUP_DIR/bashrc.txt
 
-# .bash_profile
-safecp $HOME/.bash_profile $SLACK_BACKUP_DIR/bash_profile.txt
+  # .bash_profile
+  safecp $HOME/.bash_profile $SYSTEM_BACKUP_DIR/bash_profile.txt
 
-# .vimrc
-safecp $HOME/.vimrc $SLACK_BACKUP_DIR/vimrc.txt
+  # .vimrc
+  safecp $HOME/.vimrc $SYSTEM_BACKUP_DIR/vimrc.txt
 
-# .tmux.conf
-safecp $HOME/.tmux.conf $SLACK_BACKUP_DIR/tmux.conf
+  # .tmux.conf
+  safecp $HOME/.tmux.conf $SYSTEM_BACKUP_DIR/tmux.conf
 
-# Mutt
-# safecp $HOME/.mutt/muttrc $SLACK_BACKUP_DIR/mutt.txt
+  # chromium
+  safecp /etc/chromium/01-apikeys.conf $SYSTEM_BACKUP_DIR
 
-# nvidia controller
-safecp $HOME/bin/nvidia_control.sh $SLACK_BACKUP_DIR
+  # konsole configuration
+  mkdir -p $SYSTEM_BACKUP_DIR/konsole
+  for FILE in $HOME/.local/share/konsole/*
+  do
+    safecp $FILE $SYSTEM_BACKUP_DIR/konsole/$(basename $FILE)
+  done
+
+  # Alienbob script for mirroring slackware sources
+  safecp $HOME/SlackWare/mirrors/mirror-slackware-current.conf $SYSTEM_BACKUP_DIR
+  safecp $HOME/SlackWare/mirrors/mirror-slackware-current.exclude $SYSTEM_BACKUP_DIR
+  safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SYSTEM_BACKUP_DIR
+
+else
+  ln -sf "$MAIN_BACKUP_DIR/redshift.conf" "$SYSTEM_BACKUP_DIR/redshift.conf"
+  ln -sf "$MAIN_BACKUP_DIR/bashrc.txt" "$SYSTEM_BACKUP_DIR/bashrc.txt"
+  ln -sf "$MAIN_BACKUP_DIR/bash_profile.txt" "$SYSTEM_BACKUP_DIR/bash_profile.txt"
+  ln -sf "$MAIN_BACKUP_DIR/vimrc.txt" "$SYSTEM_BACKUP_DIR/vimrc.txt"
+  ln -sf "$MAIN_BACKUP_DIR/tmux.conf" "$SYSTEM_BACKUP_DIR/tmux.conf"
+  ln -sf "$MAIN_BACKUP_DIR/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
+  ln -sf "$MAIN_BACKUP_DIR/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
+  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.conf" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.conf"
+  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.exclude" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.exclude"
+  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.sh" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.sh"
+
+  # konsole configuration
+  mkdir -p $SYSTEM_BACKUP_DIR/konsole
+  for FILE in $MAIN_BACKUP_DIR/konsole*
+  do
+    ln -sf "$MAIN_BACKUP_DIR/$(basename $FILE)" "$SYSTEM_BACKUP_DIR/$(basename $FILE)"
+  done
+
+fi
 
 # KDE shortcuts
-safecp $HOME/.config/kglobalshortcutsrc $SLACK_BACKUP_DIR
-safecp $HOME/.config/khotkeysrc $SLACK_BACKUP_DIR
-
-# konsole configuration
-for FILE in $HOME/.local/share/konsole/*
-do
-  safecp $FILE $SLACK_BACKUP_DIR/konsole/$(basename $FILE)
-done
-
-# Libinput configuration
-safecp /etc/X11/xorg.conf.d/*libinput.conf $SLACK_BACKUP_DIR
-safecp /etc/X11/xorg.conf.d/*touchpad.conf $SLACK_BACKUP_DIR
-for FILE in /usr/share/X11/xorg.conf.d/*libinput.conf
-do
-  safecp $FILE $SLACK_BACKUP_DIR/$(basename $FILE).system
-done
-xinput list > $SLACK_BACKUP_DIR/xinput-list.txt
-xinput list-props 12 > $SLACK_BACKUP_DIR/xinput-list-props-12.txt
-xinput list-props 13 > $SLACK_BACKUP_DIR/xinput-list-props-13.txt
-
-# bumblebee
-safecp /etc/bumblebee/bumblebee.conf $SLACK_BACKUP_DIR
-
-# elilo
-# safecp /boot/efi/EFI/Slackware/elilo.conf $SLACK_BACKUP_DIR
-
-# grub
-safecp /etc/default/grub $SLACK_BACKUP_DIR
-
-# ld.so.conf
-safecp /etc/ld.so.conf $SLACK_BACKUP_DIR
-
-# rc.local and rc.local_shutdown
-safecp /etc/rc.d/rc.local $SLACK_BACKUP_DIR
-safecp /etc/rc.d/rc.local_shutdown $SLACK_BACKUP_DIR
-
-# rc.modules.local
-safecp /etc/rc.d/rc.modules.local $SLACK_BACKUP_DIR
-
-# fstab
-safecp /etc/fstab $SLACK_BACKUP_DIR
-
-# blacklisted kernel modules
-safecp /etc/modprobe.d/blacklist.conf $SLACK_BACKUP_DIR
-
-# hosts
-safecp /etc/hosts $SLACK_BACKUP_DIR
-
-# elogind
-safecp /etc/elogind/system-sleep/network_hook.sh $SLACK_BACKUP_DIR/elogind_network_hook.sh
-
-# installed packages
-ls /var/log/packages > $SLACK_BACKUP_DIR/packages.txt
-ls /var/log/packages | grep SBo > $SLACK_BACKUP_DIR/packages_SBo.txt
-ls /var/log/packages | grep alien > $SLACK_BACKUP_DIR/packages_alien.txt
-
-# groups
-groups $USER > $SLACK_BACKUP_DIR/groups-$USER.txt
-
-# chromium 
-safecp /etc/chromium/01-apikeys.conf $SLACK_BACKUP_DIR
-
-# Alienbob script for mirroring slackware sources
-safecp $HOME/SlackWare/mirrors/mirror-slackware-current.conf $SLACK_BACKUP_DIR
-safecp $HOME/SlackWare/mirrors/mirror-slackware-current.exclude $SLACK_BACKUP_DIR
-safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SLACK_BACKUP_DIR
+safecp $HOME/.config/kglobalshortcutsrc $SYSTEM_BACKUP_DIR
+safecp $HOME/.config/khotkeysrc $SYSTEM_BACKUP_DIR
 
 # default applications
-safecp $HOME/.config/mimeapps.list $SLACK_BACKUP_DIR
+safecp $HOME/.config/mimeapps.list $SYSTEM_BACKUP_DIR
 
-# geoclue.conf
-safecp /etc/geoclue/geoclue.conf $SLACK_BACKUP_DIR
+# nvidia controller
+safecp $HOME/bin/nvidia_control.sh $SYSTEM_BACKUP_DIR
+
+# slackpkgplus
+safecp /etc/slackpkg/slackpkgplus.conf $SYSTEM_BACKUP_DIR
 
 # slackpkg blacklist and greylist - not used, but backed up for reference
-safecp /etc/slackpkg/blacklist $SLACK_BACKUP_DIR/slackpkg-blacklist
-safecp /etc/slackpkg/greylist $SLACK_BACKUP_DIR/slackpkg-greylist
+safecp /etc/slackpkg/blacklist $SYSTEM_BACKUP_DIR/slackpkg-blacklist
+safecp /etc/slackpkg/greylist $SYSTEM_BACKUP_DIR/slackpkg-greylist
+
+
+# Libinput configuration
+mkdir -p $SYSTEM_BACKUP_DIR/libinput
+safecp /etc/X11/xorg.conf.d/*libinput.conf $SYSTEM_BACKUP_DIR/libinput
+safecp /etc/X11/xorg.conf.d/*touchpad.conf $SYSTEM_BACKUP_DIR/libinput
+
+for FILE in /usr/share/X11/xorg.conf.d/*libinput.conf
+do
+  safecp $FILE $SYSTEM_BACKUP_DIR/libinput/$(basename $FILE).system
+done
+
+xinput list > $SYSTEM_BACKUP_DIR/libinput/xinput-list.txt
+xinput list-props 12 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-12.txt
+xinput list-props 13 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-13.txt
+
+# bumblebee
+# safecp /etc/bumblebee/bumblebee.conf $SYSTEM_BACKUP_DIR
+
+# elilo
+safecp /boot/efi/EFI/Slackware/elilo.conf $SYSTEM_BACKUP_DIR
+
+# grub
+safecp /etc/default/grub $SYSTEM_BACKUP_DIR
+
+# ld.so.conf
+safecp /etc/ld.so.conf $SYSTEM_BACKUP_DIR
+
+# rc.local and rc.local_shutdown
+safecp /etc/rc.d/rc.local $SYSTEM_BACKUP_DIR
+safecp /etc/rc.d/rc.local_shutdown $SYSTEM_BACKUP_DIR
+
+# rc.modules.local
+safecp /etc/rc.d/rc.modules.local $SYSTEM_BACKUP_DIR
+
+# fstab
+safecp /etc/fstab $SYSTEM_BACKUP_DIR
+
+# blacklisted kernel modules
+safecp /etc/modprobe.d/blacklist.conf $SYSTEM_BACKUP_DIR
+
+# hosts
+safecp /etc/hosts $SYSTEM_BACKUP_DIR
+
+# elogind
+safecp /etc/elogind/system-sleep/network_hook.sh $SYSTEM_BACKUP_DIR/elogind_network_hook.sh
+
+# installed packages
+ls /var/log/packages > $SYSTEM_BACKUP_DIR/packages.txt
+ls /var/log/packages | grep SBo > $SYSTEM_BACKUP_DIR/packages_SBo.txt
+ls /var/log/packages | grep alien > $SYSTEM_BACKUP_DIR/packages_alien.txt
+
+# groups
+groups $USER > $SYSTEM_BACKUP_DIR/groups-$USER.txt
+
+# geoclue.conf
+safecp /etc/geoclue/geoclue.conf $SYSTEM_BACKUP_DIR
