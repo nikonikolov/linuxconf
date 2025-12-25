@@ -122,7 +122,7 @@ xinput list-props 13 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-13.txt
 # safecp /etc/bumblebee/bumblebee.conf $SYSTEM_BACKUP_DIR
 
 # elilo
-safecp /boot/efi/EFI/Slackware/elilo.conf $SYSTEM_BACKUP_DIR
+safecp /boot/efi/EFI/Slackware/elilo/elilo.conf $SYSTEM_BACKUP_DIR
 
 # grub
 safecp /etc/default/grub $SYSTEM_BACKUP_DIR
