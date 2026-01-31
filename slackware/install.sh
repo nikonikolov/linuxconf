@@ -41,19 +41,27 @@ HOME_USER=/home/$SUDO_USER
 
 installfromsource(){
   local PACKAGE_NAME="$1"
-  local PACKAGE_BINARY_PATH="$2"
+  local PACKAGE_SLACKBUILD_DIR="${2:-$SLACK_PKG_DIR/$PACKAGE_NAME}"
+
   installstart "$PACKAGE_NAME"
-  PACKAGE_SLACKBUILD_DIR=$SLACK_PKG_DIR/$PACKAGE_NAME
   if [ -d $PACKAGE_SLACKBUILD_DIR ]; then
     cd $PACKAGE_SLACKBUILD_DIR
     # Parse the .info file and download the source
     local PACKAGE_SOURCE_URL=$(grep -oP 'DOWNLOAD_x86_64="\K[^"]+' $PACKAGE_NAME.info)
+    # Some packages have the same source for 32 and 64 bit and only DOWNLOAD is present
+    if [ -z "$PACKAGE_SOURCE_URL" ]; then
+      local PACKAGE_SOURCE_URL=$(grep -oP 'DOWNLOAD="\K[^"]+' $PACKAGE_NAME.info)
+    fi
     wget $PACKAGE_SOURCE_URL
     # Compile
     sudo ./$PACKAGE_NAME.SlackBuild
-    sudo installpkg /tmp/$PACKAGE_NAME-*-x86_64-*.tgz
+    sudo installpkg /tmp/$PACKAGE_NAME-*.tgz
+    installend $PACKAGE_NAME
   else 
-    message "[ERROR]: $PACKAGE_NAME not available. Continuing without installing $PACKAGE_NAME"
+    MESSAGE="[ERROR]: $PACKAGE_NAME not found in $PACKAGE_SLACKBUILD_DIR. Continuing without installing $PACKAGE_NAME"
+    printf "$(make_yellow "\n$MESSAGE\n")"
+    printf "Press any key to continue\n"
+    read -n 1 -s -r
   fi
 }
 
@@ -121,11 +129,7 @@ else
   git clone git://git.slackbuilds.org/slackbuilds.git
 fi
 cd -
-cd $SLACK_PKG_DIR/slackbuilds/system/sbotools/
-chmod +x sbotools.SlackBuild
-sudo ./sbotools.SlackBuild
-sudo installpkg /tmp/sbotools-*-noarch-1_SBo
-cd -
+installfromsource "sbotools" "$SLACK_PKG_DIR/slackbuilds/system/sbotools/"
 sudo sboconfig --slackware-version $SLACKWARE_VERSION
 sudo sbocheck
 
