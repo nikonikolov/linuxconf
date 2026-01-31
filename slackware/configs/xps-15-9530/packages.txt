@@ -154,6 +154,7 @@ clucene-2.3.3.4-x86_64-5
 cmake-4.1.2-x86_64-1
 cmark-0.31.1-x86_64-1
 cmark-gfm-0.29.0.gfm.13-x86_64-3
+cndrvcups-capt-2.71-1.x86_64
 colord-1.4.8-x86_64-1
 colord-kde-23.08.5-x86_64-3
 compiz-0.8.18-x86_64-5
@@ -1257,7 +1258,7 @@ pimcommon-23.08.5-x86_64-3
 pinentry-1.3.2-x86_64-1
 pipewire-1.4.8-x86_64-1
 pixman-0.46.4-x86_64-1
-pkcs11-helper-1.30.0-x86_64-1_SBo
+pkcs11-helper-1.31.0-x86_64-1_SBo
 pkgconf-2.5.1-x86_64-1
 pkgtools-15.1-noarch-30
 plasma-browser-integration-5.27.12-x86_64-3
@@ -1471,7 +1472,7 @@ speex-1.2.1-x86_64-1
 speexdsp-1.2.1-x86_64-1
 spirv-llvm-translator-21.1.1-x86_64-1
 splitvt-1.6.6-x86_64-5
-spotify-1.2.74.477-x86_64-1_SBo
+spotify-1.2.79.425-x86_64-1_SBo
 sqlite-3.50.4-x86_64-1
 squashfs-tools-4.7.2-x86_64-1
 sshfs-3.7.3-x86_64-1
@@ -1515,7 +1516,7 @@ tcpdump-4.99.5-x86_64-1
 tcsh-6.24.16-x86_64-1
 tdb-1.4.14-x86_64-1
 teamviewer-15.53.6-x86_64-1_SBo
-telegram-6.1.3-x86_64-1_SBo
+telegram-6.3.9-x86_64-1_SBo
 telnet-0.17-x86_64-7
 terminus-font-4.49.1-noarch-3
 tevent-0.17.1-x86_64-1
@@ -1548,7 +1549,7 @@ unarj-265-x86_64-4
 undervolt-0.4.0-x86_64-2
 unicode-ucd-17.0.0-noarch-1
 universal-ctags-6.2.0-x86_64-1
-unrar-6.2.12-x86_64-1_SBo
+unrar-7.2.3-x86_64-1_SBo
 upower-1.90.10-x86_64-1
 urw-core35-fonts-otf-20170801_91edd6e_git-noarch-4
 usb_modeswitch-2.6.2-x86_64-1
@@ -1572,7 +1573,7 @@ vlan-1.9-x86_64-5
 vlc-3.0.21-x86_64-2alien
 volume_key-0.3.12-x86_64-9
 vorbis-tools-1.4.3-x86_64-1
-vscode-bin-1.106.3-x86_64-1_SBo
+vscode-bin-1.107.0-x86_64-1_SBo
 vsftpd-3.0.5-x86_64-4
 vte-0.82.0-x86_64-1
 vulkan-sdk-1.4.313.0-x86_64-1
@@ -1742,7 +1743,7 @@ zeromq-4.3.5-x86_64-1_SBo
 zlib-1.3.1-x86_64-1
 zoo-2.10_28-x86_64-1
 zoom-linux-6.6.6.5306-x86_64-1_SBo
-zotero-7.0.22-x86_64-1_SBo
+zotero-7.0.30-x86_64-1_SBo
 zsh-5.9-x86_64-1
 zstd-1.5.7-x86_64-1
 zug-0.1.1-x86_64-1

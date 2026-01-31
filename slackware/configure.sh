@@ -14,10 +14,19 @@ fi
 # ===================== CONFIRM READY =====================
 
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-SLACK_BACKUP_DIR="$DIRPATH/configs"
 source $DIRPATH/../common/helpers.sh
 
+# Determine the directory where configs are stored
+SLACK_HARDWARE_BACKUP_DIR="$DIRPATH/configs/$HARDWARE_ID"
+if [ ! -d $SLACK_HARDWARE_BACKUP_DIR ]; then
+  SLACK_HARDWARE_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"
+fi
+
+
 mkdir -p ~/bin
+
+# Prompt for the sudo password once
+sudo -v || exit 1
 
 # ------------------------ quotes ------------------------
 message "Removing Quotes"
@@ -27,7 +36,7 @@ sudo chmod -x /etc/profile.d/bsd-games-login-fortune.sh
 # ------------------------ groups ------------------------
 message "Adding to power group"
 # sudo usermod -aG power niko
-sudo -u $SUDO_USER usermod -aG power $SUDO_USER
+sudo usermod -aG power $USER
 
 
 # ------------------------ git ------------------------
@@ -39,11 +48,11 @@ git config --global core.editor "nvim -w"
 
 # ------------------------ bashrc and bash_profile ------------------------
 message "Configuring .bash_profile"
-cp $SLACK_BACKUP_DIR/bash_profile.txt ~/.bash_profile
+cp $SLACK_SYSTEM_BACKUP_DIR/bash_profile.txt ~/.bash_profile
 source ~/.bash_profile
 
 message "Configuring .bashrc"
-cp $SLACK_BACKUP_DIR/bashrc.txt ~/.bashrc
+cp $SLACK_SYSTEM_BACKUP_DIR/bashrc.txt ~/.bashrc
 source ~/.bashrc
 
 
@@ -54,17 +63,18 @@ for FILE in $HOME/.local/share/konsole/*
 do
   mv $FILE "$FILE.original"
 done
-cp $SLACK_BACKUP_DIR/konsole/* $HOME/.local/share/konsole/
+cp $SLACK_SYSTEM_BACKUP_DIR/konsole/* $HOME/.local/share/konsole/
 
 
 # ------------------------ tmux ------------------------
-configure_tmux $SLACK_BACKUP_DIR
+configure_tmux $SLACK_SYSTEM_BACKUP_DIR
 
 
 # ------------------------ vim ------------------------
-configure_vim $SLACK_BACKUP_DIR
-sudo -u $SUDO_USER ln -s "/home/$SUDO_USER/.vimrc" /root/.vimrc
-sudo -u $SUDO_USER ln -s "/home/$SUDO_USER/.vim" /root/.vim
+# This is deprecated in favor of neovim which needs to be installed and is done in install.sh
+# configure_vim $SLACK_SYSTEM_BACKUP_DIR
+# sudo ln -s "/home/$USER/.vimrc" /root/.vimrc
+# sudo ln -s "/home/$USER/.vim" /root/.vim
 # sudo ln -s /home/niko/.vimrc /root/.vimrc
 # sudo ln -s /home/niko/.vim /root/.vim
 
@@ -77,7 +87,7 @@ sudo sysctl -w vm.swappiness=10
 # ------------------------ nvidia ------------------------
 message "Adding nvidia control script"
 # Add the nvidia control script so that bashrc finds it
-cp $SLACK_BACKUP_DIR/nvidia_control.sh ~/bin/nvidia_control.sh
+cp $SLACK_SYSTEM_BACKUP_DIR/nvidia_control.sh ~/bin/nvidia_control.sh
 chmod +x ~/bin/nvidia_control.sh
 
 
@@ -121,43 +131,43 @@ EOT
 
 # ------------------------ slackpkg mirror ------------------------
 LINE_NUM=$(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
-sudo -u $SUDO_USER sed -i "$LINE_NUM a file://home/$SUDO_USER/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
+sudo sed -i "$LINE_NUM a file://home/$USER/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
 # sudo sed -i "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
 
 
 # ------------------------ aleinbob scripts for mirroring slackware sources ------------------------
 mkdir -p $HOME/SlackWare/mirrors
-cp $SLACK_BACKUP_DIR/mirror-slackware-current.conf $HOME/SlackWare/mirrors/
-cp $SLACK_BACKUP_DIR/mirror-slackware-current.exclude $HOME/SlackWare/mirrors/
-cp $SLACK_BACKUP_DIR/mirror-slackware-current.sh $HOME/SlackWare/mirrors/
+cp $SLACK_SYSTEM_BACKUP_DIR/mirror-slackware-current.conf $HOME/SlackWare/mirrors/
+cp $SLACK_SYSTEM_BACKUP_DIR/mirror-slackware-current.exclude $HOME/SlackWare/mirrors/
+cp $SLACK_SYSTEM_BACKUP_DIR/mirror-slackware-current.sh $HOME/SlackWare/mirrors/
 
 
 # ------------------------ libinput ------------------------
-sudo cp $SLACK_BACKUP_DIR/libinput/*-touchpad.conf /etc/X11/xorg.conf.d/
-sudo cp $SLACK_BACKUP_DIR/libinput/*-libinput.conf /etc/X11/xorg.conf.d/
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/libinput/*-touchpad.conf /etc/X11/xorg.conf.d/
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/libinput/*-libinput.conf /etc/X11/xorg.conf.d/
 
 
 # ------------------------ rc.local ------------------------
 message "Configuring /etc/rc.d/rc.local"
-sudo cp $SLACK_BACKUP_DIR/rc.local /etc/rc.d/rc.local
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/rc.local /etc/rc.d/rc.local
 sudo chmod +x /etc/rc.d/rc.local
 
 
 # ------------------------ rc.local_shutdown ------------------------
 message "Configuring /etc/rc.d/rc.local_shutdown"
-sudo cp $SLACK_BACKUP_DIR/rc.local_shutdown /etc/rc.d/rc.local_shutdown
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/rc.local_shutdown /etc/rc.d/rc.local_shutdown
 sudo chmod +x /etc/rc.d/rc.local_shutdown
 
 
 # ------------------------ rc.modules.local ------------------------
 message "Configuring /etc/rc.d/rc.modules.local"
-sudo cp $SLACK_BACKUP_DIR/rc.modules.local /etc/rc.d/rc.modules.local
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/rc.modules.local /etc/rc.d/rc.modules.local
 sudo chmod +x /etc/rc.d/rc.modules.local
 
 
 # ------------------------ elogind sleep hook ------------------------
 sudo mkdir -p /etc/elogind/system-sleep
-sudo cp $SLACK_BACKUP_DIR/elogind_network_hook.sh /etc/elogind/system-sleep/network_hook.sh
+sudo cp $SLACK_SYSTEM_BACKUP_DIR/elogind_network_hook.sh /etc/elogind/system-sleep/network_hook.sh
 sudo chmod +x /etc/elogind/system-sleep/network_hook.sh
 
 
@@ -188,7 +198,7 @@ sudo pipewire-enable.sh
 
 # message "Configuring mutt"
 # mkdir -p ~/.mutt
-# cp $SLACK_BACKUP_DIR/mutt.txt ~/.mutt/muttrc
+# cp $SLACK_SYSTEM_BACKUP_DIR/mutt.txt ~/.mutt/muttrc
 
 # message "Enabling Network Manager"
 # sudo chmod +x /etc/rc.d/rc.networkmanager

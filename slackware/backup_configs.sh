@@ -3,18 +3,16 @@
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source $DIRPATH/../common/helpers.sh
 
-# Setup the backup directory
-SYSTEM_BACKUP_DIR="$DIRPATH/configs/$HARDWARE_ID"
-mkdir -p $SYSTEM_BACKUP_DIR
+SYSTEM_BACKUP_DIR="$DIRPATH/configs/$HARDWARE_ID"  # The backup directory for THIS MACHINE!
+MAIN_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"  # The default 'source-of-truth' backup directory for ANY machine
 
-# Setup what files should be tracked
-MAIN_HARDWARE_ID=xps-15-9530  # The 'source-of-truth' hardware
-MAIN_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"  # The 'source-of-truth' backup directory
+mkdir -p $SYSTEM_BACKUP_DIR
 
 if [ "$HARDWARE_ID" == "$MAIN_HARDWARE_ID" ]; then
     IS_MAIN="true"
 else
     IS_MAIN="false"
+    SYMLINK_PATH=$(realpath --relative-to $MAIN_BACKUP_DIR $SYSTEM_BACKUP_DIR)
 fi
 
 # sublime key shortcuts
@@ -66,22 +64,22 @@ if [ "$IS_MAIN" = "true" ]; then
   safecp $HOME/SlackWare/mirrors/mirror-slackware-current.sh $SYSTEM_BACKUP_DIR
 
 else
-  ln -sf "$MAIN_BACKUP_DIR/redshift.conf" "$SYSTEM_BACKUP_DIR/redshift.conf"
-  ln -sf "$MAIN_BACKUP_DIR/bashrc.txt" "$SYSTEM_BACKUP_DIR/bashrc.txt"
-  ln -sf "$MAIN_BACKUP_DIR/bash_profile.txt" "$SYSTEM_BACKUP_DIR/bash_profile.txt"
-  ln -sf "$MAIN_BACKUP_DIR/vimrc.txt" "$SYSTEM_BACKUP_DIR/vimrc.txt"
-  ln -sf "$MAIN_BACKUP_DIR/tmux.conf" "$SYSTEM_BACKUP_DIR/tmux.conf"
-  ln -sf "$MAIN_BACKUP_DIR/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
-  ln -sf "$MAIN_BACKUP_DIR/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
-  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.conf" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.conf"
-  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.exclude" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.exclude"
-  ln -sf "$MAIN_BACKUP_DIR/mirror-slackware-current.sh" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.sh"
+  ln -sf "$SYMLINK_PATH/redshift.conf" "$SYSTEM_BACKUP_DIR/redshift.conf"
+  ln -sf "$SYMLINK_PATH/bashrc.txt" "$SYSTEM_BACKUP_DIR/bashrc.txt"
+  ln -sf "$SYMLINK_PATH/bash_profile.txt" "$SYSTEM_BACKUP_DIR/bash_profile.txt"
+  ln -sf "$SYMLINK_PATH/vimrc.txt" "$SYSTEM_BACKUP_DIR/vimrc.txt"
+  ln -sf "$SYMLINK_PATH/tmux.conf" "$SYSTEM_BACKUP_DIR/tmux.conf"
+  ln -sf "$SYMLINK_PATH/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
+  ln -sf "$SYMLINK_PATH/01-apikeys.conf" "$SYSTEM_BACKUP_DIR/01-apikeys.conf"
+  ln -sf "$SYMLINK_PATH/mirror-slackware-current.conf" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.conf"
+  ln -sf "$SYMLINK_PATH/mirror-slackware-current.exclude" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.exclude"
+  ln -sf "$SYMLINK_PATH/mirror-slackware-current.sh" "$SYSTEM_BACKUP_DIR/mirror-slackware-current.sh"
 
   # konsole configuration
   mkdir -p $SYSTEM_BACKUP_DIR/konsole
   for FILE in $MAIN_BACKUP_DIR/konsole*
   do
-    ln -sf "$MAIN_BACKUP_DIR/$(basename $FILE)" "$SYSTEM_BACKUP_DIR/$(basename $FILE)"
+    ln -sf "$SYMLINK_PATH/$(basename $FILE)" "$SYSTEM_BACKUP_DIR/$(basename $FILE)"
   done
 
 fi

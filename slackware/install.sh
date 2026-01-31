@@ -24,9 +24,15 @@ fi
 # ===================== HELPER VARIABLES =====================
 
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-SLACK_BACKUP_DIR="$DIRPATH/configs"
-SLACK_PKG_DIR="$DIRPATH/packages"
 source $DIRPATH/../common/helpers.sh
+
+SLACK_PKG_DIR="$DIRPATH/packages"
+
+# Determine the directory where configs are stored
+SLACK_HARDWARE_BACKUP_DIR="$DIRPATH/configs/$HARDWARE_ID"
+if [ ! -d $SLACK_HARDWARE_BACKUP_DIR ]; then
+  SLACK_HARDWARE_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"
+fi
 
 SBOTOOLS_VERSION=2.7
 SLACKWARE_VERSION=15.0
@@ -94,7 +100,7 @@ message "Installing slackpkg+"
 wget https://slackware.nl/slackpkgplus15/pkg/slackpkg+-1.8.0-noarch-7mt.txz
 mv slackpkg+*.txz $SLACK_PKG_DIR
 installpkg $SLACK_PKG_DIR/slackpkg+*.txz
-cp $SLACK_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
+cp $SLACK_HARDWARE_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
 slackpkg update gpg
 slackpkg update
 
@@ -112,12 +118,12 @@ sbocheck
 installsbo "sublime_text"
 ln -s /usr/bin/sublime_text /usr/bin/sublime
 # Configure keyboard shortcuts and extensions for user
-configure_sublime $SLACK_BACKUP_DIR
+configure_sublime $SLACK_HARDWARE_BACKUP_DIR
 
 
 # ------------------------ neovim ------------------------
 installsbo "neovim"
-configure_neovim $SLACK_BACKUP_DIR
+configure_neovim $SLACK_HARDWARE_BACKUP_DIR
 
 
 # ------------------------ avahi ------------------------
@@ -141,21 +147,21 @@ if [ -f /etc/geoclue/geoclue.conf ]; then
   printf "$(make_yellow "Copying config file to /etc/geoclue/geoclue.conf.new. Make sure to resolve conflicts manually\n")"
   printf "Press any key to continue\n"
   read -n 1 -s -r
-  sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf.new
+  sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf.new
 else
-  sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf
+  sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf
 fi
 
 # ------------------------ redshift ------------------------
 installsbo "redshift"
-sudo -u $SUDO_USER cp $SLACK_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
+sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
 sudo -u $SUDO_USER redshift &
 
 
 # ------------------------ chromium ------------------------
 slackpkg install chromium
 # Set up keys to enable chromium syncing with the cloud
-sudo cp $SLACK_BACKUP_DIR/01-apikeys.conf /etc/chromium/01-apikeys.conf
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/01-apikeys.conf /etc/chromium/01-apikeys.conf
 
 
 # ------------------------ bash-completion ------------------------

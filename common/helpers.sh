@@ -4,6 +4,8 @@ COMMON_DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Unique ID for the hardware, e.g. xps-15-9550, xps-15-9530
 HARDWARE_ID="$(cat /sys/class/dmi/id/product_name | tr ' [:upper:]' '-[:lower:]')"
+# The default 'source-of-truth' hardware id for ANY machine
+MAIN_HARDWARE_ID=xps-15-9530
 
 message(){
   echo ""
