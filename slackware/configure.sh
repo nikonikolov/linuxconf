@@ -30,7 +30,9 @@ sudo -v || exit 1
 
 # ------------------------ quotes ------------------------
 message "Removing Quotes"
-sudo chmod -x /etc/profile.d/bsd-games-login-fortune.sh
+if [  -f /etc/profile.d/bsd-games-login-fortune.sh ]; then
+  sudo chmod -x /etc/profile.d/bsd-games-login-fortune.sh
+fi
 
 
 # ------------------------ groups ------------------------
@@ -47,18 +49,18 @@ git config --global core.editor "nvim -w"
 
 
 # ------------------------ bashrc and bash_profile ------------------------
-message "Configuring .bash_profile"
-cp $SLACK_HARDWARE_BACKUP_DIR/bash_profile.txt ~/.bash_profile
-source ~/.bash_profile
 
 message "Configuring .bashrc"
+cp $SLACK_HARDWARE_BACKUP_DIR/bash_profile.txt ~/.bash_profile
 cp $SLACK_HARDWARE_BACKUP_DIR/bashrc.txt ~/.bashrc
-source ~/.bashrc
+
+source ~/.bash_profile
 
 
 # ------------------------ konsole profiles ------------------------
 message "Configuring konsole profiles"
 
+mkdir -p $HOME/.local/share/konsole/
 for FILE in $HOME/.local/share/konsole/*
 do
   mv $FILE "$FILE.original"

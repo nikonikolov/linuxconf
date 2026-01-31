@@ -144,10 +144,10 @@ alias loadconda="PATH=$HOME/miniconda3/bin:$PATH"
 
 # ================================== BAZEL ==================================
 
-if [ ! -z $(which bazel) ]; then
-  BAZEL_VERSION=$(bazel --version | grep -o '[0-9.]*')
-  # BZL_COMPLETE_FILE=/usr/share/bash-completion/completions/bazel/bazel-complete.bash
-  BZL_COMPLETE_FILE=$HOME/.bazel-${BAZEL_VERSION}/bin/bazel-complete.bash
+if BAZEL_PATH=$(command -v bazel); then
+    BAZEL_VERSION=$(bazel --version | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+    # BZL_COMPLETE_FILE=/usr/share/bash-completion/completions/bazel/bazel-complete.bash
+    BZL_COMPLETE_FILE="$HOME/.bazel-${BAZEL_VERSION}/bin/bazel-complete.bash"
   if [ -f $BZL_COMPLETE_FILE ]; then
     source $BZL_COMPLETE_FILE
   fi
