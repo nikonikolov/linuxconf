@@ -91,6 +91,9 @@ safecp $HOME/.config/khotkeysrc $SYSTEM_BACKUP_DIR
 # default applications
 safecp $HOME/.config/mimeapps.list $SYSTEM_BACKUP_DIR
 
+# autostart applications
+safecp $HOME/.config/autostart/* $SYSTEM_BACKUP_DIR/autostart/
+
 # nvidia controller
 safecp $HOME/bin/nvidia_control.sh $SYSTEM_BACKUP_DIR
 

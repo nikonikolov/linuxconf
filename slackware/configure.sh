@@ -63,6 +63,7 @@ message "Configuring konsole profiles"
 mkdir -p $HOME/.local/share/konsole/
 for FILE in $HOME/.local/share/konsole/*
 do
+  [ -e "$FILE" ] || continue
   mv $FILE "$FILE.original"
 done
 cp $SLACK_HARDWARE_BACKUP_DIR/konsole/* $HOME/.local/share/konsole/
@@ -70,6 +71,13 @@ cp $SLACK_HARDWARE_BACKUP_DIR/konsole/* $HOME/.local/share/konsole/
 
 # ------------------------ tmux ------------------------
 configure_tmux $SLACK_HARDWARE_BACKUP_DIR
+
+
+# ------------------------ autostart programs ------------------------
+message "Configuring autostart programs"
+
+mkdir -p $HOME/.config/autostart/
+cp $SLACK_HARDWARE_BACKUP_DIR/autostart/* $HOME/.config/autostart/
 
 
 # ------------------------ vim ------------------------
@@ -132,12 +140,16 @@ EOT
 
 
 # ------------------------ slackpkg mirror ------------------------
+message "Configuring slackpkg mirrors"
+
 LINE_NUM=$(sudo grep -n '# file://path/to/some/directory/' /etc/slackpkg/mirrors | cut -d: -f 1)
 sudo sed -i "$LINE_NUM a file://home/$USER/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
 # sudo sed -i "$LINE_NUM a file://home/niko/SlackWare/mirrors/slackware64-current/" /etc/slackpkg/mirrors
 
 
 # ------------------------ aleinbob scripts for mirroring slackware sources ------------------------
+message "Configuring alienbob mirror scripts"
+
 mkdir -p $HOME/SlackWare/mirrors
 cp $SLACK_HARDWARE_BACKUP_DIR/mirror-slackware-current.conf $HOME/SlackWare/mirrors/
 cp $SLACK_HARDWARE_BACKUP_DIR/mirror-slackware-current.exclude $HOME/SlackWare/mirrors/
@@ -145,6 +157,8 @@ cp $SLACK_HARDWARE_BACKUP_DIR/mirror-slackware-current.sh $HOME/SlackWare/mirror
 
 
 # ------------------------ libinput ------------------------
+message "Configuring libinput"
+
 sudo cp $SLACK_HARDWARE_BACKUP_DIR/libinput/*-touchpad.conf /etc/X11/xorg.conf.d/
 sudo cp $SLACK_HARDWARE_BACKUP_DIR/libinput/*-libinput.conf /etc/X11/xorg.conf.d/
 

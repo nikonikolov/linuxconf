@@ -34,7 +34,6 @@ if [ ! -d $SLACK_HARDWARE_BACKUP_DIR ]; then
   SLACK_HARDWARE_BACKUP_DIR="$DIRPATH/configs/$MAIN_HARDWARE_ID"
 fi
 
-SBOTOOLS_VERSION=2.7
 SLACKWARE_VERSION=15.0
 
 HOME_USER=/home/$SUDO_USER
@@ -107,9 +106,19 @@ slackpkg update
 
 # ------------------------ sbotools ------------------------
 message "Installing sbotools"
-wget https://pink-mist.github.io/sbotools/downloads/sbotools-$SBOTOOLS_VERSION-noarch-1_SBo.tgz
-mv sbotools-$SBOTOOLS_VERSION-noarch-1_SBo.tgz $SLACK_PKG_DIR
-installpkg $SLACK_PKG_DIR/sbotools-$SBOTOOLS_VERSION-noarch-1_SBo.tgz
+cd $SLACK_PKG_DIR
+if [ -d $SLACK_PKG_DIR/slackbuilds ]; then
+  cd $SLACK_PKG_DIR/slackbuilds
+  git pull
+else
+  mkdir -p $SLACK_PKG_DIR/slackbuilds
+  cd $SLACK_PKG_DIR/slackbuilds
+  git clone git://git.slackbuilds.org/slackbuilds.git
+fi
+chmod +x system/sbotools/sbotools.SlackBuild
+sudo system/sbotools/sbotools.SlackBuild
+cd -
+sudo installpkg /tmp/sbotools-*-noarch-1_SBo
 sboconfig --slackware-version $SLACKWARE_VERSION
 sbocheck
 
