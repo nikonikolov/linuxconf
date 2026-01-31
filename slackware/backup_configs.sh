@@ -12,7 +12,7 @@ if [ "$HARDWARE_ID" == "$MAIN_HARDWARE_ID" ]; then
     IS_MAIN="true"
 else
     IS_MAIN="false"
-    SYMLINK_PATH=$(realpath --relative-to $MAIN_BACKUP_DIR $SYSTEM_BACKUP_DIR)
+    SYMLINK_PATH=$(realpath --relative-to $SYSTEM_BACKUP_DIR $MAIN_BACKUP_DIR)
 fi
 
 # sublime key shortcuts

@@ -1,1 +1,1 @@
-/home/bojo/Workspace/linuxconf/slackware/configs/xps-15-9530/mirror-slackware-current.sh
+../xps-15-9530/mirror-slackware-current.sh
