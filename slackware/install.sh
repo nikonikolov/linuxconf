@@ -6,9 +6,8 @@
 # Packages which you normally use from alien, such as chromium, vlc are OK to come in binary
 # ======================== !! NOTE !! ========================
 
-if [[ $UID != 0 ]]; then
-    echo "Please run this script with sudo:"
-    echo "sudo $0 $*"
+if [[ $UID == 0 ]]; then
+    echo "Make sure not to run this script with sudo!"
     exit 1
 fi
 
@@ -51,8 +50,8 @@ installfromsource(){
     local PACKAGE_SOURCE_URL=$(grep -oP 'DOWNLOAD_x86_64="\K[^"]+' $PACKAGE_NAME.info)
     wget $PACKAGE_SOURCE_URL
     # Compile
-    ./$PACKAGE_NAME.SlackBuild
-    installpkg /tmp/$PACKAGE_NAME-*-x86_64-*.tgz
+    sudo ./$PACKAGE_NAME.SlackBuild
+    sudo installpkg /tmp/$PACKAGE_NAME-*-x86_64-*.tgz
   else 
     message "[ERROR]: $PACKAGE_NAME not available. Continuing without installing $PACKAGE_NAME"
   fi
@@ -64,7 +63,7 @@ installbinary(){
   installstart "$PACKAGE_NAME"
   pkg=$SLACK_PKG_DIR/$PACKAGE_BINARY_PATH
   if [ -f $pkg ]; then
-    installpkg $pkg
+    sudo installpkg $pkg
     installend "$PACKAGE_NAME"
   else 
     message "[ERROR]: $PACKAGE_NAME not available. Continuing without installing $PACKAGE_NAME"
@@ -80,7 +79,7 @@ installsbo(){
     printf "Press any key to continue\n"
     read -n 1 -s -r
   fi
-  sboinstall -j7 $PACKAGE
+  sudo sboinstall -j7 $PACKAGE
   if [ $? != 0 ]; then
     printf "$(make_red "\nPackage $PACKAGE did NOT install successfully\n")"
     printf "Press any key to continue\n"
@@ -91,17 +90,24 @@ installsbo(){
 }
 
 
+# ===================== PROMPT FOR SUDO PASSWORD =====================
+# Prompt for the sudo password once
+sudo -v || exit 1
+
+
 # ===================== INSTALLING PACKAGES =====================
 
 # ------------------------ slackpkgplus ------------------------
 message "Installing slackpkg+"
-# wget http://slakfinder.org/slackpkg+/pkg/slackpkg+-1.7.0-noarch-10mt.txz
-wget https://slackware.nl/slackpkgplus15/pkg/slackpkg+-1.8.0-noarch-7mt.txz
+
+BASE_URL="https://slackware.nl/slackpkgplus15/pkg/"
+LATEST_PKG=$(curl -s "$BASE_URL" | grep -oP 'slackpkg\+-[0-9][^"]+\.txz' | sort -V | tail -n 1)
+wget "${BASE_URL}${LATEST_PKG}"
 mv slackpkg+*.txz $SLACK_PKG_DIR
-installpkg $SLACK_PKG_DIR/slackpkg+*.txz
-cp $SLACK_HARDWARE_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
-slackpkg update gpg
-slackpkg update
+sudo installpkg $SLACK_PKG_DIR/slackpkg+*.txz
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/slackpkgplus.conf /etc/slackpkg/slackpkgplus.conf
+sudo slackpkg update gpg
+sudo slackpkg update
 
 
 # ------------------------ sbotools ------------------------
@@ -111,21 +117,23 @@ if [ -d $SLACK_PKG_DIR/slackbuilds ]; then
   cd $SLACK_PKG_DIR/slackbuilds
   git pull
 else
-  mkdir -p $SLACK_PKG_DIR/slackbuilds
-  cd $SLACK_PKG_DIR/slackbuilds
+  cd $SLACK_PKG_DIR
   git clone git://git.slackbuilds.org/slackbuilds.git
 fi
-chmod +x system/sbotools/sbotools.SlackBuild
-sudo system/sbotools/sbotools.SlackBuild
 cd -
+cd $SLACK_PKG_DIR/slackbuilds/system/sbotools/
+chmod +x sbotools.SlackBuild
+sudo ./sbotools.SlackBuild
 sudo installpkg /tmp/sbotools-*-noarch-1_SBo
-sboconfig --slackware-version $SLACKWARE_VERSION
-sbocheck
+cd -
+sudo sboconfig --slackware-version $SLACKWARE_VERSION
+sudo sbocheck
+
 
 
 # ------------------------ sublime ------------------------
 installsbo "sublime_text"
-ln -s /usr/bin/sublime_text /usr/bin/sublime
+sudo ln -s /usr/bin/sublime_text /usr/bin/sublime
 # Configure keyboard shortcuts and extensions for user
 configure_sublime $SLACK_HARDWARE_BACKUP_DIR
 
@@ -156,29 +164,29 @@ if [ -f /etc/geoclue/geoclue.conf ]; then
   printf "$(make_yellow "Copying config file to /etc/geoclue/geoclue.conf.new. Make sure to resolve conflicts manually\n")"
   printf "Press any key to continue\n"
   read -n 1 -s -r
-  sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf.new
+  sudo cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf.new
 else
-  sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf
+  sudo cp $SLACK_HARDWARE_BACKUP_DIR/geoclue.conf /etc/geoclue/geoclue.conf
 fi
 
 # ------------------------ redshift ------------------------
 installsbo "redshift"
-sudo -u $SUDO_USER cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
-sudo -u $SUDO_USER redshift &
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
+redshift &
 
 
 # ------------------------ chromium ------------------------
-slackpkg install chromium
+sudo slackpkg install chromium
 # Set up keys to enable chromium syncing with the cloud
 sudo cp $SLACK_HARDWARE_BACKUP_DIR/01-apikeys.conf /etc/chromium/01-apikeys.conf
 
 
 # ------------------------ bash-completion ------------------------
 installstart "bash-completion"
-slackpkg install bash-completion
+sudo slackpkg install bash-completion
 installend "bash-completion"
 wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-mv git-completion.bash /usr/share/bash-completion/completions/git
+sudo mv git-completion.bash /usr/share/bash-completion/completions/git
 
 
 # ------------------------ VPN packages ------------------------
@@ -224,14 +232,14 @@ installsbo "spotify"
 
 # ------------------------ plex ------------------------
 installsbo "plexmediaserver" "NOTE: Make sure to add the plex user and group when prompted by SBo"
-chmod +x /etc/rc.d/rc.plexmediaserver
+sudo chmod +x /etc/rc.d/rc.plexmediaserver
 
 # ------------------------ VS Code ------------------------
 
 installsbo vscode-bin
 
 # Configure .desktop file for opening urls. If it stops working, check the latest version in vscode .deb package
-tee -a $HOME_USER/Downloads/code-url-handler.desktop > /dev/null <<EOT
+sudo tee -a $HOME_USER/Downloads/code-url-handler.desktop > /dev/null <<EOT
 [Desktop Entry]
 Name=Visual Studio Code - URL Handler
 Comment=Code Editing. Redefined.
@@ -279,8 +287,8 @@ installfromsource "dropbox-client"
 
 
 # ------------------------ vlc ------------------------
-slackpkg install vlc
-slackpkg install npapi-vlc
+sudo slackpkg install vlc
+sudo slackpkg install npapi-vlc
 # Configure keyboard shortcuts
 sed -i '/key-jump-extrashort=/c\key-jump-extrashort=Left' $HOME_USER/.config/vlc/vlcrc
 sed -i '/key-jump+extrashort=/c\key-jump+extrashort=Right' $HOME_USER/.config/vlc/vlcrc
@@ -289,20 +297,20 @@ sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vl
 
 
 # ------------------------ VNC ------------------------
-slackpkg install fltk  # Needed for tigervnc to work
-slackpkg install tigervnc
+sudo slackpkg install fltk  # Needed for tigervnc to work
+sudo slackpkg install tigervnc
 
 
 # ------------------------ FFMPEG ------------------------
 # Update ffmpeg to alienbob's version as it's compiled with x264 and x265 support
 # Preference already configured in slackpkgplus.conf
-slackpkg upgrade ffmpeg
+sudo slackpkg upgrade ffmpeg
 installsbo "x265"
 
 
 # ------------------------ libreoffice ------------------------
-slackpkg install openjdk11  # jdk and jre are in the same package
-slackpkg install libreoffice
+sudo slackpkg install openjdk11  # jdk and jre are in the same package
+sudo slackpkg install libreoffice
 # This might be incomplete. Might need boost-compat and icu4c-compat as well as `export MESA_LOADER_DRIVER_OVERRIDE=i915`
 # Check your Slackware.md notes and the latest announcements from alien
 
