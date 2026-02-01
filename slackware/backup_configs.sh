@@ -45,6 +45,9 @@ if [ "$IS_MAIN" = "true" ]; then
   # .vimrc
   safecp $HOME/.vimrc $SYSTEM_BACKUP_DIR/vimrc.txt
 
+  # .nvim
+  safecp $HOME/.config/nvim/init.lua $SYSTEM_BACKUP_DIR/nvim-init.lua
+
   # .tmux.conf
   safecp $HOME/.tmux.conf $SYSTEM_BACKUP_DIR/tmux.conf
 
