@@ -35,8 +35,6 @@ fi
 
 SLACKWARE_VERSION=15.0
 
-HOME_USER=/home/$SUDO_USER
-
 # ===================== HELPER FUNCTIONS =====================
 
 installfromsource(){
@@ -159,8 +157,9 @@ configure_neovim $SLACK_HARDWARE_BACKUP_DIR
 # ------------------------ geoclue2 ------------------------
 # Needed for redshift automatic location. Must be installed BEFORE redshift
 # TODO: Make sure you get geoclue at least 2.7.2 and your latest geoclue config
-# TODO: Installing from source requires passing AVAHI=yes
-installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
+# installsbo "geoclue2" "NOTE: Make sure to pass AVAHI=yes"
+# TODO: Installing from source requires passing AVAHI=yes - not yet supported in the function
+installfromsource "geoclue2" "$SLACK_PKG_DIR/slackbuilds/system/sbotools/"
 
 # Recover geoclue.conf
 if [ -f /etc/geoclue/geoclue.conf ]; then
@@ -175,7 +174,7 @@ fi
 
 # ------------------------ redshift ------------------------
 installsbo "redshift"
-sudo cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$SUDO_USER/.config/
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$USER/.config/
 redshift &
 
 
@@ -220,10 +219,6 @@ installsbo "i8kutils"
 installsbo "telegram"
 
 
-# ------------------------ wireplumber ------------------------
-# installsbo "wireplumber"
-
-
 # ------------------------ spotify ------------------------
 installsbo "spotify"
 # Spotify is now properly maintained on SlackBuilds.org and the hacks below are
@@ -243,7 +238,7 @@ sudo chmod +x /etc/rc.d/rc.plexmediaserver
 installsbo vscode-bin
 
 # Configure .desktop file for opening urls. If it stops working, check the latest version in vscode .deb package
-sudo tee -a $HOME_USER/Downloads/code-url-handler.desktop > /dev/null <<EOT
+sudo tee -a $HOME/Downloads/code-url-handler.desktop > /dev/null <<EOT
 [Desktop Entry]
 Name=Visual Studio Code - URL Handler
 Comment=Code Editing. Redefined.
@@ -257,17 +252,17 @@ Categories=Utility;TextEditor;Development;IDE;
 MimeType=x-scheme-handler/vscode;
 Keywords=vscode;
 EOT
-desktop-file-install --dir=$HOME/.local/share/applications $HOME_USER/Downloads/code-url-handler.desktop
+desktop-file-install --dir=$HOME/.local/share/applications $HOME/Downloads/code-url-handler.desktop
 update-desktop-database ~/.local/share/applications
-if [ ! -f $HOME_USER/Downloads/code-url-handler.desktop ]; then
+if [ ! -f $HOME/Downloads/code-url-handler.desktop ]; then
   echo
   printf "$(make_yellow "Run the following commands as normal user in a separate terminal:\n\n")"
-  echo "desktop-file-install --dir=$HOME/.local/share/applications $HOME_USER/Downloads/code-url-handler.desktop"
+  echo "desktop-file-install --dir=$HOME/.local/share/applications $HOME/Downloads/code-url-handler.desktop"
   echo "update-desktop-database ~/.local/share/applications"
   printf "\nPress any key when done and ready to continue\n"
   read -n 1 -s -r
 fi
-rm -f $HOME_USER/Downloads/code-url-handler.desktop
+rm -f $HOME/Downloads/code-url-handler.desktop
 
 # ------------------------ jdk ------------------------
 
@@ -292,12 +287,12 @@ installfromsource "dropbox-client"
 
 # ------------------------ vlc ------------------------
 sudo slackpkg install vlc
-sudo slackpkg install npapi-vlc
+# sudo slackpkg install npapi-vlc
 # Configure keyboard shortcuts
-sed -i '/key-jump-extrashort=/c\key-jump-extrashort=Left' $HOME_USER/.config/vlc/vlcrc
-sed -i '/key-jump+extrashort=/c\key-jump+extrashort=Right' $HOME_USER/.config/vlc/vlcrc
-sed -i '/key-jump-short=/c\key-jump-short=Shift+Left' $HOME_USER/.config/vlc/vlcrc
-sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME_USER/.config/vlc/vlcrc
+sed -i '/key-jump-extrashort=/c\key-jump-extrashort=Left' $HOME/.config/vlc/vlcrc
+sed -i '/key-jump+extrashort=/c\key-jump+extrashort=Right' $HOME/.config/vlc/vlcrc
+sed -i '/key-jump-short=/c\key-jump-short=Shift+Left' $HOME/.config/vlc/vlcrc
+sed -i '/key-jump+short=/c\key-jump+short=Shift+Right' $HOME/.config/vlc/vlcrc
 
 
 # ------------------------ VNC ------------------------
@@ -353,13 +348,13 @@ sudo pip3 install -U --no-binary opencv-python opencv-python
 # ------------------------ docker ------------------------
 installsbo "docker-cli"  # If it doesn't work, use a new terminal or install manually locally. Had such problems before
 # source /etc/profile.d/go.sh
-sudo usermod -aG docker $SUDO_USER
+sudo usermod -aG docker $USER
 message "Added to docker group. Remember to reboot for changes to take effect"
 installsbo "docker-buildx"
 installsbo "libnvidia-container"
 sudo chmod +x /etc/rc.d/rc.docker
 # TODO: Install nvidia-container-toolkit - code untested
-# cd $HOME_USER/Packages/
+# cd $HOME/Packages/
 # wget https://nvidia.github.io/libnvidia-container/stable/deb/amd64/nvidia-container-toolkit_1.14.5-1_amd64.deb
 # deg2tgz nvidia-container-toolkit_1.14.5-1_amd64.deb
 # sudo installpkg nvidia-container-toolkit_1.14.5-1_amd64.txz
@@ -372,8 +367,8 @@ sudo chmod +x /etc/rc.d/rc.docker
 installfromsource "bazel"
 
 # ------------------------ virtualbox ------------------------
-groupadd vboxusers
-sudo usermod -aG vboxusers $SUDO_USER
+sudo groupadd vboxusers
+sudo usermod -aG vboxusers $USER
 
 
 # ------------------------ google-chrome ------------------------
