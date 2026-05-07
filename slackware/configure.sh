@@ -208,6 +208,19 @@ sudo pipewire-enable.sh
 # sudo sed -i "s/autospawn = yes/autospawn = no/g" /etc/pulse/client.conf
 # sudo sed -i "s/allow-autospawn-for-root = yes/allow-autospawn-for-root = no/g" /etc/pulse/client.conf
 
+# ------------------------ CPU ------------------------
+
+message "Checking CPU driver configuration"
+DRIVER=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver 2>/dev/null)
+STATUS=$(cat /sys/devices/system/cpu/intel_pstate/status 2>/dev/null)
+
+if [ "$DRIVER" != "intel_pstate" ] || [ "$STATUS" != "active" ]; then
+  message "System not configured to use intel_pstate driver. Make sure to enable Intel Speed Shift Technology in your BIOS settings. Look under Power Management or Performance settings."
+else
+  message "intel_pstate operating correctly, all good"
+fi
+
+
 # ===============================================
 # ===================== OLD =====================
 # ===============================================
@@ -221,4 +234,4 @@ sudo pipewire-enable.sh
 # sudo /etc/rc.d/rc.networkmanager restart
 
 # message "Disabling inet1"
-# sudo chmod -x /etc/rc.d/rc.inet1 
+# sudo chmod -x /etc/rc.d/rc.inet1
