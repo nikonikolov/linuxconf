@@ -26,6 +26,7 @@ application/x-extension-shtml=chromium.desktop;userapp-Firefox-JM2D72.desktop;
 application/xhtml+xml=chromium.desktop;userapp-Firefox-JM2D72.desktop;
 application/x-extension-xhtml=chromium.desktop;userapp-Firefox-JM2D72.desktop;
 application/x-extension-xht=chromium.desktop;userapp-Firefox-JM2D72.desktop;
+x-scheme-handler/viber=viber.desktop
 
 [Default Applications]
 application/json=sublime_text.desktop;
@@ -56,3 +57,4 @@ application/x-extension-shtml=userapp-Firefox-JM2D72.desktop
 application/xhtml+xml=userapp-Firefox-JM2D72.desktop
 application/x-extension-xhtml=userapp-Firefox-JM2D72.desktop
 application/x-extension-xht=userapp-Firefox-JM2D72.desktop
+x-scheme-handler/viber=viber.desktop

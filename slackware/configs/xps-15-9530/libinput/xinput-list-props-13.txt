@@ -6,5 +6,5 @@ Device 'Dell Privacy Driver':
 	libinput Send Events Modes Available (307):	1, 0
 	libinput Send Events Mode Enabled (308):	0, 0
 	libinput Send Events Mode Enabled Default (309):	0, 0
-	Device Node (310):	"/dev/input/event8"
+	Device Node (310):	"/dev/input/event5"
 	Device Product ID (311):	0, 0

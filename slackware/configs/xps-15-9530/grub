@@ -5,9 +5,17 @@ GRUB_DEFAULT=0
 #GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=false
 GRUB_TIMEOUT=10
-GRUB_DISTRIBUTOR=$( sed 's/Slackware /Slackware-/' /etc/slackware-version )
 GRUB_CMDLINE_LINUX_DEFAULT=""
 GRUB_CMDLINE_LINUX=""
+
+# Set GRUB_DISTRIBUTOR label.
+if [ -r /etc/slackware-version ]; then
+  GRUB_DISTRIBUTOR=$( sed 's/Slackware /Slackware-/' /etc/slackware-version )
+elif [ -r etc/slackware-version ]; then
+  GRUB_DISTRIBUTOR=$( sed 's/Slackware /Slackware-/' etc/slackware-version )
+else # unknown version
+  GRUB_DISTRIBUTOR=Slackware
+fi
 
 # Uncomment to disable graphical terminal (grub-pc only):
 #GRUB_TERMINAL=console
@@ -32,17 +40,17 @@ GRUB_GFXPAYLOAD_LINUX=keep
 #GRUB_DISABLE_LINUX_UUID=true
 
 # Uncomment to disable generation of recovery mode menu entries:
-GRUB_DISABLE_RECOVERY="true"
+GRUB_DISABLE_RECOVERY=true
 
 # Search for other operating systems with os-prober.
 # If you don't want this, you can do any of these things to disable it:
 # - change to "true"
 # - comment it out, since disabled is the default
 # - remove the executable bit from /etc/grub.d/30_os-prober
-GRUB_DISABLE_OS_PROBER="false"
+GRUB_DISABLE_OS_PROBER=false
 
 # Disable the submenus:
-GRUB_DISABLE_SUBMENU="true"
+GRUB_DISABLE_SUBMENU=true
 
 # What kernel filetypes to display in the menu. This may be set to "files"
 # (only display kernels that are files), "symlinks" (only display kernels
@@ -52,3 +60,8 @@ GRUB_DISPLAY_KERNEL_FILETYPES=both
 # This option allows defining an initrd name that will match any kernel as a
 # fallback if no other matching initrd is found. You may use any name you like.
 #GRUB_INITRD_FALLBACK_NAME=initrd.gz
+
+# This script (if it exists and is executable) will be run whenever the GRUB
+# package is installed/reinstalled. Usually it runs grub-install with the
+# correct options for this machine, followed by update-grub.
+GRUB_INSTALL_SCRIPT=boot/grub/grub-install-slackware.sh

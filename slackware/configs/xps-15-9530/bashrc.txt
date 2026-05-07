@@ -64,10 +64,10 @@ export LESS=${LESS}r
 # ================================== CDPATH ==================================
 
 # Add a folder to CDPATH VAR so that you can cd there from any folder
-# CDPATH=$CDPATH:/home/niko
-# CDPATH=$CDPATH:/home/niko/Workspace
-# CDPATH=$CDPATH:/home/niko/Dropbox
-# CDPATH=$CDPATH:/home/niko/Downloads
+# CDPATH=$CDPATH:/home/$MYUSER
+# CDPATH=$CDPATH:/home/$MYUSER/Workspace
+# CDPATH=$CDPATH:/home/$MYUSER/Dropbox
+# CDPATH=$CDPATH:/home/$MYUSER/Downloads
 
 
 # ================================== TEXT EDITOR ==================================
@@ -212,7 +212,11 @@ findr(){
 unset MYUSER
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/home/$MYUSER/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc' ]; then . '/home/$MYUSER/Workspace/linuxconf/slackware/packages/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc' ]; then . '/home/niko/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/home/$MYUSER/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc' ]; then . '/home/$MYUSER/Workspace/linuxconf/slackware/packages/google-cloud-sdk/completion.bash.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
