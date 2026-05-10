@@ -11,6 +11,12 @@ if [ "$ready" != "y" ]; then
 else
   echo "Continuing execution"
 fi
+
+if [[ $UID == 0 ]]; then
+    echo "Make sure not to run this script with sudo!"
+    exit 1
+fi
+
 # ===================== CONFIRM READY =====================
 
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -215,10 +221,42 @@ DRIVER=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver 2>/dev/null)
 STATUS=$(cat /sys/devices/system/cpu/intel_pstate/status 2>/dev/null)
 
 if [ "$DRIVER" != "intel_pstate" ] || [ "$STATUS" != "active" ]; then
-  message "System not configured to use intel_pstate driver. Make sure to enable Intel Speed Shift Technology in your BIOS settings. Look under Power Management or Performance settings."
+  message $(make_red "System not configured to use intel_pstate driver. Make sure to enable Intel Speed Shift Technology in your BIOS settings. Look under Power Management or Performance settings.")
 else
-  message "intel_pstate operating correctly, all good"
+  message "intel_pstate operating correctly. SUCCESS"
 fi
+
+# NOTE: The following two CPU settings expected to be set via /etc/rc.d/rc.local
+# cat /sys/devices/system/cpu/intel_pstate/status  # Expected: active
+# cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver  # Expected: intel_pstate
+
+# ------------------------ PCIe POWER SAVING ------------------------
+
+message "Configuring PCIe power saving kernel boot parameters in grub"
+
+# Add pcie_aspm=force pcie_aspm.policy=powersupersave to GRUB_CMDLINE_LINUX_DEFAULT in /etc/default/grub
+# Allows kernel to put PCIe devices in power-saving mode while they aren't active
+sudo sed -i 's/\(GRUB_CMDLINE_LINUX_DEFAULT="[^"]*\)"/\1pcie_aspm=force pcie_aspm.policy=powersupersave"/' /etc/default/grub
+
+EXPECTED='GRUB_CMDLINE_LINUX_DEFAULT="pcie_aspm=force pcie_aspm.policy=powersupersave"'
+ACTUAL=$(grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub)
+if [ "$EXPECTED" != "$ACTUAL" ]; then
+  message "$(make_red "PCIe power saving kernel boot parameters misconfigured. Fix manually")"
+else
+  # Update the grub config
+  sudo grub-mkconfig -o /boot/grub/grub.cfg
+  message "PCIe power saving kernel boot parameters configured. SUCCESS"
+fi
+
+# ------------------------ PSR POWER SAVING ------------------------
+
+message "Configuring PSR power saving via /etc/modprobe.d/i915.conf"
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/i915.conf /etc/modprobe.d/i915.conf
+
+# ------------------------ WI-FI POWER SAVING ------------------------
+
+message "Configuring Wi-Fi power saving via /etc/modprobe.d/iwlwifi.conf"
+sudo cp $SLACK_HARDWARE_BACKUP_DIR/iwlwifi.conf /etc/modprobe.d/iwlwifi.conf
 
 
 # ===============================================

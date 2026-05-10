@@ -15,5 +15,5 @@
 #/sbin/modprobe tun            # Universal TUN/TAP device driver
 #/sbin/modprobe sg             # Generic SCSI support for SATA DVD-RW
 
-/sbin/modprobe i8k force=1     # Dell hardware module
+/sbin/modprobe dell_smm_hwmon force=1     # Dell fan hardware module
 

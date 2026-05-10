@@ -1,0 +1,3 @@
+Sink support: PSR = yes [0x01], Panel Replay = no, Panel Replay Selective Update = no
+PSR mode: disabled
+PSR sink not reliable: no

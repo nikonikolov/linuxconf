@@ -5,7 +5,7 @@ GRUB_DEFAULT=0
 #GRUB_HIDDEN_TIMEOUT=0
 GRUB_HIDDEN_TIMEOUT_QUIET=false
 GRUB_TIMEOUT=10
-GRUB_CMDLINE_LINUX_DEFAULT=""
+GRUB_CMDLINE_LINUX_DEFAULT="pcie_aspm=force pcie_aspm.policy=powersupersave"
 GRUB_CMDLINE_LINUX=""
 
 # Set GRUB_DISTRIBUTOR label.
@@ -27,7 +27,8 @@ fi
 # Please note that GRUB draws the display with NO video acceleration, so
 # depending on the video hardware a resolution greater than 1024x768 may
 # result in a very slow menu.
-GRUB_GFXMODE=1024x768,800x600,640x480,auto
+#GRUB_GFXMODE=1024x768,800x600,640x480,auto
+GRUB_GFXMODE=1920x1080,auto
 
 # Font used on the graphical terminal:
 GRUB_FONT=/boot/grub/fonts/hack.pf2

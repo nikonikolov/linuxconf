@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ $UID == 0 ]]; then
+  echo "Make sure not to run this script with sudo!"
+  exit 1
+fi
+
 DIRPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 source $DIRPATH/../common/helpers.sh
 
@@ -15,7 +20,10 @@ else
     SYMLINK_PATH=$(realpath --relative-to $SYSTEM_BACKUP_DIR $MAIN_BACKUP_DIR)
 fi
 
-# sublime key shortcuts
+# Prompt for the sudo password once
+sudo -v || exit 1
+
+# sublime key shortcuts (SAME across machines)
 mkdir -p $SYSTEM_BACKUP_DIR/sublime/
 if [ "$IS_MAIN" = "true" ]; then
   safecp "$HOME/.config/sublime-text/Packages/User/Default (Linux).sublime-keymap" $SYSTEM_BACKUP_DIR/sublime/
@@ -32,6 +40,7 @@ else
 fi
 
 
+# SAME configuration across machines
 if [ "$IS_MAIN" = "true" ]; then
   # redshift
   safecp $HOME/.config/redshift.conf $SYSTEM_BACKUP_DIR
@@ -109,18 +118,21 @@ safecp /etc/slackpkg/greylist $SYSTEM_BACKUP_DIR/slackpkg-greylist
 
 
 # Libinput configuration
-mkdir -p $SYSTEM_BACKUP_DIR/libinput
-safecp /etc/X11/xorg.conf.d/*libinput.conf $SYSTEM_BACKUP_DIR/libinput
-safecp /etc/X11/xorg.conf.d/*touchpad.conf $SYSTEM_BACKUP_DIR/libinput
+# mkdir -p $SYSTEM_BACKUP_DIR/libinput
+# safecp /etc/X11/xorg.conf.d/*libinput.conf $SYSTEM_BACKUP_DIR/libinput
+# safecp /etc/X11/xorg.conf.d/*touchpad.conf $SYSTEM_BACKUP_DIR/libinput
 
-for FILE in /usr/share/X11/xorg.conf.d/*libinput.conf
-do
-  safecp $FILE $SYSTEM_BACKUP_DIR/libinput/$(basename $FILE).system
-done
+# for FILE in /usr/share/X11/xorg.conf.d/*libinput.conf
+# do
+#   safecp $FILE $SYSTEM_BACKUP_DIR/libinput/$(basename $FILE).system
+# done
 
-xinput list > $SYSTEM_BACKUP_DIR/libinput/xinput-list.txt
-xinput list-props 12 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-12.txt
-xinput list-props 13 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-13.txt
+# xinput list > $SYSTEM_BACKUP_DIR/libinput/xinput-list.txt
+# xinput list-props 12 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-12.txt
+# xinput list-props 13 > $SYSTEM_BACKUP_DIR/libinput/xinput-list-props-13.txt
+
+# xinput no longer valid in Wayland. We query libinput directly, although it has less options
+sudo libinput list-devices > $SYSTEM_BACKUP_DIR/libinput-devices.txt
 
 # bumblebee
 # safecp /etc/bumblebee/bumblebee.conf $SYSTEM_BACKUP_DIR
@@ -163,3 +175,11 @@ groups $USER > $SYSTEM_BACKUP_DIR/groups-$USER.txt
 
 # geoclue.conf
 safecp /etc/geoclue/geoclue.conf $SYSTEM_BACKUP_DIR
+
+# Power-related kernel module configurations
+safecp /etc/modprobe.d/iwlwifi.conf $SYSTEM_BACKUP_DIR
+safecp /etc/modprobe.d/i915.conf $SYSTEM_BACKUP_DIR
+
+# Current behavior for PSR
+sudo cat /sys/kernel/debug/dri/0/i915_edp_psr_status > $SYSTEM_BACKUP_DIR/i915_edp_psr_status
+sudo cat /sys/kernel/debug/dri/0/i915_dmc_info > $SYSTEM_BACKUP_DIR/i915_dmc_info

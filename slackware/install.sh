@@ -173,9 +173,10 @@ else
 fi
 
 # ------------------------ redshift ------------------------
-installsbo "redshift"
-sudo cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$USER/.config/
-redshift &
+# Redshift deprecated - doesn't work on Wayland. Use KDE built-in nightlight
+# installsbo "redshift"
+# sudo cp $SLACK_HARDWARE_BACKUP_DIR/redshift.conf /home/$USER/.config/
+# redshift &
 
 
 # ------------------------ chromium ------------------------
@@ -201,7 +202,7 @@ installsbo "xl2tpd"
 # installfromsource "xl2tpd"
 installsbo "strongswan"
 #
-installsbo "NetworkManager-openvpn"
+# installsbo "NetworkManager-openvpn"  # Part of slackware64
 #
 # openresolv needed for ProtonVPN, but is now part of official Slackware
 # installsbo "openresolv" "NOTE: Make sure to pass OPENVPN=yes"
@@ -212,7 +213,7 @@ installsbo "MasterPDFEditor"
 
 
 # ------------------------ i8kutils ------------------------
-installsbo "i8kutils"
+# installsbo "i8kutils"  # No longer needed
 
 
 # ------------------------ telegram ------------------------

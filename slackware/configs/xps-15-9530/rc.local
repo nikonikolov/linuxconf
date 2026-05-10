@@ -7,6 +7,16 @@
 # make an /etc/rc.d/rc.local_shutdown script and put those
 # commands in there.
 
+# Allow CPU to enter power-saving mode when nothing is happening
+# Otherwise kernel sets it to stuck in performance mode all the time
+# This has a very big impact on power performance
+for f in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+    echo powersave > "$f"
+done
+for f in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+    echo balance_power > "$f"
+done
+
 # Create missing nvidia device nodes after reboot
 [ -x /usr/bin/nvidia-modprobe ] && /usr/bin/nvidia-modprobe -c 0 -u
 
@@ -21,4 +31,3 @@
 
 # Start plexmediaserver
 # [ -x /etc/rc.d/rc.plexmediaserver ] && /etc/rc.d/rc.plexmediaserver start
-
